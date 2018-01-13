@@ -1,21 +1,39 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';;
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MY_ROUTES } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { MessageService } from './message/message.service';
+import { HomepageComponent } from "./homepage/homepage.component";
+import { LoginComponent } from "./login/login.component";
+import { RegisterComponent } from "./register/register.component";
+import { RecommendComponent } from "./recommend/recommend.component";
+import { MypageComponent } from './mypage/mypage.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomepageComponent,
+    LoginComponent,
+    RegisterComponent,
+    RecommendComponent,
+    MypageComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpModule,
-    FormsModule
+    CoreModule,
+    SharedModule,
+    BrowserAnimationsModule,
+    MY_ROUTES
   ],
-  providers: [MessageService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

@@ -1,0 +1,11 @@
+<section class="login">
+    <div class="login-inner">
+        <form>
+            <label for="name">ユーザネーム:</label>
+            <input id="name" name="name" type="name" placeholder="name" [(ngModel)]="name"/>
+            <label for="password">パスワード:</label>
+            <input id="password" name="password" type="password" placeholder="password" [(ngModel)]="password"/>
+            <input type="button" (click)="onSubmit()" value="Login"/>
+        </form>
+    </div>
+</section>
