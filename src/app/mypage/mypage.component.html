@@ -1,19 +1,79 @@
-<div class="back">
-    <mat-card class="example-card">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>ユーザー名</mat-card-title>
-            <mat-card-subtitle>何かしらの情報</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+<div class="container">
+  <div class="head_image">
+    <img src="./assets/user1/user1_header.jpg">
+  </div>
+  <div class="head_profile">
+    <a href="#" class="edit_profile">
+      <img src="./assets/user1/user1_profile.jpg">
+      <div class="mask">
+        <div class="caption">プロフィール編集</div>
+      </div>
+    </a>
+  </div>
+  <div class="flex_container">
+    <div class="profile_card">
+      <mat-card>
+        <div class="">
+          <h2>ユーザーID</h2>
+          <p>{{user.id}}</p>
+        </div>
+        <div class="">
+          <h2>ユーザ名</h2>
+          <p>{{user.name}}</p>
+        </div>
+        <div class="">
+          <h2>Mail</h2>
+          <p>{{user.mail}}</p>
+        </div>
+        <div class="">
+          <h2>自己紹介</h2>
+          <p>{{user.introduction}}</p>
+        </div>
         <mat-card-content>
-            <p>
-                    相手への配慮、相手の気持ちや立場に立って物事を考える姿勢というものがあると思うので、それにより自分自身がお客さまに対して最大限何が出来て、どのようにすれば満足してもらえるかを常に考え、行動していくことで相手に誠意を伝えていくことが可能だと感じます。営業という仕事を通してお客さまに対して、自分なりに長所を生かしていくことができ、また自分の力をどんどん試していけると思うのでさまざまな部分でやりがいのある仕事だと思います。一方で、今現在もう一度原点に返り、一から物事を考えて自分自身を見つめ直していこうとも考えています。
-            </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="timeline">
+      <mat-card class="timeline_card">
+        <mat-card-header>
+          <div mat-card-avatar [style.background-image]="'url(' + avatar + ')'" class="profile_card_image"></div>
+          <mat-card-title>{{ archive_1.title }}</mat-card-title>
+          <mat-card-subtitle>{{user.id}}</mat-card-subtitle>
+          <span class="spacer"></span>
+          <div class="favorite">
+            <label>{{ archive_1.favoInt }}</label>
+            <button mat-icon-button (click)='toggleMenu(archive_1)' color="{{ archive_1.favorite ? 'warn':'disabled' }}">
+              <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+            </button>
+          </div>
+        </mat-card-header>
+        <img mat-card-image src={{archive_1.img}} alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <p>{{ archive_1.description }}</p>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
         </mat-card-actions>
-    </mat-card>
+      </mat-card>
+      <mat-card class="timeline_card">
+        <mat-card-header>
+          <div mat-card-avatar [style.background-image]="'url(' + avatar + ')'" class="profile_card_image"></div>
+          <mat-card-title>{{ archive_2.title}}</mat-card-title>
+          <mat-card-subtitle>{{user.id}}</mat-card-subtitle>
+          <span class="spacer"></span>
+          <div class="favorite">
+                <label>{{ archive_2.favoInt }}</label>
+                <button mat-icon-button (click)='toggleMenu(archive_2)' color="{{ archive_2.favorite ? 'warn':'disabled' }}">
+                  <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+                </button>
+              </div>
+        </mat-card-header>
+        <img mat-card-image src={{archive_2.img}} alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <p>{{ archive_2.description }}}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </div>
