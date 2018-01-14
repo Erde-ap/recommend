@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 
 let Schema = mongoose.Schema;
-let Review = Schema({
+let Review = new Schema({
     rvname: String,//レビューの名前（被りあり）
     hostid: {type:Schema.Types.ObjectId, index:true},//obj_idから主催者のデータを拾う
     host: String,//ユーザーのIDを格納
@@ -14,7 +14,7 @@ let Review = Schema({
     com: [{type: Schema.Types.ObjectId, ref: 'ReviewCom'}]
 },{collection: 'review'});
 
-let ReviewCom = Schema({
+let ReviewCom = new Schema({
     //reviewcomの_idはreviewのIDと同じになる
     mfo: {type:Schema.Types.ObjectId, ref: 'Review', index:true},
     _conid: {type:Schema.Types.ObjectId, index:true},//コンテンツID

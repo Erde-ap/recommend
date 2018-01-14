@@ -9,6 +9,7 @@ import { MY_ROUTES } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from "./homepage/homepage.component";
 import { LoginComponent } from "./login/login.component";
+import { LogoutComponent } from "./logout/logout.component";
 import { RegisterComponent } from "./register/register.component";
 import { RecommendComponent } from "./recommend/recommend.component";
 import { MypageComponent } from './mypage/mypage.component';
@@ -19,6 +20,7 @@ import { HeaderComponent } from './header/header.component';
     AppComponent,
     HomepageComponent,
     LoginComponent,
+    LogoutComponent,
     RegisterComponent,
     RecommendComponent,
     MypageComponent,

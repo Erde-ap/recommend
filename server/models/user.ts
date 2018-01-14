@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 
 let Schema = mongoose.Schema;
-let Users = Schema({
+let Users = new Schema({
     email: {type:String, required:true, index:true, unique:true},//Email(被りなし変更化)
     uid: {type:String, index:true, unique:true},//uid(被りなし)
     name: {type:String, index:true},//ユーザーネーム（被りok!）(あとで変更可能)

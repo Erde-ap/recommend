@@ -1,5 +1,5 @@
 import * as http from 'http'; 
-import { Router, Response } from 'express';
+import { Router } from 'express';
 
 const nodemailer = require('nodemailer');
 
@@ -13,7 +13,11 @@ registerRouter.post('/' , (req, res, next)  => {
     let rand = getRand(REGI_RAND);
     let onetime_Url = getHash(rand);
 
-    exec(req, res, email, onetime_Url);
+    console.log(req.body.email);
+
+    console.log(req.session);
+
+    // exec(req, res, email, onetime_Url);
 });
 
 registerRouter.get('/' , (req, res, next)  => {

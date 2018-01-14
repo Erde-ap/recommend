@@ -7,12 +7,15 @@ import { Http, URLSearchParams, Headers } from '@angular/http';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+  email='';
+
   constructor(private http:Http){}
 
   onSubmit(){
-    let data = new FormData();
+    let params = new URLSearchParams();
+    params.set('email', this.email);  
 
-    this.http.post('http://localhost:3000/api/register', data)
+    this.http.post('http://localhost:3000/api/register', params, { withCredentials: true })
     .subscribe(
       data => console.log(data),
       error => console.log(error) 

@@ -1,13 +1,8 @@
 <section class="register">
     <div class="register-inner">
-        <!-- <form action="http://localhost:3000/api/register" method='post'>
-            <label>Eメール:</label>
-            <input  type="text" name='email' placeholder="email">
-            <input type="submit" name="メールアドレスを送る">
-        </form> -->
         <form>
             <label>Eメール:</label>
-            <input  type="text" name='email' placeholder="email">
+            <input  type="text" name='email' placeholder="email" [(ngModel)]="email">
             <input type="button" (click)="onSubmit()" value="Submit">
         </form>
     </div>
