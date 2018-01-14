@@ -51,10 +51,6 @@
         <mat-card-content>
           <p>{{ archive_1.description }}</p>
         </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
       </mat-card>
       <mat-card class="timeline_card">
         <mat-card-header>
@@ -63,11 +59,11 @@
           <mat-card-subtitle>{{user.id}}</mat-card-subtitle>
           <span class="spacer"></span>
           <div class="favorite">
-                <label>{{ archive_2.favoInt }}</label>
-                <button mat-icon-button (click)='toggleMenu(archive_2)' color="{{ archive_2.favorite ? 'warn':'disabled' }}">
-                  <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
-                </button>
-              </div>
+            <label>{{ archive_2.favoInt }}</label>
+            <button mat-icon-button (click)='toggleMenu(archive_2)' color="{{ archive_2.favorite ? 'warn':'disabled' }}">
+              <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+            </button>
+          </div>
         </mat-card-header>
         <img mat-card-image src={{archive_2.img}} alt="Photo of a Shiba Inu">
         <mat-card-content>
