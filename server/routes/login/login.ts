@@ -2,22 +2,20 @@ import * as http from 'http';
 import * as passport from 'passport';
 import { Router, Response } from 'express';
 
-import {getHash, getRand, getPhash} from '../../config';
-
 const loginRouter: Router = Router();
 loginRouter.post('/' , (req, res, next)  => {
-    console.log(req.body.name);
-    console.log(req.body.password);
     passport.authenticate('local', {
         successRedirect: '/api/login',
         failureRedirect: 'http://localhost:4200',
         failureFlash: false,
-        session: false
+        session: true
     })(req, res, next);
 });
 
 loginRouter.get('/' , (req, res, next)  => {
     //認証後
+    console.log(req.session.passport);
+    console.log(req.session.uid);
     if(req.session.uid){
         console.log('compleat');
     }else{

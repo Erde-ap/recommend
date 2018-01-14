@@ -5,6 +5,8 @@ import * as bodyParser from 'body-parser';
 import * as session from 'express-session';
 import * as connect from 'connect';
 import * as mongoose from 'mongoose';
+import * as cookieParser from 'cookie-parser';
+import * as corser from 'corser';
 
 import { getPhash, getHash, getRand, MONGO_URL_REVIEW, MONGO_URL_USER, MONGO_URL_SESSION } from './config';
 
@@ -32,16 +34,18 @@ class App {
   }
 
   private middleware(): void {
-    this.express.set('trust proxy', 1);// プロキシで通信をする
+    // プロキシで通信をする
+    this.express.set('trust proxy', 1);
 
     /**
     * CORSを許可.
     */
-    this.express.use(function(req, res, next) {
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-      next();
-    });
+    this.express.use(corser.create());
+    // this.express.use((req, res, next)=> {
+    //   res.header("Access-Control-Allow-Origin", "*");
+    //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    //   next();
+    // });
 
     // 接続する MongoDB の設定
     mongoose.Promise = global.Promise;
@@ -52,14 +56,13 @@ class App {
       mongoose.disconnect(); 
     });
 
-    this.express.use(passport.initialize());
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: false }));
+    this.express.use(cookieParser());
     this.express.use(logger('dev'));//ログ用
     this.express.use(session({
         secret: 'ioukitty',
         store: store,
-        proxy: true,
         resave: true,
         saveUninitialized: true,
         cookie: {
@@ -68,6 +71,8 @@ class App {
           maxAge: 60 * 60 * 1000
         }
     }));
+    this.express.use(passport.initialize());
+    this.express.use(passport.session());
 
     // ログイン認証
     passport.use(new LocalStrategy({
@@ -92,16 +97,19 @@ class App {
                  console.log("アカウントの認証が済んでいません。");
                  return done(null, false);
               }
-              req.session.uid = account.uid;
               return done(null, account);
           });
       })
     }));
+    passport.serializeUser((account, done)=>{
+      done(null, account.uid); // user.idをセット
+    });
   }
 
   private routes(): void {
     // 静的資産へのルーティング
     this.express.use(express.static(path.join(__dirname, 'public')));
+    this.express.use('/static',express.static(path.join(__dirname, 'public')));
     this.express.use('/api/register',  registerRouter);
     this.express.use('/api/login', loginRouter);
 

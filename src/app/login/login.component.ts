@@ -17,9 +17,6 @@ export class LoginComponent {
     params.set('name', this.name);
     params.set('password', this.password);
 
-    console.log(this.name);
-    console.log(this.password);
-
     this.http.post('http://localhost:3000/api/login', params, {
       headers: new Headers({
         'Content-Type': 'application/x-www-form-urlencoded'
