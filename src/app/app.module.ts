@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';;
 import { HttpModule } from '@angular/http';
-import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -13,6 +12,7 @@ import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { RecommendComponent } from "./recommend/recommend.component";
 import { MypageComponent } from './mypage/mypage.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +22,13 @@ import { MypageComponent } from './mypage/mypage.component';
     RegisterComponent,
     RecommendComponent,
     MypageComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    CoreModule,
     SharedModule,
     BrowserAnimationsModule,
     MY_ROUTES

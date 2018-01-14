@@ -1,10 +1,19 @@
 <!-- トップページ予定 -->
-<homepage></homepage>
-<!-- <app-header>
-    <app-mypage></app-mypage>
-</app-header> -->
-
+<!-- <homepage></homepage> -->
+<app-header></app-header>
+<app-mypage></app-mypage>
 <register></register>
 <login></login>
 
+
 <!-- <recommend-top></recommend-top> -->
+
+
+<!-- <div class="content">
+<ng-container *ngIf="isLoginPage() || auth.isFinishedCheckState">
+    <router-outlet></router-outlet>
+</ng-container>
+<ng-container *ngIf="!isLoginPage() && !auth.isFinishedCheckState">
+    <mat-progress-bar class="content__progressbar" mode="indeterminate"></mat-progress-bar>
+</ng-container>
+</div> -->

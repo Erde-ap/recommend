@@ -1,8 +1,7 @@
 @import '~https://fonts.googleapis.com/icon?family=Material+Icons';
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 html {
-    font-weight: 300;
-    font-family: "Rounded Mplus 1c";
+ font-family: "Rounded Mplus 1c";
 }
 body {
     margin: 0;
