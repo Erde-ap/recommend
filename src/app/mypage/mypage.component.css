@@ -55,6 +55,9 @@ display: flex;
 .profile_card_image {
   background-size: cover;
 }
+.profile_desc{
+  line-height: 1.45;
+}
 .timeline{
   flex: 3;
   padding: 30px 30px 30px 0;
