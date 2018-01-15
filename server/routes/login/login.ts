@@ -2,7 +2,7 @@ import * as http from 'http';
 import * as passport from 'passport';
 import { Router } from 'express';
 
-import * as Users   from '../../models/user';
+import * as Users  from '../../models/user';
 
 const loginRouter: Router = Router();
 const LocalStrategy = require('passport-local').Strategy;

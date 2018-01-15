@@ -1,9 +1,11 @@
 import * as http from 'http'; 
+import * as url from 'url';
+import * as qstring from 'querystring';
 import { Router } from 'express';
 
 const nodemailer = require('nodemailer');
 
-import { G_USER, G_PASS, REGI_RAND, REGI_SUB, getHash, getRand, getDate} from '../../config';
+import { G_USER, G_PASS, REGI_RAND, REGI_SUB, M_MINUTE, getHash, getRand, getDate} from '../../config';
 
 import * as Users   from '../../models/user';
 
@@ -13,14 +15,16 @@ registerRouter.post('/' , (req, res, next)  => {
     let rand = getRand(REGI_RAND);
     let onetime_Url = getHash(rand);
 
-    console.log(req.body.email);
+    console.log(req.body);
 
-    console.log(req.session);
-
-    // exec(req, res, email, onetime_Url);
+    exec(req, res, email, onetime_Url);
 });
 
 registerRouter.get('/' , (req, res, next)  => {
+    let u = url.parse(req.url, false);
+    let query = qstring.parse(u.query);
+    console.log(query.url_path);
+    
 });
 
 //非同期処理の実行
@@ -31,24 +35,37 @@ async function exec(req, res, email, onetime_Url){
 
 //非同期関数
 function saveurl(req, res, email, onetime_Url){
-    let dt = new Date();
-    let sendtime = getDate();
-    let url_path = onetime_Url;
+    let sendtime = getDate(M_MINUTE);
+    let url_pass = onetime_Url;
 
     let onetimeuser = new Users({
         name: "onetime",
         email: email,
         regest: sendtime,
-        url_path:url_path,
-        ac_st: false
+        url_pass:url_pass,
+        ac_st: false,
+        ac_st2:false,
     });
 
     Users.findOne({email: email}, (err,  account) => {
         if(err) return hadDbError(err, req, res);
         if(account == null){
+            //検索で何も一致しないので新規で仮登録
             onetimeuser.save((err) => {
                 if(err) return hadDbError(err, req, res);
-            });//検索で何も一致しないので新規で仮登録
+            });
+        }
+        if(account){
+            if(account.regest < getDate()){
+                Users.remove({ _id:account._id }, (err)=> {
+                    if (err) return hadDbError(err, req, res);
+                    //検索で同じメールアドレスが見つかったが、認証期限が過ぎているので削除して再認証
+                    onetimeuser.save((err) => {
+                        if(err) return hadDbError(err, req, res);
+                    });
+                });
+            }
+            //Angular4に登録出来ない事を伝えるレスポンスを返す
         }
     });
 }

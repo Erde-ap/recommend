@@ -20,7 +20,8 @@ let Users = new Schema({
     regest: {type: Date, default: Date.now},//新規登録した時間の3時間後
     regent: {type: Date, default: Date.now},//パスワードリセットを申請した時間の12時間後
     ect: {type: Date, default: Date.now},//メールアドレス変更を申請した3時間後
-    ac_st: {type: Boolean, default:false},//accountstatus falseなら仮登録中
+    ac_st: {type: Boolean, default:false},//accountstatus falseなら仮登録中(送られてきたメールのリンクを踏んだ後にtrue)
+    ac_st2: {type: Boolean, default:false},//accountstatus2 false(送られてきたメールのリンクを踏んだ後にユーザ情報の設定を終えた場合にtrue)
     ac_use: {type: Boolean, default:false},//現在accountが使用中か確認
     ac_reset: {type:Boolean, default:false},//現在accountのパスワードがリセット状態にあるか
     ac_ec: {type:Boolean, default:false},//現在accountのemailが変更されようとしているか

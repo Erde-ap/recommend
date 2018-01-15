@@ -10,7 +10,6 @@ export const MONGO_URL_SESSION ='mongodb://150.95.148.134:28001/sessiondata';
 // export const MONGO_URL_REVIEW ='mongodb://localhost:27001/review';
 // export const MONGO_URL_SESSION ='mongodb://localhost:27001/sessiondata';
 
-
 //googleAPIkey
 export const G_USER = 'Recommend911@gmail.com';
 export const G_PASS = 'firestack';
@@ -26,6 +25,9 @@ export const REGI_SUB = 'Recommendにぶち込んでやるぜ！';
 
 //ユーザにメール送信する 際のランダムな文字の文字数
 export const REGI_RAND = 10;//register時
+
+//メール認証の期限(default == 180min == 3hour)
+export const M_MINUTE = 180;
 
 //日付と時間を取得
 export function getDate(ago_minute = 0){

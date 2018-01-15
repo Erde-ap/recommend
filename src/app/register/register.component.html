@@ -1,9 +1,27 @@
-<section class="register">
-    <div class="register-inner">
+<section class='register'>
+    <div class='register-inner'>
         <form>
-            <label>Eメール:</label>
-            <input  type="text" name='email' placeholder="email" [(ngModel)]="email">
-            <input type="button" (click)="onSubmit()" value="Submit">
+            <label>*Eメール:</label>
+            <input  type='text' name='email' placeholder='Eメール' [(ngModel)]='email'/>
+            <label>*ユーザID:</label>
+            <input  type='text' name='uid' placeholder='ユーザID' [(ngModel)]='uid'/>
+            <label>*パスワード:</label>
+            <input  type='password' name='password' placeholder='パスワード' [(ngModel)]='password'/>
+            <label>*パスワード確認:</label>
+            <input  type='password' name='password_confirm' placeholder='パスワード確認' [(ngModel)]='password_confirm'/>
+            <label>*ユーザ名:</label>
+            <input  type='text' name='name' placeholder='ユーザ名' [(ngModel)]='name'/>
+            <label>性別:</label>
+            <ng-container *ngFor="let item of data;">
+            <label>
+                <input type="radio" name="sex" [(ngModel)]='selected' [value]='item.value' [checked]='selected == item.value'>{{item.label}}
+            </label>
+            </ng-container>
+            <label>生年月日:</label>
+            <input type="date" name="date" [(ngModel)]='date'/>
+            <label>自己紹介:</label>
+            <textarea ref-textarea name='syoukai' rows='4' cols="40" [(ngModel)]='syoukai'>{{ syoukai }}</textarea>
+            <input type='button' (click)='onSubmit()' value='Submit'/>
         </form>
     </div>
 </section>
