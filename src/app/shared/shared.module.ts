@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 import {MatListModule} from '@angular/material/list';
 import {MatTabsModule} from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
@@ -35,7 +35,6 @@ import {
     MatListModule,
     HttpClientModule,
     MatTabsModule
-  ],
-  declarations: []
+  ]
 })
 export class SharedModule { }

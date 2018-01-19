@@ -1,4 +1,5 @@
 import { Component, ChangeDetectorRef} from '@angular/core';
+import { SharedModule } from '../shared.module';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MediaMatcher } from '@angular/cdk/layout';
