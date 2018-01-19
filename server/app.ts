@@ -24,6 +24,7 @@ import { registerRouter } from './routes/register/register';
 import { loginRouter } from './routes/login/login';
 import { logoutRouter } from './routes/logout/logout';
 import { checksessionRouter } from './routes/check_session/check_session';
+import { mypageRouter } from './routes/mypage/mypage';
 class App {
   public express: express.Application;
 
@@ -84,6 +85,8 @@ class App {
     this.express.use('/api/login', loginRouter);
     this.express.use('/api/logout', logoutRouter);
     this.express.use('/api/checksession', checksessionRouter);
+    this.express.use('/api/mypage', mypageRouter);
+
     //ここからずらさないで
     this.express.options("*", cors(options));
 

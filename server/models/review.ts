@@ -15,6 +15,16 @@ let Review = new Schema({
     com: [{type: Schema.Types.ObjectId, ref: 'ReviewCom'}]
 },{collection: 'review'});
 
+//レビューのコンテンツを保存
+let ReviewCon = new Schema({
+    //reviewconの_idはreviewのIDと同じになる
+    mfo: {type:Schema.Types.ObjectId, ref: 'Review', index:true},
+    _conid: {type:Schema.Types.ObjectId, index:true},//コンテンツID
+    cuday: {type:Date, default: Date.now},//コンテンツを上げた日
+    chday: Date,//内容を編集した日
+    body: String//各ブロックのコンテンツ
+},{collection:'reviewcon'});
+
 let ReviewCom = new Schema({
     //reviewcomの_idはreviewのIDと同じになる
     mfo: {type:Schema.Types.ObjectId, ref: 'Review', index:true},
@@ -30,7 +40,8 @@ let ReviewCom = new Schema({
 mongoose.Promise = global.Promise;
 let Review_model = mongoose.model("Review", Review);
 let ReviewCom_model = mongoose.model("ReviewCom", ReviewCom);
+let ReviewCon_model = mongoose.model("ReiviewCon", ReviewCon);
 
-let Review_Obj = [Review_model, ReviewCom_model];
+let Review_Obj = [Review_model, ReviewCom_model, ReviewCon_model];
 
 export = Review_Obj;
