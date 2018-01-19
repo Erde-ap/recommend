@@ -4,10 +4,10 @@ import { SharedService } from '../shared/shared.service';
 @Component({
   selector: 'app-mypage',
   templateUrl: './mypage.component.html',
-  styleUrls: ['./mypage.component.css']
+  styleUrls: ['./mypage.component.css'],
+  providers: [SharedService]
 })
 export class MypageComponent implements OnInit {
-
   avatar = "./assets/user1/user1_profile.jpg"
   user = {
     id  :"Johnson0212",
@@ -33,12 +33,11 @@ export class MypageComponent implements OnInit {
   toggleMenu(archive): void {
     archive.favorite = !archive.favorite;
     archive.favorite ? archive.favoInt++ : archive.favoInt--;
-}
+  }
   constructor(@Inject(SharedService)private sharedservice: SharedService){
     sharedservice.check_session();
   }
 
   ngOnInit() {
   }
-
 }

@@ -9,5 +9,5 @@ const myRoutes = [ // 追加
     { path: 'register', component: RegisterComponent}
   ];
 
-  export const MY_ROUTES: ModuleWithProviders = 
+  export const MY_ROUTES: ModuleWithProviders =
     RouterModule.forRoot(myRoutes);
