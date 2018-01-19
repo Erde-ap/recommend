@@ -4,6 +4,9 @@ import { Router } from 'express';
 
 import * as Users  from '../../models/user';
 
+import{getPhash} from '../../config';
+import{ LOGIN_S_REDIRECT_URL, LOGIN_F_REDIRECT_URL} from '../../redirect_config';
+
 const loginRouter: Router = Router();
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -20,9 +23,9 @@ passport.use("local-login",new LocalStrategy({
               console.log("ユーザ名かパスワードが間違っています。");
                 return done(null, false);
             }
-            //let hashedPassword = perfectHash(password);//本番用
-            let hashedPassword = req.body.password;//テスト用
-            if (account.hashpass != hashedPassword) { //パスワードが一致しない
+            let hashedPassword = getPhash(password, account.salt);//本番用
+            // let hashedPassword = req.body.password;//テスト用
+            if (account.hashpass != hashedPassword[0]) { //パスワードが一致しない
               console.log("ユーザ名かパスワードが間違っています。");
                 return done(null, false);
             }
@@ -38,27 +41,34 @@ passport.use("local-login",new LocalStrategy({
     done(null, account.id); // useridをセット
   });
   passport.deserializeUser((id, done) => {
-    console.log(id);
     Users.findById(id, function(err, user) {
       done(err, user);
     });
   });
 
-loginRouter.post('/' , (req, res, next)  => {
+loginRouter.post('/' , (req, res, next) =>{
     passport.authenticate('local-login', {
-        successRedirect: '/api/login',
-        failureRedirect: 'http://localhost:4200',
-        session: true
+        successRedirect: LOGIN_S_REDIRECT_URL,
+        failureRedirect: LOGIN_F_REDIRECT_URL,
+        session: false
     })(req, res, next)
 });
 
-loginRouter.get('/' , (req: any, res: any, next: any)  => {
+loginRouter.get('/' , (req:any, res, next) =>{
     //認証後
-    console.log(req.session.passport.user);
-    if(req.session.passport.user){
+    console.log(req.user);
+    if(req.user != null){
         console.log('compleat');
+        let compleat = {
+            stauts:'ログイン完了'
+        }
+        res.send(compleat);
     }else{
         console.log('failure');
+        let error = {
+            stauts:'ログインしていません。'
+        }
+        res.send(error);
     }
 });
 
