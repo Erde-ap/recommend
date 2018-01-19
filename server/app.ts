@@ -6,9 +6,9 @@ import * as session from 'express-session';
 import * as connect from 'connect';
 import * as mongoose from 'mongoose';
 import * as mongo from "connect-mongo";
-import * as corser from 'corser';
+import * as cors from 'cors';
 
-import { getPhash, getHash, getRand, MONGO_URL_REVIEW, MONGO_URL_USER, MONGO_URL_SESSION } from './config';
+import { getPhash, getHash, getRand,API_URL, MONGO_URL_REVIEW, MONGO_URL_USER, MONGO_URL_SESSION } from './config';
 
 const MongoStore = mongo(session);
 let store = new MongoStore({ //セッション管理用DB接続設定
@@ -23,7 +23,7 @@ import * as Users   from './models/user';
 import { registerRouter } from './routes/register/register';
 import { loginRouter } from './routes/login/login';
 import { logoutRouter } from './routes/logout/logout';
-
+import { checksessionRouter } from './routes/check_session/check_session';
 class App {
   public express: express.Application;
 
@@ -36,16 +36,6 @@ class App {
   private middleware(): void {
     // プロキシで通信をする
     // this.express.set('trust proxy', 1);
-
-    /**
-    * CORSを許可.
-    */
-    this.express.use(corser.create());
-    // this.express.use((req, res, next)=> {
-    //   res.header("Access-Control-Allow-Origin", "*");
-    //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    //   next();
-    // });
 
     // 接続する MongoDB の設定
     mongoose.connect(process.env.MONGO_URL_USER || MONGO_URL_USER || MONGO_URL_REVIEW, {
@@ -75,12 +65,27 @@ class App {
   }
 
   private routes(): void {
+    /**
+    * CORSを許可.
+    */
+  const options:cors.CorsOptions = {
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
+    credentials: true,
+    methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+    origin: API_URL,
+    preflightContinue: false
+  };
+
     // 静的資産へのルーティング
+    this.express.use(cors(options));
     this.express.use(express.static(path.join(__dirname, 'public')));
     this.express.use('/static',express.static(path.join(__dirname, 'public')));
     this.express.use('/api/register',  registerRouter);
     this.express.use('/api/login', loginRouter);
     this.express.use('/api/logout', logoutRouter);
+    this.express.use('/api/checksession', checksessionRouter);
+    //ここからずらさないで
+    this.express.options("*", cors(options));
 
     //ミドルウェアを使いつくしたので404を生成 
     this.express.use((err, req, res, next) => {

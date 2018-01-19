@@ -34,7 +34,7 @@ export class RegisterComponent {
 
     this.http.post('http://localhost:3000/api/register', params, { withCredentials: true })
     .subscribe(
-      data => console.log(data),
+      data => console.log(data.json()),
       error => console.log(error) 
     ) 
   }

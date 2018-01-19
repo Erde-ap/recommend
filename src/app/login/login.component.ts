@@ -22,11 +22,10 @@ export class LoginComponent {
     this.http.post('http://localhost:3000/api/login', params, { withCredentials: true})
     .subscribe(
       response => {
-        console.log(response)
+        console.log(response);
       },
       error => {
-        console.log(error)
-      }
-    );
+        console.log(error);
+      });
   }
 }

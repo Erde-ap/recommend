@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-mypage',
@@ -33,7 +34,9 @@ export class MypageComponent implements OnInit {
     archive.favorite = !archive.favorite;
     archive.favorite ? archive.favoInt++ : archive.favoInt--;
 }
-  constructor() { }
+  constructor(@Inject(SharedService)private sharedservice: SharedService){
+    sharedservice.check_session();
+  }
 
   ngOnInit() {
   }
