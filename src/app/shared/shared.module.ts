@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import {MatListModule} from '@angular/material/list';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
 import {
   MatButtonModule,
   MatMenuModule,
@@ -11,7 +12,6 @@ import {
   MatCardModule,
   MatSidenavModule
 } from '@angular/material';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -23,7 +23,8 @@ import {
     MatSidenavModule,
     MatListModule,
     HttpClientModule,
-    MatTabsModule
+    MatTabsModule,
+    MatInputModule
   ],
   exports: [
     MatButtonModule,
@@ -34,7 +35,8 @@ import {
     MatSidenavModule,
     MatListModule,
     HttpClientModule,
-    MatTabsModule
+    MatTabsModule,
+    MatInputModule
   ]
 })
 export class SharedModule { }
