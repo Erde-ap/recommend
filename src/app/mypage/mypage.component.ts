@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Injectable } from '@angular/core';
 import { SharedService } from '../shared/shared.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { SharedService } from '../shared/shared.service';
   styleUrls: ['./mypage.component.css'],
   providers: [SharedService]
 })
+@Injectable()
 export class MypageComponent implements OnInit {
   avatar = './assets/user1/user1_profile.jpg';
   name = '';
@@ -31,14 +32,15 @@ export class MypageComponent implements OnInit {
       description: '『ワイルド・スピード SKY MISSION』（ワイルド・スピード スカイ・ミッション、原題：『Furious 7』、別題：『Furious Seven』、『Fast 7』、『Fast & Furious 7』）は、2015年のアメリカ合衆国のカーアクション映画。『ワイルド・スピード』シリーズの7作目である。シリーズの時間軸は、1作目→2作目→4作目（『ワイルド・スピード MAX』）→5作目（『ワイルド・スピード MEGA MAX』）→6作目（『ワイルド・スピード EURO MISSION』）→3作目（『ワイルドスピードX3 TOKYO DRIFT』）→7作目（本作）→8作目（『ワイルド・スピード ICE BREAK』）の順となっている。本作のクランクアップ前に主演のポール・ウォーカーが交通事故により他界したため、一部のシーンは彼の弟2人（カレブ・ウォーカーとコディ・ウォーカー）が代役を務めている[3]。また本編の最後に「FOR PAUL（ポールに捧ぐ）」のメッセージが捧げられている。'
     }
   ];
-  toggleMenu(archive): void {
-    archive.favorite = !archive.favorite;
-    archive.favorite ? archive.favoInt++ : archive.favoInt--;
-  }
-  constructor(@Inject(SharedService)private sharedservice: SharedService){
+
+  constructor (private sharedservice: SharedService) {
     sharedservice.check_session();
   }
 
-  ngOnInit() {
+  ngOnInit () {}
+
+  toggleMenu (archive): void {
+    archive.favorite = !archive.favorite;
+    archive.favorite ? archive.favoInt++ : archive.favoInt--;
   }
 }

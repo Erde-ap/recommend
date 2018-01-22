@@ -31,30 +31,30 @@ export const REGI_RAND = 10; // register時
 export const M_MINUTE = 180;
 
 // 日付と時間を取得
-export function getDate(ago_minute = 0){
-    const now = new Date();
-    now.setMinutes(now.getMinutes() + ago_minute);
-    return now;
+export function getDate (agominute = 0) {
+  const now = new Date();
+  now.setMinutes(now.getMinutes() + agominute);
+  return now;
 }
 
 // ランダムな文字列を生成
-export function getRand(size){
-    const rand = randomstring.generate(size);
-    return rand;
+export function getRand (size) {
+  const rand = randomstring.generate(size);
+  return rand;
 }
 
 // hash 作成
-export function getHash(word: string){
-    const hash = sha512(word); // hash生成
-    return hash.toString('hex');
+export function getHash (word: string) {
+  const hash = sha512(word); // hash生成
+  return hash.toString('hex');
 }
 
 // ソルト付きでストレッチング 済みのhashs作成(Phash = PerfectHash)
 const STRETCH = 10; // ストレッチ回数の設定
 const SALT_LENGTH = 12; // ソルトの文字数の設定
-export function getPhash (word: string, salt = randomstring.generate(SALT_LENGTH)){
-    for (let i = 0 ; i < STRETCH ; i++){
-        word = getHash(word + salt);
-    }
-    return [word, salt];
+export function getPhash (word: string, salt = randomstring.generate(SALT_LENGTH)) {
+  for (let i = 0 ; i < STRETCH ; i++) {
+    word = getHash(word + salt);
+  }
+  return [word, salt];
 }

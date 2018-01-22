@@ -7,20 +7,12 @@ import { DetailComponent } from './detail/detail.component';
 import { PostComponent } from './post/post.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    TopComponent,
-    SearchComponent,
-    DetailComponent,
-    PostComponent,
-  ],
   exports: [
     CommonModule,
     TopComponent,
     SearchComponent,
     DetailComponent,
-    PostComponent,
-  ],
-  declarations: []
+    PostComponent
+  ]
 })
 export class ReviewModule { }

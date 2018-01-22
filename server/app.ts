@@ -8,7 +8,7 @@ import * as mongoose from 'mongoose';
 import * as mongo from 'connect-mongo';
 import * as cors from 'cors';
 
-import { getPhash, getHash, getRand, API_URL, MONGO_URL_REVIEW, MONGO_URL_USER, MONGO_URL_SESSION} from './config';
+import { getPhash, getHash, getRand, API_URL, MONGO_URL_REVIEW, MONGO_URL_USER, MONGO_URL_SESSION } from './config';
 import { LOGIN_F_REDIRECT_URL } from './redirect_config';
 
 const MongoStore = mongo(session);
@@ -29,19 +29,19 @@ import { mypageRouter } from './routes/mypage/mypage';
 class App {
   public express: express.Application;
 
-  constructor() {
+  constructor () {
     this.express = express();
     this.middleware();
     this.routes();
   }
 
-  private middleware(): void {
+  private middleware (): void {
     // プロキシで通信をする
     // this.express.set('trust proxy', 1);
 
     // 接続する MongoDB の設定
     mongoose.connect(process.env.MONGO_URL_USER || MONGO_URL_USER || MONGO_URL_REVIEW, {
-      useMongoClient: true,
+      useMongoClient: true
     });
     process.on('SIGINT', () => {
       mongoose.disconnect();
@@ -51,44 +51,39 @@ class App {
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: true }));
     this.express.use(session({
-        secret: 'ioukitty',
-        store: store,
-        resave: true,
-        saveUninitialized: true,
-        rolling: true,
-        cookie: {
-          secure: false,
-          httpOnly: true,
-          maxAge: 60 * 60 * 1000
-        }
+      secret: 'ioukitty',
+      store: store,
+      resave: true,
+      saveUninitialized: true,
+      rolling: true,
+      cookie: {
+        secure: false,
+        httpOnly: true,
+        maxAge: 60 * 60 * 1000
+      }
     }));
     this.express.use(passport.initialize());
     this.express.use(passport.session());
   }
 
-  private routes(): void {
-    /**
+  private routes (): void {
+    /*
     * CORSを許可.
     */
-  const options: cors.CorsOptions = {
-    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'X-Access-Token'],
-    credentials: true,
-    methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-    origin: API_URL,
-    preflightContinue: false
-  };
+    const options: cors.CorsOptions = {
+      allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'X-Access-Token'],
+      credentials: true,
+      methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+      origin: API_URL,
+      preflightContinue: false
+    };
 
     // 静的資産へのルーティング
     this.express.use(cors(options));
     this.express.use(express.static(path.join(__dirname, 'public')));
     this.express.use('/static', express.static(path.join(__dirname, 'public')));
-    this.express.use('/api/register',  registerRouter);
-    // this.express.use('/api/login', loginRouter);
-    this.express.use('api/login', passport.authenticate('local', {
-      failureRedirect: LOGIN_F_REDIRECT_URL
-    }), (req, res) => {
-      res.send('ログイン完了!');
-    });
+    this.express.use('/api/register', registerRouter);
+    this.express.use('/api/login', loginRouter);
     this.express.use('/api/logout', logoutRouter);
     this.express.use('/api/checksession', checksessionRouter);
     this.express.use('/api/mypage', mypageRouter);
@@ -108,9 +103,9 @@ class App {
     // will print stacktrace
     if (this.express.get('env') === 'development') {
       this.express.use((err, req, res, next) => {
-          res.status(err.status || 500);
-          console.log(err.message);
-          console.log(err);
+        res.status(err.status || 500);
+        console.log(err.message);
+        console.log(err);
       });
     }
 
@@ -118,8 +113,8 @@ class App {
     // no stacktraces leaked to user
     this.express.use((err, req, res, next) => {
       res.status(err.status || 500);
-        console.log(err.message);
-        console.log(err);
+      console.log(err.message);
+      console.log(err);
     });
   }
 }
