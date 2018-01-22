@@ -5,20 +5,21 @@ import * as bodyParser from 'body-parser';
 import * as session from 'express-session';
 import * as connect from 'connect';
 import * as mongoose from 'mongoose';
-import * as mongo from "connect-mongo";
+import * as mongo from 'connect-mongo';
 import * as cors from 'cors';
 
-import { getPhash, getHash, getRand,API_URL, MONGO_URL_REVIEW, MONGO_URL_USER, MONGO_URL_SESSION } from './config';
+import { getPhash, getHash, getRand, API_URL, MONGO_URL_REVIEW, MONGO_URL_USER, MONGO_URL_SESSION} from './config';
+import { LOGIN_F_REDIRECT_URL } from './redirect_config';
 
 const MongoStore = mongo(session);
-let store = new MongoStore({ //セッション管理用DB接続設定
+const store = new MongoStore({ // セッション管理用DB接続設定
   url: MONGO_URL_SESSION,
-  ttl: 60 * 60 //1hour
+  ttl: 60 * 60 // 1hour
 });
 
 import * as passport from 'passport';
 
-import * as Users   from './models/user';
+import * as Users from './models/user';
 
 import { registerRouter } from './routes/register/register';
 import { loginRouter } from './routes/login/login';
@@ -42,11 +43,11 @@ class App {
     mongoose.connect(process.env.MONGO_URL_USER || MONGO_URL_USER || MONGO_URL_REVIEW, {
       useMongoClient: true,
     });
-    process.on('SIGINT', () => { 
-      mongoose.disconnect(); 
+    process.on('SIGINT', () => {
+      mongoose.disconnect();
     });
 
-    this.express.use(logger('dev'));//ログ用
+    this.express.use(logger('dev')); // ログ用
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: true }));
     this.express.use(session({
@@ -69,10 +70,10 @@ class App {
     /**
     * CORSを許可.
     */
-  const options:cors.CorsOptions = {
-    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
+  const options: cors.CorsOptions = {
+    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'X-Access-Token'],
     credentials: true,
-    methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+    methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
     origin: API_URL,
     preflightContinue: false
   };
@@ -80,17 +81,22 @@ class App {
     // 静的資産へのルーティング
     this.express.use(cors(options));
     this.express.use(express.static(path.join(__dirname, 'public')));
-    this.express.use('/static',express.static(path.join(__dirname, 'public')));
+    this.express.use('/static', express.static(path.join(__dirname, 'public')));
     this.express.use('/api/register',  registerRouter);
-    this.express.use('/api/login', loginRouter);
+    // this.express.use('/api/login', loginRouter);
+    this.express.use('api/login', passport.authenticate('local', {
+      failureRedirect: LOGIN_F_REDIRECT_URL
+    }), (req, res) => {
+      res.send('ログイン完了!');
+    });
     this.express.use('/api/logout', logoutRouter);
     this.express.use('/api/checksession', checksessionRouter);
     this.express.use('/api/mypage', mypageRouter);
 
-    //ここからずらさないで
-    this.express.options("*", cors(options));
+    // ここからずらさないで
+    this.express.options('*', cors(options));
 
-    //ミドルウェアを使いつくしたので404を生成 
+    // ミドルウェアを使いつくしたので404を生成
     this.express.use((err, req, res, next) => {
       // var err = new Error('Not Found');
       err.status = 404;
