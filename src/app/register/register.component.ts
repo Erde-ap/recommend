@@ -2,27 +2,27 @@ import { Component } from '@angular/core';
 import { Http, URLSearchParams, Headers } from '@angular/http';
 
 @Component({
-  selector: 'register',
+  selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  email='';
-  uid='';
-  password='';
-  password_confirm='';
-  name='';
-  date='';
-  selected ='male';
-  syoukai='ここに自己紹介を記入してください。';
+  email= '';
+  uid= '';
+  password= '';
+  password_confirm= '';
+  name= '';
+  date= '';
+  selected = 'male';
+  syoukai= 'ここに自己紹介を記入してください。';
 
   data = [
-    { label: '男性', value: 'male'},
-    { label: '女性', value: 'female'},
+    { label: '男性', value: 'male' },
+    { label: '女性', value: 'female' }
   ];
-  constructor(private http:Http){}
+  constructor (private http: Http) {}
 
-  onSubmit(){
+  onSubmit () {
     let params = new URLSearchParams();
     params.set('email', this.email);
     params.set('uid', this.uid);
@@ -35,16 +35,7 @@ export class RegisterComponent {
     this.http.post('http://localhost:3000/api/register', params, { withCredentials: true })
     .subscribe(
       data => console.log(data.json()),
-      error => console.log(error) 
-    ) 
-  }
-
-  nav_flag = false;
-  nav_state(){
-    if(this.nav_flag == false){
-      this.nav_flag = true;
-    }else{
-      this.nav_flag = false;
-    }
+      error => console.log(error)
+    );
   }
 }

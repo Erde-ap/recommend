@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopComponent implements OnInit {
 
-  constructor() { }
+  constructor () { }
 
-  ngOnInit() {
+  ngOnInit () {
   }
 
 }

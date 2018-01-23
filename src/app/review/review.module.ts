@@ -7,6 +7,7 @@ import { DetailComponent } from './detail/detail.component';
 import { PostComponent } from './post/post.component';
 
 @NgModule({
+<<<<<<< HEAD
   imports: [
     CommonModule,
     TopComponent,
@@ -14,6 +15,8 @@ import { PostComponent } from './post/post.component';
     DetailComponent,
     PostComponent
   ],
+=======
+>>>>>>> 6788789da85c120eb5d5b28428247748443785fa
   exports: [
     CommonModule
   ],
