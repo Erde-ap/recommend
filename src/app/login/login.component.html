@@ -9,6 +9,17 @@
         </form>
     </div>
 </section>
-<mat-form-field>
-<textarea matInput placeholder="Autosize textarea" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
-</mat-form-field>
+<form>
+  <mat-form-field >
+    <input matInput placeholder="ユーザーID・Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher">
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+      <strong>*</strong>ユーザーID・メールアドレスと入力してください
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field >
+    <input matInput placeholder="パスワード" [formControl]="passwordFormControl" [errorStateMatcher]="matcher">
+    <mat-error *ngIf="passwordFormControl.hasError('required')">
+      <strong>*</strong>パスワードを入力してください
+    </mat-error>
+  </mat-form-field>
+</form>

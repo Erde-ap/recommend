@@ -12,15 +12,16 @@ import { PostComponent } from './post/post.component';
     TopComponent,
     SearchComponent,
     DetailComponent,
-    PostComponent,
+    PostComponent
   ],
   exports: [
-    CommonModule,
+    CommonModule
+  ],
+  declarations: [
     TopComponent,
     SearchComponent,
     DetailComponent,
-    PostComponent,
-  ],
-  declarations: []
+    PostComponent
+  ]
 })
 export class ReviewModule { }

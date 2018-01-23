@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
-import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import {
   MatButtonModule,
@@ -15,6 +16,7 @@ import {
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
@@ -22,7 +24,6 @@ import {
     MatCardModule,
     MatSidenavModule,
     MatListModule,
-    HttpClientModule,
     MatTabsModule,
     MatInputModule
   ],
