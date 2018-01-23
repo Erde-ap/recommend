@@ -23,6 +23,10 @@ export class LoginComponent {
   emailFormControl = new FormControl('', [
     Validators.required
   ]);
+  passwordFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
   matcher = new MyErrorStateMatcher();
   constructor (private http: Http) {}
 
