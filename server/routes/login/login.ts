@@ -60,7 +60,7 @@ loginRouter.get('/' , (req: any, res, next) => {
   if (req.session.user != null) {
     console.log('compleat');
     res.send(error.status[11]);
-  }else {
+  } else {
     console.log('failure');
     res.send(error.status[10]);
   }

@@ -10,7 +10,7 @@
     </div>
 </section>
 <form>
-  <mat-form-field >
+  <mat-form-field>
     <input matInput placeholder="ユーザーID・Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher">
     <mat-error *ngIf="emailFormControl.hasError('required')">
       <strong>*</strong>ユーザーID・メールアドレスと入力してください
