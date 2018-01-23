@@ -38,7 +38,7 @@ export const error = {
     },
     {
       code: 9,
-      response: 'アカウントが仮登録の状態です。'
+      response: 'アカウントが本登録が済んでいません。'
     },
     {
       code: 10,
@@ -99,6 +99,10 @@ export const error = {
     {
       code: 24,
       response: 'ログインに失敗しました。'
+    },
+    {
+      code: 25,
+      response: 'ログアウトに成功しました。'
     }
   ]
 };

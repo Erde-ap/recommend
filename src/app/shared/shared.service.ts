@@ -9,8 +9,10 @@ export class SharedService {
     this.http.get('http://localhost:3000/api/checksession', { withCredentials: true })
         .subscribe(
           response => {
-            console.log(response);
-            // session.userにidが格納されていなかったらログイン画面にリダイレクトする。
+            // 受け取ったセッション情報をjson化して変数に格納する。
+            const resp = response.json();
+            console.log(resp.user);
+            // resp.userにidが格納されていなかったらログイン画面にリダイレクトするコードを書く↓。(resp.user == undefined || resp.user ==null)
           },
           error => {
             console.log(error);

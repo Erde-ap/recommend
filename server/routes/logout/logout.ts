@@ -7,11 +7,10 @@ const logoutRouter: Router = Router();
 
 logoutRouter.get('/' , (req: any, res, next) => {
     // ログアウト処理
-  req.session.destroy(function (err) {
+  req.session.destroy((err) => {
     if (err) return hadLogoutError(req, res);
-    res.send(error.status[0]);
+    res.send(error.status[25]);
   });
-    // angular4にlogoutが終わった事を伝える
 });
 
 // エラーハンドル

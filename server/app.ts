@@ -10,6 +10,7 @@ import * as cors from 'cors';
 
 import { getPhash, getHash, getRand, API_URL, MONGO_URL_REVIEW, MONGO_URL_USER, MONGO_URL_SESSION } from './config';
 import { LOGIN_F_REDIRECT_URL } from './redirect_config';
+import { error } from './error_config';
 
 const MongoStore = mongo(session);
 const store = new MongoStore({ // セッション管理用DB接続設定
@@ -26,6 +27,7 @@ import { loginRouter } from './routes/login/login';
 import { logoutRouter } from './routes/logout/logout';
 import { checksessionRouter } from './routes/check_session/check_session';
 import { mypageRouter } from './routes/mypage/mypage';
+import { reviewRouter } from './routes/review/review';
 class App {
   public express: express.Application;
 
@@ -87,6 +89,7 @@ class App {
     this.express.use('/api/logout', logoutRouter);
     this.express.use('/api/checksession', checksessionRouter);
     this.express.use('/api/mypage', mypageRouter);
+    this.express.use('/api/review', reviewRouter);
 
     // ここからずらさないで
     this.express.options('*', cors(options));

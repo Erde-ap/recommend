@@ -4,12 +4,13 @@ import { Router } from 'express';
 
 import * as Users from '../../models/user';
 
+const LocalStrategy = require('passport-local').Strategy;
+
 import { getPhash } from '../../config';
 import { LOGIN_S_REDIRECT_URL, LOGIN_F_REDIRECT_URL } from '../../redirect_config';
 import { error } from '../../error_config';
 
 const loginRouter: Router = Router();
-const LocalStrategy = require('passport-local').Strategy;
 
 // ログイン認証
 passport.use('local-login', new LocalStrategy({
@@ -24,12 +25,11 @@ passport.use('local-login', new LocalStrategy({
         return done(null, false);
       }
       const hashedPassword = getPhash(password, user.salt); // 本番用
-            // let hashedPassword = req.body.password;//テスト用
+        // let hashedPassword = req.body.password;//テスト用
       if (user.hashpass !== hashedPassword[0]) { // パスワードが一致しない
         return done(null, false);
       }
       if (user.ac_st !== true) {// アカウントの登録が済んでいない
-        console.log('アカウントの認証が済んでいません。');
         return done(null, false);
       }
       return done(null, user);
@@ -40,14 +40,14 @@ passport.serializeUser((user: any, done) => {
   done(null, user.id); // useridをセット
 });
 passport.deserializeUser((id, done) => {
-  Users.findById(id, function (err, user) {
+  Users.findById(id, (err, user) => {
     done(err, user);
   });
 });
 
 loginRouter.post('/' , (req: any, res: any, next: any) => {
   passport.authenticate('local-login', { session: false }, (err, user, info) => {
-    if (err) { return next(err); }
+    if (err) { return res.send(error.status[24]).end(); }
     if (!user) { return res.send(error.status[24]).end(); }
     req.session.user = user._id;
     res.send(error.status[23]);
@@ -57,8 +57,7 @@ loginRouter.post('/' , (req: any, res: any, next: any) => {
 
 loginRouter.get('/' , (req: any, res, next) => {
     // ログイン確認用
-  console.log(req.user);
-  if (req.user != null) {
+  if (req.session.user != null) {
     console.log('compleat');
     res.send(error.status[11]);
   }else {
