@@ -18,18 +18,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-<<<<<<< HEAD
   name: string = '';
   password: string = '';
   emailFormControl = new FormControl('', [
     Validators.required
   ]);
   matcher = new MyErrorStateMatcher();
-=======
-  name = '';
-  password = '';
-
->>>>>>> 6788789da85c120eb5d5b28428247748443785fa
   constructor (private http: Http) {}
 
   onSubmit () {
