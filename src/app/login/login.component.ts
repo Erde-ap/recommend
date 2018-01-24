@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Http, URLSearchParams, Headers } from '@angular/http';
-import { FormControl,FormGroupDirective,NgForm,Validators } from '@angular/forms';
+import { FormControl,FormBuilder,FormGroupDirective,NgForm,Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms/src/model';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -18,21 +19,24 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  name: string = '';
-  password: string = '';
-  emailFormControl = new FormControl('', [
-    Validators.required
-  ]);
-  passwordFormControl = new FormControl('', [
-    Validators.required
-  ]);
+  loginForm: FormGroup;
   matcher = new MyErrorStateMatcher();
-  constructor (private http: Http) {}
+
+  constructor (private http: Http,private builder: FormBuilder) {
+    this.loginForm = this.builder.group({
+      userName : new FormControl('', [
+        Validators.required
+      ]),
+      password : new FormControl('', [
+        Validators.required
+      ])
+    });
+  }
 
   onSubmit () {
     const params = new URLSearchParams();
-    params.set('name', this.name);
-    params.set('password', this.password);
+    params.set('name', this.loginForm.controls.userName.value);
+    params.set('password', this.loginForm.controls.password.value);
     // JSON.Stringifyでｏｂｊを文字列化
     // params.set('object', JSON.stringify(this.object));
 

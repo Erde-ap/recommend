@@ -1,25 +1,15 @@
-<section class="login">
-    <div class="login-inner">
-        <form>
-            <label for="name">ユーザネーム:</label>
-            <input id="name" name="name" type="name" placeholder="name" [(ngModel)]="name"/>
-            <label for="password">パスワード:</label>
-            <input id="password" name="password" type="password" placeholder="password" [(ngModel)]="password"/>
-            <input type="button" (click)="onSubmit()" value="Login"/>
-        </form>
-    </div>
-</section>
-<form>
+<form [formGroup]="loginForm">
   <mat-form-field>
-    <input matInput placeholder="ユーザーID・Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher">
-    <mat-error *ngIf="emailFormControl.hasError('required')">
+    <input matInput placeholder="ユーザーID・Email" [formControl]="this.loginForm.controls.userName" [errorStateMatcher]="matcher">
+    <mat-error *ngIf="loginForm.controls.userName.hasError('required')">
       <strong>*</strong>ユーザーID・メールアドレスと入力してください
     </mat-error>
   </mat-form-field>
   <mat-form-field >
-    <input matInput placeholder="パスワード" [formControl]="passwordFormControl" [errorStateMatcher]="matcher">
-    <mat-error *ngIf="passwordFormControl.hasError('required')">
+    <input matInput placeholder="パスワード" [formControl]="this.loginForm.controls.password" [errorStateMatcher]="matcher">
+    <mat-error *ngIf="loginForm.controls.password.hasError('required')">
       <strong>*</strong>パスワードを入力してください
     </mat-error>
   </mat-form-field>
+  <button mat-raised-button (click)="onSubmit()">ログイン</button>
 </form>

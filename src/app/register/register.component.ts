@@ -1,5 +1,17 @@
 import { Component } from '@angular/core';
+import { SharedModule } from '../shared/shared.module';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { Http, URLSearchParams, Headers } from '@angular/http';
+import { FormControl,FormBuilder,FormGroupDirective,NgForm,Validators ,ValidationErrors } from '@angular/forms';
+import { FormGroup } from '@angular/forms/src/model';
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState (control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-register',
@@ -7,30 +19,54 @@ import { Http, URLSearchParams, Headers } from '@angular/http';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  email= '';
-  uid= '';
-  password= '';
-  password_confirm= '';
-  name= '';
-  date= '';
-  selected = 'male';
-  syoukai= 'ここに自己紹介を記入してください。';
+  this: any;
+  registerForm: FormGroup;
+  matcher = new MyErrorStateMatcher();
+  checkPassword: any;
 
-  data = [
-    { label: '男性', value: 'male' },
-    { label: '女性', value: 'female' }
-  ];
-  constructor (private http: Http) {}
+  constructor (private http: Http,private builder: FormBuilder) {
+    this.registerForm = this.builder.group({
+      Email : new FormControl('', [
+        Validators.required,
+        Validators.email
+      ]),
+      userId : new FormControl('', [
+        Validators.required
+      ]),
+      password : new FormControl('', [
+        Validators.required,
+        Validators.maxLength(16),
+        Validators.minLength(8)
+      ]),
+      confirmPassword : new FormControl('', [
+        Validators.required
+      ]),
+      userName : new FormControl('', [
+        Validators.required
+      ]),
+      sex : new FormControl('男',[]),
+      birthday : new FormControl('1990-01-01', []),
+      intro : new FormControl('', [])
+    }, { validator: this.samePasswords });
+  }
+  // ,{ validator: this.samePasswords }
+  checkPasswordChange () {
+    return this.registerForm.get('password').value === this.registerForm.get('confirmPassword').value ? true : false;
+  }
+
+  samePasswords (group: FormGroup) {
+    return group.get('password').value === group.get('confirmPassword').value ? null : { 'mismatch': true };
+  }
 
   onSubmit () {
     let params = new URLSearchParams();
-    params.set('email', this.email);
-    params.set('uid', this.uid);
-    params.set('password', this.password);
-    params.set('name', this.name);
-    params.set('date', this.date);
-    params.set('sex', this.selected);
-    params.set('syoukai', this.syoukai);
+    params.set('email', this.registerForm.controls.Email.value);
+    params.set('uid', this.registerForm.controls.userId.value);
+    params.set('password', this.registerForm.controls.password.value);
+    params.set('name', this.registerForm.controls.userName.value);
+    params.set('birthday', this.registerForm.controls.birthday.value);
+    params.set('sex', this.registerForm.controls.sex.value);
+    params.set('syoukai', this.registerForm.controls.intro.value);
 
     this.http.post('http://localhost:3000/api/register', params, { withCredentials: true })
     .subscribe(

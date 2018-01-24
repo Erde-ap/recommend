@@ -5,13 +5,17 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
   MatButtonModule,
   MatMenuModule,
   MatToolbarModule,
   MatIconModule,
   MatCardModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatNativeDateModule
 } from '@angular/material';
 @NgModule({
   imports: [
@@ -25,7 +29,11 @@ import {
     MatSidenavModule,
     MatListModule,
     MatTabsModule,
-    MatInputModule
+    MatInputModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     MatButtonModule,
@@ -37,7 +45,14 @@ import {
     MatListModule,
     HttpClientModule,
     MatTabsModule,
-    MatInputModule
+    MatInputModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
+  providers: [
+    MatNativeDateModule
   ]
 })
 export class SharedModule { }
