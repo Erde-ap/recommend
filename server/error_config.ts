@@ -1,4 +1,6 @@
-export const error = {
+import { CONF_REDIRECT_URL } from './redirect_config';
+
+export let error = {
   status: [
     {
       code: 0,
@@ -10,7 +12,8 @@ export const error = {
     },
     {
       code: 2,
-      response: '入力されたIDまたはアドレスは登録済みです。'
+      response: '入力されたIDまたはアドレスは登録済みです。',
+      match: { uid: '', email: '' }
     },
     {
       code: 3,
@@ -120,13 +123,18 @@ export function hadInputdataError (req, res) {
   res.send(error.status[1]);
 }
 
-export function hadOverlapError (req, res) {
-  res.send(error.status[2]);
+export function hadOverlapError (req, res, matches) {
+  const change = {
+    code: error.status[2].code,
+    response: error.status[2].response,
+    match: matches
+  };
+  res.send(change);
 }
 
 export function hadSendmailError (req, res, resp, transporter) {
-  transporter.close();
   res.send(error.status[4]);
+  transporter.close();
 }
 
 export function hadUrlError (req, res) {

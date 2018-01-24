@@ -57,7 +57,7 @@ function saveurl (req, res, onetimeUrl) {
     hashpass: hashpass[0],
     salt: hashpass[1],
     name: req.body.name,
-    date: req.body.date,
+    birthday: req.body.birthday,
     sex: req.body.sex,
     syoukai: req.body.syoukai,
     regest: sendtime,
@@ -65,7 +65,7 @@ function saveurl (req, res, onetimeUrl) {
     ac_st: false
   });
 
-  Users.findOne({ email: req.body.email }, (err, account) => {
+  Users.findOne({ $or: [{ email: req.body.email },{ uid: req.body.uid }] }, (err, account) => {
     if (err) return hadDbError(req, res);
     if (account == null) {
             // 検索で何も一致しないので新規で仮登録
@@ -78,15 +78,25 @@ function saveurl (req, res, onetimeUrl) {
       if (account.regest < getDate && account.ac_st === false) {
         Users.remove({ _id: account._id }, () => {
           if (err) return hadDbError(req, res);
-                    // 検索で同じメールアドレスが見つかったが、認証期限が過ぎているので削除して再認証
+          // 検索で同じメールアドレスまたはUSERIDが見つかったが、認証期限が過ぎているので削除して再認証
           onetimeuser.save(() => {
             if (err) return hadDbError(req, res);
             sendmail(req, res, onetimeUrl);
           });
         });
       }
-      hadEntryedError(req, res);
-            // Angular4に登録出来ない事を伝えるレスポンスを返す
+      // Angular4に登録出来ない事を伝えるレスポンスを返す
+      const match = {
+        uid: false,
+        email: false
+      };
+      if (account.email === req.body.email) {
+        match.email = true;
+      }
+      if (account.uid === req.body.uid) {
+        match.uid = true;
+      }
+      hadOverlapError(req, res, match);
     }
   });
 }
@@ -118,7 +128,7 @@ function sendmail (req: any, res: any, onetimeUrl: any) {
 }
 
 function confirm_urlpath (req, res, query) {
-  Users.findOne({ url_pass: query.url_path }, (err,  account) => {
+  Users.findOne({ url_path: query.url_path }, (err, account) => {
     if (err) return hadDbError(req, res);
     if (account == null) {
             // 検索で何も一致しないので 無効な認証
@@ -128,16 +138,21 @@ function confirm_urlpath (req, res, query) {
       if (account.regest < getDate() && account.ac_st === false) {
         Users.remove({ _id: account._id }, () => {
           if (err) return hadDbError(req, res);
-                    // 検索で同じurl_pathが見つかったが、認証期限が過ぎているので削除して認証の期限切れを告知
-          hadEntryError(req, res);
+             // 検索で同じurl_pathが見つかったが、認証期限が過ぎているので削除して認証の期限切れを告知
+          res.redirect(CONF_REDIRECT_URL);
+          // hadEntryError(req, res);
         });
       }else if (account.regest > getDate() && account.ac_st === false) {
-        Users.update({ _id: account._id }, { $set: { ac_st: true } },
-                    () => {
-                      if (err) return hadDbError(req, res);
-                      hadEntrySuccess(req, res);
-                      res.redirect(CONF_REDIRECT_URL);
-                    });
+        Users.update({ _id: account._id }, { $set: { ac_st: true } },(err) => {
+          if (err) return hadDbError(req, res);
+          // 認証完了
+          res.redirect(CONF_REDIRECT_URL);
+          // hadEntrySuccess(req, res);
+        });
+      }else if (account.ac_st === true) {
+        // 認証済みなのにアクセス
+        res.redirect(CONF_REDIRECT_URL);
+        // hadEntryedError(req, res);
       }
     }
   });
