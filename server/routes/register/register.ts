@@ -7,7 +7,7 @@ const nodemailer = require('nodemailer');
 
 import { G_USER, G_PASS, REGI_RAND, REGI_SUB, M_MINUTE, getHash, getRand, getDate, getPhash } from '../../config';
 import { CONF_REDIRECT_URL } from '../../redirect_config';
-import { error } from '../../error_config';
+import { error, hadDbError, hadInputdataError, hadLoginError, hadOverlapError, hadRateoverError, hadSendmailError } from '../../error_config';
 import * as Users from '../../models/user';
 
 const registerRouter: Router = Router();
@@ -21,9 +21,7 @@ registerRouter.post('/' , (req: any, res: any, next: any) => {
   const syoukai = req.body.syoukai;
 
   const rand = getRand(REGI_RAND);
-  const onetimeUrl: any = getHash(rand);
-
-  console.log(req.body);
+  const onetimeUrl = getHash(rand);
 
   exec(req, res, onetimeUrl);
 });
@@ -31,7 +29,6 @@ registerRouter.post('/' , (req: any, res: any, next: any) => {
 registerRouter.get('/' , (req: any, res: any, next: any) => {
   const u = url.parse(req.url, false);
   const query = qstring.parse(u.query);
-  console.log(query.url_path);
 
   confirm_urlpath(req, res, query);
 });
@@ -149,29 +146,6 @@ function confirm_urlpath (req, res, query) {
       }
     }
   });
-}
-
-// エラーハンドル
-function hadInputdataError (req, res) {
-  res.send(error.status[1]);
-}
-
-function hadOverlapError (req, res) {
-  res.send(error.status[2]);
-}
-
-function hadSendmailError (req, res, resp) {
-  res.send(error.status[4]);
-}
-
-function hadDbError (req, res) {
-  // const error = { status: 6 , err: err };
-  res.send(error.status[6]);
-}
-
-function hadRateoverError (req, res) {
-  // const error = { status: 13, err: err };
-  res.send(error.status[13]);
 }
 
 export { registerRouter };

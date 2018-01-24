@@ -8,7 +8,7 @@ const LocalStrategy = require('passport-local').Strategy;
 
 import { getPhash } from '../../config';
 import { LOGIN_S_REDIRECT_URL, LOGIN_F_REDIRECT_URL } from '../../redirect_config';
-import { error } from '../../error_config';
+import { error, hadLogintfaildError, hadLoginsuccessError, hadLogoutedError, hadLoginError } from '../../error_config';
 
 const loginRouter: Router = Router();
 
@@ -47,10 +47,10 @@ passport.deserializeUser((id, done) => {
 
 loginRouter.post('/' , (req: any, res: any, next: any) => {
   passport.authenticate('local-login', { session: false }, (err, user, info) => {
-    if (err) { return res.send(error.status[24]).end(); }
-    if (!user) { return res.send(error.status[24]).end(); }
+    if (err) { return hadLogintfaildError(req, res); }
+    if (!user) { return hadLogintfaildError(req, res); }
     req.session.user = user._id;
-    res.send(error.status[23]);
+    hadLoginsuccessError(req, res);
     next();
   })(req, res, next);
 });
@@ -58,11 +58,9 @@ loginRouter.post('/' , (req: any, res: any, next: any) => {
 loginRouter.get('/' , (req: any, res, next) => {
     // ログイン確認用
   if (req.session.user != null) {
-    console.log('compleat');
-    res.send(error.status[11]);
+    hadLogoutedError(req, res);
   } else {
-    console.log('failure');
-    res.send(error.status[10]);
+    hadLoginError(req, res);
   }
 });
 

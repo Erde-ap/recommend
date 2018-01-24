@@ -106,3 +106,46 @@ export const error = {
     }
   ]
 };
+
+// エラーハンドル
+export function hadInputdataError (req, res) {
+  res.send(error.status[1]);
+}
+
+export function hadOverlapError (req, res) {
+  res.send(error.status[2]);
+}
+
+export function hadSendmailError (req, res, resp) {
+  res.send(error.status[4]);
+}
+
+export function hadDbError (req, res) {
+  // const error = { status: 6 , err: err };
+  res.send(error.status[6]);
+}
+
+export function hadLoginError (req, res) {
+  res.send(error.status[10]);
+}
+
+export function hadLogoutedError (req, res) {
+  res.send(error.status[11]);
+}
+
+export function hadRateoverError (req, res) {
+  // const error = { status: 13, err: err };
+  res.send(error.status[13]);
+}
+
+export function hadLogoutError (req, res) {
+  res.send(error.status[22]);
+}
+
+export function hadLoginsuccessError (req, res) {
+  res.send(error.status[23]);
+}
+
+export function hadLogintfaildError (req, res) {
+  res.send(error.status[24]);
+}
