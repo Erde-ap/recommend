@@ -8,7 +8,7 @@ const LocalStrategy = require('passport-local').Strategy;
 
 import { getPhash } from '../../config';
 import { LOGIN_S_REDIRECT_URL, LOGIN_F_REDIRECT_URL } from '../../redirect_config';
-import { error, hadLogintfaildError, hadLoginsuccessError, hadLogoutedError, hadLoginError } from '../../error_config';
+import { error, hadLogintfaildError, hadLoginSuccess, hadLogoutedError, hadLoginError } from '../../error_config';
 
 const loginRouter: Router = Router();
 
@@ -50,7 +50,7 @@ loginRouter.post('/' , (req: any, res: any, next: any) => {
     if (err) { return hadLogintfaildError(req, res); }
     if (!user) { return hadLogintfaildError(req, res); }
     req.session.user = user._id;
-    hadLoginsuccessError(req, res);
+    hadLoginSuccess(req, res);
     next();
   })(req, res, next);
 });

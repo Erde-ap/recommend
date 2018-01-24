@@ -70,7 +70,7 @@ export const error = {
     },
     {
       code: 17,
-      response: 'このアカウントは承認済みです。'
+      response: 'このアカウントは登録済みです。'
     },
     {
       code: 18,
@@ -103,6 +103,14 @@ export const error = {
     {
       code: 25,
       response: 'ログアウトに成功しました。'
+    },
+    {
+      code: 26,
+      response: '認証の期限が切れました。再登録してください。'
+    },
+    {
+      code: 27,
+      response: '認証が完了しました。'
     }
   ]
 };
@@ -118,6 +126,10 @@ export function hadOverlapError (req, res) {
 
 export function hadSendmailError (req, res, resp) {
   res.send(error.status[4]);
+}
+
+export function hadUrlError (req, res) {
+  res.send(error.status[5]);
 }
 
 export function hadDbError (req, res) {
@@ -138,14 +150,30 @@ export function hadRateoverError (req, res) {
   res.send(error.status[13]);
 }
 
+export function hadEntryedError (req, res) {
+  res.send(error.status[17]);
+}
+
 export function hadLogoutError (req, res) {
   res.send(error.status[22]);
 }
 
-export function hadLoginsuccessError (req, res) {
+export function hadLoginSuccess (req, res) {
   res.send(error.status[23]);
 }
 
 export function hadLogintfaildError (req, res) {
   res.send(error.status[24]);
+}
+
+export function hadLogoutSuccess (req, res) {
+  res.send(error.status[25]);
+}
+
+export function hadEntryError (req, res) {
+  res.send(error.status[26]);
+}
+
+export function hadEntrySuccess (req, res) {
+  res.send(error.status[27]);
 }

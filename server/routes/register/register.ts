@@ -7,7 +7,7 @@ const nodemailer = require('nodemailer');
 
 import { G_USER, G_PASS, REGI_RAND, REGI_SUB, M_MINUTE, getHash, getRand, getDate, getPhash } from '../../config';
 import { CONF_REDIRECT_URL } from '../../redirect_config';
-import { error, hadDbError, hadInputdataError, hadLoginError, hadOverlapError, hadRateoverError, hadSendmailError } from '../../error_config';
+import { error, hadDbError, hadInputdataError, hadLoginError, hadOverlapError, hadRateoverError, hadSendmailError, hadEntryedError, hadUrlError, hadEntryError, hadEntrySuccess } from '../../error_config';
 import * as Users from '../../models/user';
 
 const registerRouter: Router = Router();
@@ -85,10 +85,7 @@ function saveurl (req, res, onetimeUrl) {
           });
         });
       }
-      const error = {
-        status: 'すでに登録済みです。'
-      };
-      res.send(error);
+      hadEntryedError(req, res);
             // Angular4に登録出来ない事を伝えるレスポンスを返す
     }
   });
@@ -125,22 +122,20 @@ function confirm_urlpath (req, res, query) {
     if (err) return hadDbError(req, res);
     if (account == null) {
             // 検索で何も一致しないので 無効な認証
-      const error = { status: '無効な認証です' };
-      res.send(error);
+      hadUrlError(req, res);
     }
     if (account) {
       if (account.regest < getDate() && account.ac_st === false) {
         Users.remove({ _id: account._id }, () => {
           if (err) return hadDbError(req, res);
                     // 検索で同じurl_pathが見つかったが、認証期限が過ぎているので削除して認証の期限切れを告知
-          const error = { status: '認証の期限が切れました再登録してください。' };
-          res.send(error);
+          hadEntryError(req, res);
         });
       }else if (account.regest > getDate() && account.ac_st === false) {
         Users.update({ _id: account._id }, { $set: { ac_st: true } },
                     () => {
                       if (err) return hadDbError(req, res);
-                      const compleat = { status: '認証が完了しました。' };
+                      hadEntrySuccess(req, res);
                       res.redirect(CONF_REDIRECT_URL);
                     });
       }
