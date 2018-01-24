@@ -58,28 +58,3 @@ export function getPhash (word: string, salt = randomstring.generate(SALT_LENGTH
   }
   return [word, salt];
 }
-
-// カテゴリ毎のレビューのテンプレートを保存
-export const cate = {
-  'Book': {
-    name: '本・コミック・雑誌',
-    review: [
-      '見どころさんはありますか？',
-      '',
-      ''
-    ]},
-  'PcOffice': {
-    name: 'パソコン・オフィス用品',
-    review: [
-      '',
-      '',
-      ''
-    ]},
-  'Drag': {
-    name: '',
-    review: [
-      '',
-      '',
-      ''
-    ]}
-};

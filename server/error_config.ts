@@ -124,7 +124,8 @@ export function hadOverlapError (req, res) {
   res.send(error.status[2]);
 }
 
-export function hadSendmailError (req, res, resp) {
+export function hadSendmailError (req, res, resp, transporter) {
+  transporter.close();
   res.send(error.status[4]);
 }
 
@@ -148,6 +149,11 @@ export function hadLogoutedError (req, res) {
 export function hadRateoverError (req, res) {
   // const error = { status: 13, err: err };
   res.send(error.status[13]);
+}
+
+export function hadUpload (req, res) {
+  // const error = { status: 13, err: err };
+  res.send(error.status[14]);
 }
 
 export function hadEntryedError (req, res) {

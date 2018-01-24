@@ -6,7 +6,7 @@ let Users = new Schema({
   uid: { type: String, index: true, unique: true }, // uid(被りなし)
   name: { type: String, index: true }, // ユーザーネーム（被りok!）(あとで変更可能)
   age: { type: String, index: true }, // 年齢
-  date: { type: Date, default: Date.now },
+  birthday: { type: Date, default: Date.now },
   sex: { type: Number, min: 0, max: 1 }, // 0男性 1女性
   work: { type: String, index: true }, // 職業
   syoukai: { type: String, index: true },

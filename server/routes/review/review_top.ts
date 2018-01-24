@@ -3,10 +3,10 @@ import { Router } from 'express';
 
 import { error, hadLoginError } from '../../error_config';
 
-const reviewRouter: Router = Router();
-
-reviewRouter.post('/' , (req: any, res, next) => {
+const reviewtopRouter: Router = Router();
+reviewtopRouter.get('/' , (req: any, res, next) => {
   if (!req.session.user) return hadLoginError(req, res);
+
 });
 
-export { reviewRouter };
+export { reviewtopRouter };

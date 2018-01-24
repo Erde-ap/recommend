@@ -27,7 +27,10 @@ import { loginRouter } from './routes/login/login';
 import { logoutRouter } from './routes/logout/logout';
 import { checksessionRouter } from './routes/check_session/check_session';
 import { mypageRouter } from './routes/mypage/mypage';
-import { reviewRouter } from './routes/review/review';
+import { reviewtopRouter } from './routes/review/review_top';
+import { reviewdetailRouter } from './routes/review/review_detail';
+import { reviewuploadRouter } from './routes/review/review_upload';
+import { searchreviewRouter } from './routes/review/search_review';
 class App {
   public express: express.Application;
 
@@ -89,7 +92,10 @@ class App {
     this.express.use('/api/logout', logoutRouter);
     this.express.use('/api/checksession', checksessionRouter);
     this.express.use('/api/mypage', mypageRouter);
-    this.express.use('/api/review', reviewRouter);
+    this.express.use('/api/reviewtop', reviewtopRouter);
+    this.express.use('/api/reviewdetail', reviewdetailRouter);
+    this.express.use('/api/reviewupload', reviewuploadRouter);
+    this.express.use('/api/searchreview', searchreviewRouter);
 
     // ここからずらさないで
     this.express.options('*', cors(options));

@@ -110,7 +110,7 @@ function sendmail (req: any, res: any, onetimeUrl: any) {
   transporter.sendMail(mailOptions, (err, resp) => { // メールの送信
     if (err) { // 送信に失敗したとき
               // console.log('');
-      hadSendmailError(req, res, resp);
+      hadSendmailError(req, res, resp, transporter);
       transporter.close(); // SMTPの切断
     }
     transporter.close(); // SMTPの切断
