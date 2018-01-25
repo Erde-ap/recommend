@@ -1,18 +1,19 @@
 <mat-toolbar class="mat-elevation-z6" color="primary">
-  <a href="#" class="titleGroup">
+  <a routerLink="/" class="titleGroup">
       <span><mat-icon svgIcon="logo" class="logo">icon</mat-icon></span>
       <span><mat-icon svgIcon="title" class="title">recommend</mat-icon></span>
   </a>
   <!-- <h1 *ngIf="!isActiveNavbar" class="toolbar__title">{{routerName}}</h1> -->
   <span class="spacer"></span>
   <div class="button-row">
-    <a mat-raised-button routerLink=".">ログイン</a>
-    <a mat-raised-button routerLink=".">登録</a>
-    <a mat-raised-button (click)="logout()"> ログアウト</a>
+    <a mat-raised-button routerLink="/login">ログイン</a>
+    <a mat-raised-button routerLink="/review">レビュー</a>
+    <a mat-raised-button routerLink="/register">登録</a>
+    <a mat-raised-button routerLink="/homepage" (click)="logout()"> ログアウト</a>
   </div>
   </mat-toolbar>
   <!-- <nav mat-tab-nav-bar>
-      <!-- <a mat-tab-link
+     <a mat-tab-link
       *ngFor="let link of navLinks"
       [routerLink]="link.path"
       routerLinkActive #rla="routerLinkActive"

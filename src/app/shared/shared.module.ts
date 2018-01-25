@@ -17,6 +17,7 @@ import {
   MatSidenavModule,
   MatNativeDateModule
 } from '@angular/material';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -53,6 +54,7 @@ import {
   ],
   providers: [
     MatNativeDateModule
-  ]
+  ],
+  declarations: []
 })
 export class SharedModule { }

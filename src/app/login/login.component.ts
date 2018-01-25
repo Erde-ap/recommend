@@ -37,6 +37,7 @@ export class LoginComponent {
     const params = new URLSearchParams();
     params.set('name', this.loginForm.controls.userName.value);
     params.set('password', this.loginForm.controls.password.value);
+    console.log(this.loginForm.value);
     // JSON.Stringifyでｏｂｊを文字列化
     // params.set('object', JSON.stringify(this.object));
 

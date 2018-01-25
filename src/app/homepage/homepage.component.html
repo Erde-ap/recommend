@@ -1,37 +1,3 @@
-<header>
-    <div class="gnav-btn" [class.is-open]="nav_flag" (click)="nav_state()">
-        <div class="icon-animation">
-        <span class="top"></span>
-        <span class="middle"></span>
-        <span class="bottom"></span>
-        </div>
-    </div>
-    <nav class="global">
-        <ul class="gnav" [class.on]="nav_flag">
-            <li><a href="">ホーム</a></li>
-            <li><a href="">レビュー</a></li>
-            <li><a href="">新規登録</a></li>
-            <li class="login-group">
-                <p class="login-p">ログイン</p>
-                <form>
-                    <span class="input input--uk">
-                    <label class="input__label input__label--uk" for="input-1">
-                        <span class="input__label-content input__label-content--uk">UserID</span>
-                    </label>
-                    <input class="input__field input__field--uk" type="text" id="id" />
-                    </span>
-                    <span class="input input--uk">
-                    <label class="input__label input__label--uk" for="input-1">
-                        <span class="input__label-content input__label-content--uk">Password</span>
-                    </label>
-                    <input class="input__field input__field--uk" type="text" id="passwd" />
-                    </span>
-                    <input type="submit" class="submit_btn" value="ログイン">
-                </form>
-            </li>
-        </ul>
-    </nav>
-</header>
 <section class="top-group">
         <img src="./assets/main.jpg" alt="メイン画像" class="top-image">
         <h1 class="top-cap"><img src="./assets/title.svg" alt=""></h1>

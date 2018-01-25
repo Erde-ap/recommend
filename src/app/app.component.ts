@@ -7,9 +7,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [
-    MediaMatcher
-  ]
+  providers: [MediaMatcher]
 })
 export class AppComponent {
   constructor (iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {

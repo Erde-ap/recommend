@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MY_ROUTES } from './app-routing.module';
+import { ReviewModule } from './review/review.module';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -14,7 +15,7 @@ import { RegisterComponent } from './register/register.component';
 import { MypageComponent } from './mypage/mypage.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { DetailComponent } from './review/detail/detail.component';
+import { ErrorComponent } from './shared/error/error.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { DetailComponent } from './review/detail/detail.component';
     MypageComponent,
     HeaderComponent,
     FooterComponent,
-    DetailComponent
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +34,7 @@ import { DetailComponent } from './review/detail/detail.component';
     ReactiveFormsModule,
     HttpModule,
     SharedModule,
+    ReviewModule,
     BrowserAnimationsModule,
     MY_ROUTES
   ],
