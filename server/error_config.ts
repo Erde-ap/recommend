@@ -114,6 +114,10 @@ export let error = {
     {
       code: 27,
       response: '認証が完了しました。'
+    },
+    {
+      code: 28,
+      response: '入力されたアドレス宛てにメールを送信しました。'
     }
   ]
 };
@@ -190,4 +194,9 @@ export function hadEntryError (req, res) {
 
 export function hadEntrySuccess (req, res) {
   res.send(error.status[27]);
+}
+
+export function hadSendmailSuccess (req, res, transporter) {
+  res.send(error.status[28]);
+  transporter.close();
 }

@@ -7,7 +7,7 @@ const nodemailer = require('nodemailer');
 
 import { G_USER, G_PASS, REGI_RAND, REGI_SUB, M_MINUTE, getHash, getRand, getDate, getPhash } from '../../config';
 import { CONF_REDIRECT_URL } from '../../redirect_config';
-import { error, hadDbError, hadInputdataError, hadLoginError, hadOverlapError, hadRateoverError, hadSendmailError, hadEntryedError, hadUrlError, hadEntryError, hadEntrySuccess } from '../../error_config';
+import { error, hadDbError, hadInputdataError, hadLoginError, hadOverlapError, hadRateoverError, hadSendmailError, hadEntryedError, hadUrlError, hadEntryError, hadEntrySuccess, hadSendmailSuccess } from '../../error_config';
 import * as Users from '../../models/user';
 
 const registerRouter: Router = Router();
@@ -123,9 +123,8 @@ function sendmail (req: any, res: any, onetimeUrl: any) {
     if (err) { // 送信に失敗したとき
               // console.log('');
       hadSendmailError(req, res, resp, transporter);
-      transporter.close(); // SMTPの切断
     }
-    transporter.close(); // SMTPの切断
+    hadSendmailSuccess(req, res, transporter);
   });
 }
 
