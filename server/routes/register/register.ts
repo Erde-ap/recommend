@@ -75,7 +75,7 @@ function saveurl (req, res, onetimeUrl) {
       });
     }
     if (account) {
-      if (account.regest < getDate && account.ac_st === false) {
+      if (account.regest < getDate() && account.ac_st === false) {
         Users.remove({ _id: account._id }, () => {
           if (err) return hadDbError(req, res);
           // 検索で同じメールアドレスまたはUSERIDが見つかったが、認証期限が過ぎているので削除して再認証
@@ -85,18 +85,20 @@ function saveurl (req, res, onetimeUrl) {
           });
         });
       }
+      if (account.ac_st === true) {
       // Angular4に登録出来ない事を伝えるレスポンスを返す
-      const match = {
-        uid: false,
-        email: false
-      };
-      if (account.email === req.body.email) {
-        match.email = true;
+        const match = {
+          uid: false,
+          email: false
+        };
+        if (account.email === req.body.email) {
+          match.email = true;
+        }
+        if (account.uid === req.body.uid) {
+          match.uid = true;
+        }
+        hadOverlapError(req, res, match);
       }
-      if (account.uid === req.body.uid) {
-        match.uid = true;
-      }
-      hadOverlapError(req, res, match);
     }
   });
 }
@@ -139,20 +141,20 @@ function confirm_urlpath (req, res, query) {
         Users.remove({ _id: account._id }, () => {
           if (err) return hadDbError(req, res);
              // 検索で同じurl_pathが見つかったが、認証期限が過ぎているので削除して認証の期限切れを告知
-          res.redirect(CONF_REDIRECT_URL);
-          // hadEntryError(req, res);
+          // res.redirect(CONF_REDIRECT_URL);
+          hadEntryError(req, res);
         });
       }else if (account.regest > getDate() && account.ac_st === false) {
         Users.update({ _id: account._id }, { $set: { ac_st: true } },(err) => {
           if (err) return hadDbError(req, res);
           // 認証完了
-          res.redirect(CONF_REDIRECT_URL);
-          // hadEntrySuccess(req, res);
+          // res.redirect(CONF_REDIRECT_URL);
+          hadEntrySuccess(req, res);
         });
       }else if (account.ac_st === true) {
         // 認証済みなのにアクセス
-        res.redirect(CONF_REDIRECT_URL);
-        // hadEntryedError(req, res);
+        // res.redirect(CONF_REDIRECT_URL);
+        hadEntryedError(req, res);
       }
     }
   });
