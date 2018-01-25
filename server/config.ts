@@ -22,7 +22,7 @@ export const REFRESH_TOKEN = '1/FTYsEbvr62sUh5g1tOqsnbM4JNsIlgSUZGP5wp2jhlY';
 export const FROM = 'Recommend運営<Recommend@gmail.com>';
 
 // メール件名
-export const REGI_SUB = 'Recommendにぶち込んでやるぜ！';
+export const REGI_SUB = 'Recommendにようこそ！';
 
 // ユーザにメール送信する 際のランダムな文字の文字数
 export const REGI_RAND = 10; // register時

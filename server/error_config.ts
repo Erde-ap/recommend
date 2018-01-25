@@ -1,4 +1,4 @@
-import { CONF_REDIRECT_URL } from './redirect_config';
+import { SEND_REDIRECT_URL, FAIL_REDIRECT_URL } from './redirect_config';
 
 export let error = {
   status: [
@@ -169,7 +169,8 @@ export function hadUpload (req, res) {
 }
 
 export function hadEntryedError (req, res) {
-  res.send(error.status[17]);
+  res.redirect(SEND_REDIRECT_URL + '?status=entryed');
+  // res.send(error.status[17]);
 }
 
 export function hadLogoutError (req, res) {
@@ -189,11 +190,13 @@ export function hadLogoutSuccess (req, res) {
 }
 
 export function hadEntryError (req, res) {
-  res.send(error.status[26]);
+  res.redirect(FAIL_REDIRECT_URL + '?status=faild');
+  // res.send(error.status[26]);
 }
 
 export function hadEntrySuccess (req, res) {
-  res.send(error.status[27]);
+  res.redirect(SEND_REDIRECT_URL + '?status=success');
+  // res.send(error.status[27]);
 }
 
 export function hadSendmailSuccess (req, res, transporter) {
