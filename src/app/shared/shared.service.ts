@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, URLSearchParams, Headers } from '@angular/http';
 import { Router } from '@angular/router';
-import { MYPAGE_REDIRECT } from './shared.redirecturl';
 import { AppState } from '../app.state';
 
 @Injectable()
