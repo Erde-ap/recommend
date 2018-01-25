@@ -19,7 +19,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  this: any;
   registerForm: FormGroup;
   matcher = new MyErrorStateMatcher();
   checkPassword: any;
@@ -70,7 +69,7 @@ export class RegisterComponent {
 
     this.http.post('http://localhost:3000/api/register', params, { withCredentials: true })
     .subscribe(
-      data => console.log(data.json()),
+      data => JSON.stringify(data),
       error => console.log(error)
     );
   }

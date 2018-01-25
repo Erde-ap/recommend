@@ -1,4 +1,5 @@
 <mat-card>
+    {{responseJson.replace(replace,'','g')}}
 <form [formGroup]="loginForm">
   <mat-form-field>
     <input matInput placeholder="ユーザーID・Email" [formControl]="this.loginForm.controls.userName" [errorStateMatcher]="matcher">

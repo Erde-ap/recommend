@@ -19,6 +19,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  responseJson = '';
+  replace: RegExp = /"/;
   loginForm: FormGroup;
   matcher = new MyErrorStateMatcher();
 
@@ -46,6 +48,7 @@ export class LoginComponent {
     this.http.post('http://localhost:3000/api/login', params, { withCredentials: true })
     .subscribe(
       response => {
+        this.responseJson = JSON.stringify(response.json().response);
         const resobj = response.json();
         console.log(response);
       },
