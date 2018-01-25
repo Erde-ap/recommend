@@ -24,6 +24,9 @@ svg{
   span{
     zoom: 1.2;
   }
+  .title{
+    display: none;
+  }
 }
 @media screen and (max-width:460px) {
   span{

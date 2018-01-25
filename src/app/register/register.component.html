@@ -1,3 +1,4 @@
+<mat-card>
 <form [formGroup]="registerForm">
     <mat-form-field>
       <input matInput placeholder="Email" [formControl]="this.registerForm.controls.Email" [errorStateMatcher]="matcher">
@@ -18,7 +19,7 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field >
-      <input matInput placeholder="パスワード" [formControl]="this.registerForm.controls.password" [errorStateMatcher]="matcher">
+      <input matInput type="password" placeholder="パスワード" [formControl]="this.registerForm.controls.password" [errorStateMatcher]="matcher">
       <mat-error *ngIf="this.registerForm.controls.password.hasError('required')">
         <strong>*</strong>必須項目
       </mat-error>
@@ -27,7 +28,7 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field >
-      <input matInput placeholder="パスワード確認" [formControl]="this.registerForm.controls.confirmPassword" [errorStateMatcher]="matcher" (input)="checkPasswordChange()">
+      <input matInput type="password" placeholder="パスワード確認" [formControl]="this.registerForm.controls.confirmPassword" [errorStateMatcher]="matcher" (input)="checkPasswordChange()">
       <mat-error *ngIf="registerForm.controls.confirmPassword.hasError('required')">
         <strong>*</strong>必須項目
       </mat-error>
@@ -58,4 +59,4 @@
     </mat-form-field>
     <button mat-raised-button (click)="onSubmit()" [disabled]="!registerForm.valid">登録</button>
   </form>
-  {{ checkPassword }}
+</mat-card>

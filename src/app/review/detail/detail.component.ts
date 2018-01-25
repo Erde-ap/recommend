@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailComponent implements OnInit {
 
-  constructor() { }
+  avatar = './assets/user1/user1_profile.jpg';
 
-  ngOnInit() {
-  }
+  constructor () {}
+
+  ngOnInit () {}
 
 }
