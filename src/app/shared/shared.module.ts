@@ -17,6 +17,7 @@ import {
   MatSidenavModule,
   MatNativeDateModule
 } from '@angular/material';
+import { RegisterconfirmComponent } from './registerconfirm/registerconfirm.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -53,6 +54,7 @@ import {
   ],
   providers: [
     MatNativeDateModule
-  ]
+  ],
+  declarations: [RegisterconfirmComponent]
 })
 export class SharedModule { }
