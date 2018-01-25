@@ -14,6 +14,7 @@ import { RegisterComponent } from './register/register.component';
 import { MypageComponent } from './mypage/mypage.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { DetailComponent } from './review/detail/detail.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FooterComponent } from './shared/footer/footer.component';
     RegisterComponent,
     MypageComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,

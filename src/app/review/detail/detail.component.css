@@ -1,0 +1,21 @@
+mat-card{
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 50px auto;
+}
+.profile_card_image {
+  background-size: cover;
+}
+.review_img{
+  width: 100%;
+}
+img{
+  width: 100%;
+}
+@media (max-width:767px){
+  mat-card{
+    width: 80%;
+    margin: 20px auto;
+  }
+}

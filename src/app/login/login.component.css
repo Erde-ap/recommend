@@ -1,4 +1,7 @@
-
+mat-card{
+  width: 500px;
+  margin: 50px auto;
+}
 form {
   display: flex;
   flex-direction: column;
@@ -8,4 +11,20 @@ form {
 mat-form-field{
   width: 500px;
   margin-bottom: 20px;
+}
+@media (max-width:767px){
+  mat-card{
+    width: 80%;
+    margin: 20px auto;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+  }
+  mat-form-field{
+    width: 100%;
+    margin-bottom: 20px;
+  }
 }
