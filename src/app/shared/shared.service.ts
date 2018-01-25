@@ -18,6 +18,7 @@ export class SharedService {
             console.log(error);
           });
   }
+
   logout () {
         // withCredentials: trueは必須.これがないとsessionが維持できない
         // angular4は標準レスポンス時にCookieを送り出さないためこの問題が発生する

@@ -84,11 +84,6 @@ function saveurl (req, res, onetimeUrl) {
             sendmail(req, res, onetimeUrl);
           });
         });
-      }else if (account.regest > getDate() && account.ac_st === false) {
-        onetimeuser.save(() => {
-          if (err) return hadDbError(req, res);
-          sendmail(req, res, onetimeUrl);
-        });
       }
       if (account.ac_st === true) {
       // Angular4に登録出来ない事を伝えるレスポンスを返す
