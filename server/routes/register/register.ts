@@ -6,7 +6,7 @@ import { Router } from 'express';
 const nodemailer = require('nodemailer');
 
 import { G_USER, G_PASS, REGI_RAND, REGI_SUB, M_MINUTE, getHash, getRand, getDate, getPhash } from '../../config';
-import { CONF_REDIRECT_URL } from '../../redirect_config';
+import { SEND_REDIRECT_URL } from '../../redirect_config';
 import { error, hadDbError, hadInputdataError, hadLoginError, hadOverlapError, hadRateoverError, hadSendmailError, hadEntryedError, hadUrlError, hadEntryError, hadEntrySuccess, hadSendmailSuccess } from '../../error_config';
 import * as Users from '../../models/user';
 

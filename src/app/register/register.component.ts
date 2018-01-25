@@ -4,6 +4,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { Http, URLSearchParams, Headers } from '@angular/http';
 import { FormControl,FormBuilder,FormGroupDirective,NgForm,Validators ,ValidationErrors } from '@angular/forms';
 import { FormGroup } from '@angular/forms/src/model';
+import { Router, ActivatedRoute } from '@angular/router';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -22,8 +23,12 @@ export class RegisterComponent {
   registerForm: FormGroup;
   matcher = new MyErrorStateMatcher();
   checkPassword: any;
+  resp = '';
+  queryParams: any;
 
-  constructor (private http: Http,private builder: FormBuilder) {
+  constructor (private http: Http,private builder: FormBuilder,
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router) {
     this.registerForm = this.builder.group({
       Email : new FormControl('', [
         Validators.required,
@@ -55,6 +60,15 @@ export class RegisterComponent {
 
   samePasswords (group: FormGroup) {
     return group.get('password').value === group.get('confirmPassword').value ? null : { 'mismatch': true };
+  }
+
+  ngOnInit () {
+    this._activatedRoute.queryParams.subscribe(
+      params => {
+        this.queryParams = params;
+        this.resp = this.queryParams.status;
+        console.log(this.resp);
+      });
   }
 
   onSubmit () {
