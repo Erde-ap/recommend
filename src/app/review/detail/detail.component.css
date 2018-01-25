@@ -8,7 +8,7 @@ mat-card{
   background-size: cover;
 }
 .review_img{
-  width: 100%;
+  width: 45%;
 }
 img{
   width: 100%;
@@ -17,5 +17,9 @@ img{
   mat-card{
     width: 80%;
     margin: 20px auto;
+  }
+  .review_img{
+    margin: 0 auto;
+    width: 90%;
   }
 }

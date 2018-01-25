@@ -13,6 +13,8 @@ import { ErrorComponent } from './shared/error/error.component';
 import { TopComponent } from './review/top/top.component';
 
 const myRoutes = [
+  { path: 'test', component: TopComponent },
+  { path: 'detail', component: DetailComponent },
   { path: 'login', component: LoginComponent, canActivate: [AuthguardService2] },
   { path: 'register', component: RegisterComponent, canActivate: [AuthguardService2] },
   { path: 'homepage', component: HomepageComponent },

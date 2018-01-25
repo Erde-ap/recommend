@@ -37,6 +37,7 @@ import { AuthguardService } from './authguard/authguard.service';
     MatNativeDateModule
   ],
   exports: [
+    CommonModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
