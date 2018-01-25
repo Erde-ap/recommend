@@ -20,7 +20,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class LoginComponent {
   responseJson = '';
-  replace: RegExp = /"/;
+  replace= RegExp(/"/,'g');
   loginForm: FormGroup;
   matcher = new MyErrorStateMatcher();
 
