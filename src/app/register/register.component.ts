@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
+import { SharedService } from '../shared/shared.service';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Http, URLSearchParams, Headers } from '@angular/http';
 import { FormControl,FormBuilder,FormGroupDirective,NgForm,Validators ,ValidationErrors } from '@angular/forms';
@@ -17,7 +18,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  providers: [SharedService]
 })
 export class RegisterComponent {
   registerForm: FormGroup;
@@ -28,7 +30,8 @@ export class RegisterComponent {
 
   constructor (private http: Http,private builder: FormBuilder,
     private _activatedRoute: ActivatedRoute,
-    private _router: Router) {
+    private _router: Router,
+    private sharedservice: SharedService) {
     this.registerForm = this.builder.group({
       Email : new FormControl('', [
         Validators.required,

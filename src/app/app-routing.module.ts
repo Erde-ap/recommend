@@ -1,5 +1,6 @@
-import { ModuleWithProviders } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
+import { AuthguardService, AuthguardService2 } from './shared/authguard/authguard.service';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -12,14 +13,18 @@ import { ErrorComponent } from './shared/error/error.component';
 import { TopComponent } from './review/top/top.component';
 
 const myRoutes = [
-    { path: '', component: MypageComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'homepage', component: HomepageComponent },
+  { path: 'login', component: LoginComponent, canActivate: [AuthguardService2] },
+  { path: 'register', component: RegisterComponent, canActivate: [AuthguardService2] },
+  { path: 'homepage', component: HomepageComponent },
+  {path: '', canActivate: [AuthguardService], children: [
+    { path: 'mypage', component: MypageComponent },
     { path: 'review', component: TopComponent },
-    { path: '**', component: ErrorComponent }
-
+    { path: '**', component: ErrorComponent }]
+  }
 ];
-
-export const MY_ROUTES: ModuleWithProviders =
-    RouterModule.forRoot(myRoutes);
+@NgModule({
+  imports: [RouterModule.forRoot(myRoutes)],
+  providers: [AuthguardService, AuthguardService2],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}

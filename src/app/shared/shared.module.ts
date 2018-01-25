@@ -17,6 +17,7 @@ import {
   MatSidenavModule,
   MatNativeDateModule
 } from '@angular/material';
+import { AuthguardService } from './authguard/authguard.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -52,7 +53,8 @@ import {
     MatNativeDateModule
   ],
   providers: [
-    MatNativeDateModule
+    MatNativeDateModule,
+    AuthguardService
   ]
 })
 export class SharedModule { }

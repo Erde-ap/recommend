@@ -1,23 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, URLSearchParams, Headers } from '@angular/http';
+import { Router } from '@angular/router';
+import { MYPAGE_REDIRECT } from './shared.redirecturl';
+import { AppState } from '../app.state';
 
 @Injectable()
 export class SharedService {
-  constructor (private http: Http) {}
-
-  check_session () {
-    this.http.get('http://localhost:3000/api/checksession', { withCredentials: true })
-        .subscribe(
-          response => {
-            // 受け取ったセッション情報をjson化して変数に格納する。
-            const resp = response.json();
-            console.log(resp.user);
-            // resp.userにidが格納されていなかったらログイン画面にリダイレクトするコードを書く↓。(resp.user == undefined || resp.user ==null)
-          },
-          error => {
-            console.log(error);
-          });
-  }
+  constructor (private http: Http, private router: Router, private appstate: AppState) {}
 
   logout () {
         // withCredentials: trueは必須.これがないとsessionが維持できない
@@ -25,6 +14,7 @@ export class SharedService {
     this.http.get('http://localhost:3000/api/logout', { withCredentials: true })
         .subscribe(
           response => {
+            this.appstate.isLogin = false;
             console.log(response);
           },
           error => {

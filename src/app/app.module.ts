@@ -5,7 +5,8 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MY_ROUTES } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
+import { AppState } from './app.state';
 import { ReviewModule } from './review/review.module';
 
 import { AppComponent } from './app.component';
@@ -36,9 +37,10 @@ import { ErrorComponent } from './shared/error/error.component';
     SharedModule,
     ReviewModule,
     BrowserAnimationsModule,
-    MY_ROUTES
+    AppRoutingModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [AppState]
 })
 
 export class AppModule { }

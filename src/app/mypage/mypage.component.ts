@@ -34,10 +34,10 @@ export class MypageComponent implements OnInit {
   ];
 
   constructor (private sharedservice: SharedService) {
-    sharedservice.check_session();
   }
 
-  ngOnInit () {}
+  ngOnInit () {
+  }
 
   toggleMenu (archive): void {
     archive.favorite = !archive.favorite;

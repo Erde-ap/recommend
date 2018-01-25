@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Http, URLSearchParams, Headers } from '@angular/http';
+import { Router } from '@angular/router';
 import { FormControl,FormBuilder,FormGroupDirective,NgForm,Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms/src/model';
+import { AppState } from '../app.state';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -18,13 +20,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   responseJson = '';
   replace= RegExp(/"/,'g');
   loginForm: FormGroup;
   matcher = new MyErrorStateMatcher();
 
-  constructor (private http: Http,private builder: FormBuilder) {
+  constructor (private http: Http,private builder: FormBuilder, private router: Router, private appstate: AppState) {
     this.loginForm = this.builder.group({
       userName : new FormControl('', [
         Validators.required
@@ -33,6 +35,9 @@ export class LoginComponent {
         Validators.required
       ])
     });
+  }
+
+  ngOnInit () {
   }
 
   onSubmit () {
@@ -49,8 +54,14 @@ export class LoginComponent {
     .subscribe(
       response => {
         this.responseJson = JSON.stringify(response.json().response);
-        const resobj = response.json();
-        console.log(response);
+        console.log(response.json().code);
+        if (response.json().code === 23) {
+          this.appstate.isLogin = true;
+          this.router.navigate(['/mypage']);
+        }else if (response.json().code === 24) {
+          this.appstate.isLogin = false;
+          this.router.navigate(['/login']);
+        }
       },
       error => {
         console.log(error);
