@@ -3,24 +3,11 @@
       <span><mat-icon svgIcon="logo" class="logo">icon</mat-icon></span>
       <span><mat-icon svgIcon="title" class="title">recommend</mat-icon></span>
   </a>
-  <!-- <h1 *ngIf="!isActiveNavbar" class="toolbar__title">{{routerName}}</h1> -->
   <span class="spacer"></span>
   <div class="button-row">
-    <a mat-raised-button routerLink="/login">ログイン</a>
-    <a mat-raised-button routerLink="/review">レビュー</a>
-    <a mat-raised-button routerLink="/register">登録</a>
-    <a mat-raised-button routerLink="/homepage" (click)="logout()"> ログアウト</a>
+    <a mat-raised-button routerLink="/login" *ngIf="!appstate.isLogin">ログイン</a>
+    <a mat-raised-button routerLink="/review" *ngIf="appstate.isLogin">レビュー</a>
+    <a mat-raised-button routerLink="/register" *ngIf="!appstate.isLogin">登録</a>
+    <a mat-raised-button routerLink="/homepage" (click)="logout()" *ngIf="appstate.isLogin"> ログアウト</a>
   </div>
   </mat-toolbar>
-  <!-- <nav mat-tab-nav-bar>
-     <a mat-tab-link
-      *ngFor="let link of navLinks"
-      [routerLink]="link.path"
-      routerLinkActive #rla="routerLinkActive"
-      [active]="rla.isActive">
-     {{link.label}} -->
-     <!--<a mat-tab-link href="#">Test1</a>
-     <a mat-tab-link href="#">Test2</a>
-     <a mat-tab-link href="#">Test3</a>
-     <a mat-tab-link href="#">Test4</a>
-  </nav> -->

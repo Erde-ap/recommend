@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="!appstate.isLogin">
     {{responseJson.replace(replace,'')}}
 <form [formGroup]="loginForm">
   <mat-form-field>

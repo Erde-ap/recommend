@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="!appstate.isLogin">
 <form [formGroup]="registerForm">
     <mat-form-field>
       <input matInput placeholder="Email" [formControl]="this.registerForm.controls.Email" [errorStateMatcher]="matcher">

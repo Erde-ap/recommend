@@ -6,6 +6,7 @@ import { Http, URLSearchParams, Headers } from '@angular/http';
 import { FormControl,FormBuilder,FormGroupDirective,NgForm,Validators ,ValidationErrors } from '@angular/forms';
 import { FormGroup } from '@angular/forms/src/model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AppState } from '../app.state';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -31,7 +32,8 @@ export class RegisterComponent {
   constructor (private http: Http,private builder: FormBuilder,
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
-    private sharedservice: SharedService) {
+    private sharedservice: SharedService,
+    private appstate: AppState) {
     this.registerForm = this.builder.group({
       Email : new FormControl('', [
         Validators.required,

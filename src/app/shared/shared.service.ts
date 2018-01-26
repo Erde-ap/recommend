@@ -19,6 +19,6 @@ export class SharedService {
           error => {
             console.log(error);
           }
-        );
+      );
   }
 }

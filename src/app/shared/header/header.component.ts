@@ -15,7 +15,8 @@ import { AppState } from '../../app.state';
 })
 
 @Injectable()
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
+  isLogin;
   constructor (private sharedservice: SharedService,private router: Router, iconRegistry: MatIconRegistry,private appstate: AppState,
     sanitizer: DomSanitizer, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     iconRegistry.addSvgIcon('logo', sanitizer.bypassSecurityTrustResourceUrl('/assets/logo.svg'));
