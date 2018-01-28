@@ -1,8 +1,8 @@
 <div class="flex_container">
-  <div *ngFor="let item of items;">
+  <div *ngFor="let item of items; let i = index">
   <mat-card>
     <mat-card-header>
-        <p>{{item.i}}</p>
+        <div class="star" *ngFor="let item of createstar(item.i);"><i class="material-icons">star</i></div>
       <div mat-card-avatar [style.background-image]="'url(' + avatar + ')'" class="profile_card_image"></div>
       <mat-card-title>TestUser</mat-card-title>
       <mat-card-title>2018-01-25</mat-card-title>

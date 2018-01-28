@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
@@ -22,6 +23,8 @@ import { AuthguardService } from './authguard/authguard.service';
   imports: [
     CommonModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
@@ -38,6 +41,8 @@ import { AuthguardService } from './authguard/authguard.service';
   ],
   exports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,

@@ -1,3 +1,27 @@
-<p>
-  post works!
-</p>
+<mat-card *ngIf="!appstate.isLogin">
+  {{responseJson.replace(replace,'')}}
+<form [formGroup]="reviewForm">
+<mat-form-field class="maintitle">
+  <input matInput  placeholder="レビュータイトル" [formControl]="this.reviewForm.controls.mainTitle" [errorStateMatcher]="matcher">
+  <mat-error *ngIf="reviewForm.controls.mainTitle.hasError('required')">
+    <strong>*</strong>必須項目
+  </mat-error>
+</mat-form-field>
+<mat-form-field >
+  <textarea matInput rows="6" cols="40" placeholder="商品紹介" [formControl]="this.reviewForm.controls.mainDetail" [errorStateMatcher]="matcher"></textarea>
+  <mat-error *ngIf="reviewForm.controls.mainDetail.hasError('required')">
+    <strong>*</strong>必須項目
+  </mat-error>
+</mat-form-field>
+
+<h2>カテゴリー質問</h2>
+<mat-form-field >
+  <textarea matInput rows="6" cols="40" placeholder="回答内容" [formControl]="this.reviewForm.controls.cateDetail" [errorStateMatcher]="matcher"></textarea>
+  <mat-error *ngIf="reviewForm.controls.cateDetail.hasError('required')">
+    <strong>*</strong>必須項目
+  </mat-error>
+</mat-form-field>
+
+<button mat-raised-button (click)="onSubmit()" [disabled]="!reviewForm.valid">レビューを投稿</button>
+</form>
+</mat-card>
