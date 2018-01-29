@@ -45,9 +45,7 @@ export class PostComponent implements OnInit {
         Validators.required
       ]),
       selfContents : this.builder.array([]),
-      tag : new FormControl('', [
-        Validators.required
-      ])
+      tag : new FormControl('', [])
     });
   }
 
