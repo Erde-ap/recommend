@@ -44,7 +44,8 @@ export class PostComponent implements OnInit {
       cateAnswer : new FormControl('', [
         Validators.required
       ]),
-      selfContents : this.builder.array([])
+      selfContents : this.builder.array([]),
+      tag : new FormControl('', [])
     });
   }
 

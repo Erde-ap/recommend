@@ -47,7 +47,9 @@
         </mat-form-field>
       </div>
     </div>
-
+    <h2>タグを追加</h2>
+    <tag-input [formControl]="this.reviewForm.controls.tag"></tag-input>
+    <p>Enterキーを押すことでタグを追加出来ます</p>
     <button type="file" mat-raised-button>画像</button>
     <button mat-raised-button (click)="addSection()">要素追加</button>
     <button mat-raised-button (click)="onSubmit()" [disabled]="!reviewForm.valid">レビューを投稿</button>
