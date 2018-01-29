@@ -20,30 +20,29 @@ export class AuthguardService implements CanActivate {
     }else if (this.appstate.isLogin === false) {
       this.router.navigate(['cert/login']);
       return false;
-    } else {
-      this.checksession();
-      if (this.appstate.isLogin === true) {
-        return true;
-      }
     }
   }
 
   checksession () {
-    this.http.get('http://localhost:3000/api/checksession', { withCredentials: true })
-        .subscribe(
-          response => {
-            // 受け取ったセッション情報をjson化して変数に格納する。
-            const resp = response.json();
-            if (resp.user !== undefined) {
-              this.appstate.isLogin = true;
-            } else if (resp.user === undefined) {
-              this.appstate.isLogin = false;
-            }
-          },
-          error => {
-            console.log(error);
-          }
-        );
+    (async () => {
+      const response = await fetch('http://localhost:3000/api/checksession', { credentials: 'include' });
+      console.log(response);
+    })();
+    // this.http.get('http://localhost:3000/api/checksession', { withCredentials: true })
+    //     .subscribe(
+    //       response => {
+    //         // 受け取ったセッション情報をjson化して変数に格納する。
+    //         const resp = response.json();
+    //         if (resp.user !== undefined) {
+    //           this.appstate.isLogin = true;
+    //         } else if (resp.user === undefined) {
+    //           this.appstate.isLogin = false;
+    //         }
+    //       },
+    //       error => {
+    //         console.log(error);
+    //       }
+    //     );
   }
 }
 

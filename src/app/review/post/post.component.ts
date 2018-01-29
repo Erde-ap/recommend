@@ -71,18 +71,10 @@ export class PostComponent implements OnInit {
 
     // withCredentials: trueは必須これがないとsessionが維持できない
     // angular4は標準レスポンス時にCookieを送り出さないためこの問題が発生する
-    this.http.post('http://localhost:3000/api/レビューの投稿先', params, { withCredentials: true })
+    this.http.post('http://localhost:3000/api/upload', params, { withCredentials: true })
     .subscribe(
       response => {
-        this.responseJson = JSON.stringify(response.json().response);
         console.log(response.json().code);
-        if (response.json().code === 23) {
-          this.appstate.isLogin = true;
-          this.router.navigate(['/mypage']);
-        }else if (response.json().code === 24) {
-          this.appstate.isLogin = false;
-          this.router.navigate(['/login']);
-        }
       },
       error => {
         console.log(error);
