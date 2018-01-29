@@ -5,36 +5,55 @@ import { error, hadLoginError, hadDbError, hadUpload } from '../../error_config'
 
 import * as mongoose from 'mongoose';
 import * as Review from '../../models/review';
+import { getDate } from '../../config';
 
 const reviewuploadRouter: Router = Router();
-reviewuploadRouter.get('/' , (req: any, res, next) => {
+reviewuploadRouter.post('/' , (req: any, res, next) => {
   if (!req.session.user) return hadLoginError(req, res);
-  const protodata = {
-    title: 'テスト用タイトル',
-    cateans: 'カテゴリ別回答1',
-    subtitle: ['サブタイトル1', 'サブタイトル2'],
-    mainimg: ['http://localhost:3000/public/img/hoge', 'http://localhost:3000/public/img/hoge2'],
-    main: ['おまんけ1', 'おまんけ2'],
-    tag: ['テスト用']
+  // const protodata = {
+  //   title: 'テスト用タイトル',
+  //   cateans: 'カテゴリ別回答1',
+  //   subtitle: ['サブタイトル1', 'サブタイトル2'],
+  //   mainimg: ['http://localhost:3000/public/img/hoge', 'http://localhost:3000/public/img/hoge2'],
+  //   main: ['おまんけ1', 'おまんけ2'],
+  //   tag: ['テスト用']
+  // };
+  const tag = JSON.parse(req.body.tag);
+  // 重要↓
+  let tags = [];
+  tags = tag.map(x => {
+    return x.value;
+  });
+
+  const maindata = {
+    title: req.body.mainTitle,
+    star: req.body.star,
+    category: req.body.category,
+    recommend: req.body.recommend,
+    improvement: req.body.improvement,
+    cateans: req.body.cateAnswer,
+    main: req.body.selfContents,
+    tag: tags,
+    mainimg: ''
   };
 
-  save_review(req, res, protodata);
-
+  save_review(req, res, maindata);
 });
 
-function save_review (req, res, protodata) {
+function save_review (req, res, data) {
   const reviewsave = new Review[0]({
     hostid: req.session.user, // obj_idから主催者のデータを拾う
     count: null, // アクセスされた回数
-    uday: null, // アップロードした日
-    star: null, // 評価の星の数を保存
-    tag: protodata.tag, // この中にタグ記述してもらう(ニコ動のタグみたいなもの)
-    title: protodata.title,
-    cateques: protodata.cateques,
-    cateans: protodata.cateans,
-    subtitle: protodata.subtitle,
-    mainimg: protodata.mainimg,
-    main: protodata.main,
+    uday: getDate(), // アップロードした日
+    star: data.star, // 評価の星の数を保存
+    tag: data.tag, // この中にタグ記述してもらう(ニコ動のタグみたいなもの)
+    title: data.title,
+    recommend: data.recommend,
+    improvement: data.improvement,
+    cateans: data.cateans,
+    mainimg: data.mainimg,
+    main: data.main,
+    category: data.category,
     fav: [] // ファボした人のオブジェクトIDを格納
   });
   reviewsave.save((err) => {

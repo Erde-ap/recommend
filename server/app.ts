@@ -32,6 +32,8 @@ import { reviewtopRouter } from './routes/review/review_top';
 import { reviewdetailRouter } from './routes/review/review_detail';
 import { reviewuploadRouter } from './routes/review/review_upload';
 import { searchreviewRouter } from './routes/reviewsearch/search_review';
+import { searchtagRouter } from './routes/reviewsearch/search_tag';
+import { searchcateRouter } from './routes/reviewsearch/search_cate';
 class App {
   public express: express.Application;
 
@@ -98,6 +100,8 @@ class App {
     this.express.use('/api/reviewdetail', reviewdetailRouter);
     this.express.use('/api/reviewupload', reviewuploadRouter);
     this.express.use('/api/searchreview', searchreviewRouter);
+    this.express.use('/api/searchtag', searchtagRouter);
+    this.express.use('/api/searchcate', searchcateRouter);
 
     // ここからずらさないで
     this.express.options('*', cors(options));

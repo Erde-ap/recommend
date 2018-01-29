@@ -6,13 +6,14 @@ const Review = new Schema({
   hostid: { type: Schema.Types.ObjectId, index: true }, // obj_idから主催者のデータを拾う
   count: Number, // アクセスされた回数
   uday: { type: Date, index: true, default: Date.now }, // アップロードした日
-  star: [Number], // 評価の星の数を保存
+  star: Number, // 評価の星の数を保存
   tag: [String], // この中にタグ記述してもらう(ニコ動のタグみたいなもの)
-  cateques: [String],
   cateans: [String],
-  subtitle: [String],
   mainimg: [String],
   main: [String],
+  recommend: String,
+  improvement: String,
+  category: String,
   fav: [{ type: Schema.Types.ObjectId, index: true }], // ファボした人のオブジェクトIDを格納
   com: [{ type: Schema.Types.ObjectId, ref: 'ReviewCom' }]
 }, { collection: 'review' });

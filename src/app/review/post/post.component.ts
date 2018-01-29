@@ -80,18 +80,24 @@ export class PostComponent implements OnInit {
 
   onSubmit () {
     const params = new URLSearchParams();
-    params.set('name', this.reviewForm.controls.mainTitle.value);
-    params.set('mainDetail', this.reviewForm.controls.mainDetail.value);
-    console.log(this.reviewForm.value);
+    params.set('mainTitle', this.reviewForm.controls.mainTitle.value);
+    params.set('star', this.reviewForm.controls.star.value);
+    params.set('category', this.reviewForm.controls.category.value);
+    params.set('recommend', this.reviewForm.controls.recommend.value);
+    params.set('improvement', this.reviewForm.controls.improvement.value);
+    params.set('cateAnswer', this.reviewForm.controls.cateAnswer.value);
+    params.set('selfContents', JSON.stringify(this.reviewForm.controls.selfContents.value));
+    params.set('tag', JSON.stringify(this.reviewForm.controls.tag.value));
+
     // JSON.Stringifyでｏｂｊを文字列化
     // params.set('object', JSON.stringify(this.object));
 
     // withCredentials: trueは必須これがないとsessionが維持できない
     // angular4は標準レスポンス時にCookieを送り出さないためこの問題が発生する
-    this.http.post('http://localhost:3000/api/upload', params, { withCredentials: true })
+    this.http.post('http://localhost:3000/api/reviewupload', params, { withCredentials: true })
     .subscribe(
       response => {
-        console.log(response.json().code);
+        console.log(response.json());
       },
       error => {
         console.log(error);
