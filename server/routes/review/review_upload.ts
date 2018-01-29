@@ -11,8 +11,7 @@ reviewuploadRouter.get('/' , (req: any, res, next) => {
   if (!req.session.user) return hadLoginError(req, res);
   const protodata = {
     title: 'テスト用タイトル',
-    cateques: ['カテゴリ別質問1', 'カテゴリ別質問2'],
-    cateans: ['カテゴリ別回答1', 'カテゴリ別回答2'],
+    cateans: 'カテゴリ別回答1',
     subtitle: ['サブタイトル1', 'サブタイトル2'],
     mainimg: ['http://localhost:3000/public/img/hoge', 'http://localhost:3000/public/img/hoge2'],
     main: ['おまんけ1', 'おまんけ2'],

@@ -23,8 +23,6 @@ export class HeaderComponent {
     iconRegistry.addSvgIcon('title', sanitizer.bypassSecurityTrustResourceUrl('/assets/title2.svg'));
   }
 
-  ngOnInit () {}
-
   logout () {
     this.sharedservice.logout();
   }

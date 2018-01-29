@@ -14,16 +14,18 @@ import { ErrorComponent } from './shared/error/error.component';
 import { TopComponent } from './review/top/top.component';
 
 const myRoutes = [
+  { path: '', component: HomepageComponent },
   { path: 'test', component: PostComponent },
   { path: 'detail', component: DetailComponent },
-  { path: 'login', component: LoginComponent, canActivate: [AuthguardService2] },
-  { path: 'register', component: RegisterComponent, canActivate: [AuthguardService2] },
-  { path: 'homepage', component: HomepageComponent },
-  {path: '', canActivate: [AuthguardService], children: [
+  {path: 'contents', canActivate: [AuthguardService], children: [
     { path: 'mypage', component: MypageComponent },
-    { path: 'review', component: TopComponent },
-    { path: '**', component: ErrorComponent }]
-  }
+    { path: 'review', component: TopComponent }
+  ]},
+  {path: 'cert', canActivate: [AuthguardService2], children: [
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent }
+  ]},
+  { path: '**', component: ErrorComponent }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(myRoutes)],

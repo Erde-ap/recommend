@@ -54,10 +54,10 @@ export class LoginComponent{
         console.log(response.json().code);
         if (response.json().code === 23) {
           this.appstate.isLogin = true;
-          this.router.navigate(['/mypage']);
+          this.router.navigate(['contents/mypage']);
         }else if (response.json().code === 24) {
           this.appstate.isLogin = false;
-          this.router.navigate(['/login']);
+          this.router.navigate(['cert/login']);
         }
       },
       error => {
