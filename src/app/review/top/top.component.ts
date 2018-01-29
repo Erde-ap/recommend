@@ -15,6 +15,9 @@ export class TopComponent {
     this.onLoad();
   }
 
+  // 星の数を表示するためのメソッド
+  createstar = num => new Array(num);
+
   onLoad () {
     // JSON.Stringifyでｏｂｊを文字列化
     // params.set('object', JSON.stringify(this.object));
