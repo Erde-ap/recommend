@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 
 import { StarRatingModule } from 'angular-star-rating';
+import { TagInputModule } from 'ngx-chips';
 
 import { TopComponent } from './top/top.component';
 import { SearchComponent } from './search/search.component';
@@ -15,7 +16,8 @@ import { BrowserModule } from '@angular/platform-browser/src/browser';
   imports: [
     SharedModule,
     RouterModule,
-    StarRatingModule
+    StarRatingModule,
+    TagInputModule
   ],
   exports: [
   ],
