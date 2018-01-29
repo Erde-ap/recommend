@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 @Injectable()
 export class AppState {
   public isUser: String = '';
-  public isLogin: Boolean = false;
+  public isLogin: Boolean;
 
   constructor (private http: Http) {
     this.checksession();

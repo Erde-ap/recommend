@@ -19,7 +19,12 @@ export class AuthguardService implements CanActivate {
       return true;
     }else if (this.appstate.isLogin === false) {
       this.router.navigate(['cert/login']);
-      return;
+      return false;
+    } else {
+      this.checksession();
+      if (this.appstate.isLogin === true) {
+        return true;
+      }
     }
   }
 
@@ -31,7 +36,7 @@ export class AuthguardService implements CanActivate {
             const resp = response.json();
             if (resp.user !== undefined) {
               this.appstate.isLogin = true;
-            } else {
+            } else if (resp.user === undefined) {
               this.appstate.isLogin = false;
             }
           },
@@ -55,7 +60,7 @@ export class AuthguardService2 implements CanActivate {
    // テスト用に認証無効
     if (this.appstate.isLogin === true) {
       this.router.navigate(['contents/mypage']);
-      return;
+      return false;
     }else if (this.appstate.isLogin === false) {
       return true;
     }
@@ -69,7 +74,7 @@ export class AuthguardService2 implements CanActivate {
             const resp = response.json();
             if (resp.user !== undefined) {
               this.appstate.isLogin = true;
-            } else {
+            } else if (resp.user === undefined) {
               this.appstate.isLogin = false;
             }
           },
