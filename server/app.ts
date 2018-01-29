@@ -30,7 +30,7 @@ import { mypageRouter } from './routes/mypage/mypage';
 import { reviewtopRouter } from './routes/review/review_top';
 import { reviewdetailRouter } from './routes/review/review_detail';
 import { reviewuploadRouter } from './routes/review/review_upload';
-import { searchreviewRouter } from './routes/review/search_review';
+import { searchreviewRouter } from './routes/reviewsearch/search_review';
 class App {
   public express: express.Application;
 
