@@ -15,6 +15,7 @@
     "@angular/platform-browser": "^4.4.6",
     "@angular/platform-browser-dynamic": "^4.4.6",
     "@angular/router": "^4.4.6",
+    "angular-star-rating": "^3.0.8",
     "body-parser": "^1.17.2",
     "connect-mongo": "^2.0.1",
     "cookie-parser": "^1.4.3",

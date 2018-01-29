@@ -8,6 +8,8 @@
         <strong>*</strong>必須項目
       </mat-error>
     </mat-form-field>
+    <h2>評価</h2>
+    <star-rating-comp class="star-rating" [starType]="'icon'" [formControl]="this.reviewForm.controls.star" ></star-rating-comp>
     <h2>カテゴリー選択</h2>
     <mat-radio-group class="cate-radio-group" [formControl]="this.reviewForm.controls.category">
       <mat-radio-button class="cate-radio-button" value="食料・飲料"  checked="true">食料・飲料</mat-radio-button>
@@ -35,7 +37,6 @@
         <strong>*</strong>必須項目
       </mat-error>
     </mat-form-field>
-    <p>ここから下に自分の思ったことを書いてください</p>
     <div formArrayName="selfContents">
       <div *ngFor="let content of selfContents.controls; let i=index" [formGroupName]="i">
         <mat-form-field class="maintitle">

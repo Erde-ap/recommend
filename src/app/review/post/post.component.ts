@@ -31,6 +31,7 @@ export class PostComponent implements OnInit {
       mainTitle : new FormControl('', [
         Validators.required
       ]),
+      star : new FormControl('', []),
       category : new FormControl('ゲーム', [
         Validators.required
       ]),
