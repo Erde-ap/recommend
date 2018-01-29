@@ -4,6 +4,7 @@ import { CanActivate , ActivatedRouteSnapshot, RouterStateSnapshot, Router } fro
 import { Http, URLSearchParams, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import { AppState } from '../../app.state';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthguardService implements CanActivate {
@@ -14,35 +15,31 @@ export class AuthguardService implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) {
     // テスト用に認証無効
-    this.checksession();
-    if (this.appstate.isLogin === true) {
-      return true;
-    }else if (this.appstate.isLogin === false) {
-      this.router.navigate(['cert/login']);
-      return false;
-    }
+    return this.checksession();
   }
 
-  checksession () {
-    (async () => {
-      const response = await fetch('http://localhost:3000/api/checksession', { credentials: 'include' });
-      console.log(response);
-    })();
-    // this.http.get('http://localhost:3000/api/checksession', { withCredentials: true })
-    //     .subscribe(
-    //       response => {
-    //         // 受け取ったセッション情報をjson化して変数に格納する。
-    //         const resp = response.json();
-    //         if (resp.user !== undefined) {
-    //           this.appstate.isLogin = true;
-    //         } else if (resp.user === undefined) {
-    //           this.appstate.isLogin = false;
-    //         }
-    //       },
-    //       error => {
-    //         console.log(error);
-    //       }
-    //     );
+  checksession (): Observable<boolean> {
+    return this.http.get('http://localhost:3000/api/checksession', { withCredentials: true })
+        .map(
+          response => {
+            // 受け取ったセッション情報をjson化して変数に格納する。
+            const resp = response.json();
+            if (resp.user !== undefined) {
+              this.appstate.isLogin = true;
+            } else if (resp.user === undefined) {
+              this.appstate.isLogin = false;
+            }
+            if (this.appstate.isLogin === true) {
+              return true;
+            }else if (this.appstate.isLogin === false) {
+              this.router.navigate(['cert/login']);
+              return false;
+            }
+          },
+          error => {
+            console.log(error);
+          }
+        );
   }
 }
 
@@ -55,19 +52,12 @@ export class AuthguardService2 implements CanActivate {
   canActivate (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) {
-    this.checksession();
-   // テスト用に認証無効
-    if (this.appstate.isLogin === true) {
-      this.router.navigate(['contents/mypage']);
-      return false;
-    }else if (this.appstate.isLogin === false) {
-      return true;
-    }
+    return this.checksession();
   }
 
-  checksession () {
-    this.http.get('http://localhost:3000/api/checksession', { withCredentials: true })
-        .subscribe(
+  checksession (): Observable<boolean> {
+    return this.http.get('http://localhost:3000/api/checksession', { withCredentials: true })
+        .map(
           response => {
             // 受け取ったセッション情報をjson化して変数に格納する。
             const resp = response.json();
@@ -75,6 +65,12 @@ export class AuthguardService2 implements CanActivate {
               this.appstate.isLogin = true;
             } else if (resp.user === undefined) {
               this.appstate.isLogin = false;
+            }
+            if (this.appstate.isLogin === true) {
+              this.router.navigate(['contents/mypage']);
+              return false;
+            }else if (this.appstate.isLogin === false) {
+              return true;
             }
           },
           error => {
