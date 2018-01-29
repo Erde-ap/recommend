@@ -3,7 +3,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Http, URLSearchParams, Headers } from '@angular/http';
 import { Router } from '@angular/router';
-import { FormControl,FormBuilder,FormGroupDirective,NgForm,Validators } from '@angular/forms';
+import { FormControl,FormBuilder,FormGroupDirective,NgForm,FormArray,Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms/src/model';
 import { AppState } from '../../app.state';
 
@@ -20,7 +20,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
-export class PostComponent {
+export class PostComponent implements OnInit {
   responseJson = '';
   replace= RegExp(/"/,'g');
   reviewForm: FormGroup;
@@ -31,16 +31,35 @@ export class PostComponent {
       mainTitle : new FormControl('', [
         Validators.required
       ]),
-      mainDetail : new FormControl('', [
+      category : new FormControl('ゲーム', [
         Validators.required
       ]),
-      cateTitle : new FormControl('', [
+      recommend : new FormControl('', [
         Validators.required
       ]),
-      cateDetail : new FormControl('', [
+      improvement : new FormControl('', [
         Validators.required
-      ])
+      ]),
+      cateAnswer1 : new FormControl('', [
+        Validators.required
+      ]),
+      cateAnswer2 : new FormControl('', [
+        Validators.required
+      ]),
+      selfContents : this.builder.array([])
     });
+  }
+
+  addSection () {
+    this.selfContents.push(this.builder.group({
+      title: '',
+      body: ''
+    }));
+  }
+
+  ngOnInit () { this.addSection(); }
+  get selfContents (): FormArray {
+    return this.reviewForm.get('selfContents') as FormArray;
   }
 
   onSubmit () {

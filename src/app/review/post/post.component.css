@@ -15,6 +15,16 @@ mat-form-field{
   width: 100%;
   margin-bottom: 20px;
 }
+.cate-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.cate-radio-button {
+  margin: 5px;
+}
+
 @media (max-width:767px){
   mat-card{
     width: 80%;

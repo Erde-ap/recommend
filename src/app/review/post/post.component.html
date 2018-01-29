@@ -1,27 +1,62 @@
 <mat-card *ngIf="!appstate.isLogin">
   {{responseJson.replace(replace,'')}}
-<form [formGroup]="reviewForm">
-<mat-form-field class="maintitle">
-  <input matInput  placeholder="レビュータイトル" [formControl]="this.reviewForm.controls.mainTitle" [errorStateMatcher]="matcher">
-  <mat-error *ngIf="reviewForm.controls.mainTitle.hasError('required')">
-    <strong>*</strong>必須項目
-  </mat-error>
-</mat-form-field>
-<mat-form-field >
-  <textarea matInput rows="6" cols="40" placeholder="商品紹介" [formControl]="this.reviewForm.controls.mainDetail" [errorStateMatcher]="matcher"></textarea>
-  <mat-error *ngIf="reviewForm.controls.mainDetail.hasError('required')">
-    <strong>*</strong>必須項目
-  </mat-error>
-</mat-form-field>
+  <form [formGroup]="reviewForm">
+    <h2>タイトル</h2>
+    <mat-form-field class="maintitle">
+      <input matInput placeholder="レビュータイトル" [formControl]="this.reviewForm.controls.mainTitle" [errorStateMatcher]="matcher">
+      <mat-error *ngIf="reviewForm.controls.mainTitle.hasError('required')">
+        <strong>*</strong>必須項目
+      </mat-error>
+    </mat-form-field>
+    <h2>カテゴリー選択</h2>
+    <mat-radio-group class="cate-radio-group" [formControl]="this.reviewForm.controls.category">
+      <mat-radio-button class="cate-radio-button" value="食料・飲料"  checked="true">食料・飲料</mat-radio-button>
+      <mat-radio-button class="cate-radio-button" value="ゲーム">ゲーム</mat-radio-button>
+      <mat-radio-button class="cate-radio-button" value="ヘルス＆ビューテー">ヘルス＆ビューテー</mat-radio-button>
+    </mat-radio-group>
+    <h2>薦めたい所</h2>
+    <mat-form-field>
+      <textarea matInput rows="6" cols="40" placeholder="ここに記入してください" [formControl]="this.reviewForm.controls.recommend" [errorStateMatcher]="matcher"></textarea>
+      <mat-error *ngIf="reviewForm.controls.recommend.hasError('required')">
+        <strong>*</strong>必須項目
+      </mat-error>
+    </mat-form-field>
+    <h2>改善してほしい所</h2>
+    <mat-form-field>
+      <textarea matInput rows="6" cols="40" placeholder="ここに記入してください" [formControl]="this.reviewForm.controls.improvement" [errorStateMatcher]="matcher"></textarea>
+      <mat-error *ngIf="reviewForm.controls.improvement.hasError('required')">
+        <strong>*</strong>必須項目
+      </mat-error>
+    </mat-form-field>
+    <h2>カテゴリ別質問１</h2>
+    <mat-form-field>
+      <textarea matInput rows="6" cols="40" placeholder="ここに記入してください" [formControl]="this.reviewForm.controls.cateAnswer1" [errorStateMatcher]="matcher"></textarea>
+      <mat-error *ngIf="reviewForm.controls.cateAnswer1.hasError('required')">
+        <strong>*</strong>必須項目
+      </mat-error>
+    </mat-form-field>
+    <h2>カテゴリ別質問２</h2>
+    <mat-form-field>
+      <textarea matInput rows="6" cols="40" placeholder="ここに記入してください" [formControl]="this.reviewForm.controls.cateAnswer2" [errorStateMatcher]="matcher"></textarea>
+      <mat-error *ngIf="reviewForm.controls.cateAnswer2.hasError('required')">
+        <strong>*</strong>必須項目
+      </mat-error>
+    </mat-form-field>
+    <p>ここから下に自分の思ったことを書いてください</p>
+    <div formArrayName="selfContents">
+      <div *ngFor="let content of selfContents.controls; let i=index" [formGroupName]="i">
+        <mat-form-field class="maintitle">
+          <input matInput placeholder="タイトル" formControlName="title">
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput rows="6" cols="40" placeholder="内容"  formControlName="body"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
 
-<h2>カテゴリー質問</h2>
-<mat-form-field >
-  <textarea matInput rows="6" cols="40" placeholder="回答内容" [formControl]="this.reviewForm.controls.cateDetail" [errorStateMatcher]="matcher"></textarea>
-  <mat-error *ngIf="reviewForm.controls.cateDetail.hasError('required')">
-    <strong>*</strong>必須項目
-  </mat-error>
-</mat-form-field>
-
-<button mat-raised-button (click)="onSubmit()" [disabled]="!reviewForm.valid">レビューを投稿</button>
-</form>
+    <button type="file" mat-raised-button>画像</button>
+    <button mat-raised-button (click)="addSection()">要素追加</button>
+    <button mat-raised-button (click)="onSubmit()" [disabled]="!reviewForm.valid">レビューを投稿</button>
+  </form>
+  <pre>Form value: {{ reviewForm.value | json }}</pre>
 </mat-card>
