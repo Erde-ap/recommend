@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Http, URLSearchParams, Headers } from '@angular/http';
@@ -20,7 +20,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent{
   responseJson = '';
   replace= RegExp(/"/,'g');
   loginForm: FormGroup;
@@ -35,9 +35,6 @@ export class LoginComponent implements OnInit {
         Validators.required
       ])
     });
-  }
-
-  ngOnInit () {
   }
 
   onSubmit () {

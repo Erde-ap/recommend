@@ -1,0 +1,43 @@
+mat-card{
+  width: 70%;
+  margin: 50px auto;
+}
+.maintitle input{
+  font-size: 30px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+}
+mat-form-field{
+  width: 100%;
+  margin-bottom: 20px;
+}
+.cate-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.cate-radio-button {
+  margin: 5px;
+}
+
+@media (max-width:767px){
+  mat-card{
+    width: 80%;
+    margin: 20px auto;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+  }
+  mat-form-field{
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}

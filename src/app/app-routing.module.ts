@@ -9,11 +9,12 @@ import { RegisterComponent } from './register/register.component';
 import { MypageComponent } from './mypage/mypage.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { DetailComponent } from './review/detail/detail.component';
+import { PostComponent } from './review/post/post.component';
 import { ErrorComponent } from './shared/error/error.component';
 import { TopComponent } from './review/top/top.component';
 
 const myRoutes = [
-  { path: 'test', component: TopComponent },
+  { path: 'test', component: PostComponent },
   { path: 'detail', component: DetailComponent },
   { path: 'login', component: LoginComponent, canActivate: [AuthguardService2] },
   { path: 'register', component: RegisterComponent, canActivate: [AuthguardService2] },
