@@ -7,16 +7,13 @@ import { AppState } from '../../app.state';
 
 @Injectable()
 export class AuthguardService implements CanActivate {
-  isLogin: boolean;
   constructor (private router: Router, private http: Http, private appstate: AppState) {
-    this.isLogin = appstate.isLogin;
   }
 
   canActivate (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) {
     // テスト用に認証無効
-    this.isLogin = this.appstate.isLogin;
     this.checksession();
     if (this.appstate.isLogin === true) {
       return true;
@@ -48,15 +45,12 @@ export class AuthguardService implements CanActivate {
 // ログイン済みなのにlogin及びregisterにアクセスした場合
 @Injectable()
 export class AuthguardService2 implements CanActivate {
-  isLogin: boolean;
   constructor (private router: Router, private http: Http, private appstate: AppState) {
-    this.isLogin = appstate.isLogin;
   }
 
   canActivate (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) {
-    this.isLogin = this.appstate.isLogin;
     this.checksession();
    // テスト用に認証無効
     if (this.appstate.isLogin === true) {

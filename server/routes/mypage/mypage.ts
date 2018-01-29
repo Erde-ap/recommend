@@ -12,9 +12,11 @@ mypageRouter.get('/' , (req: any, res, next) => {
   const u = url.parse(req.url, false);
   const query = qstring.parse(u.query);
 
+  readmypage(req, res);
 });
 
-function readmypage () {
+function readmypage (req, res) {
+  const userid = req.session.user;
 }
 
 export { mypageRouter };

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 
 @Injectable()
@@ -7,6 +7,10 @@ export class AppState {
   public isLogin: Boolean = false;
 
   constructor (private http: Http) {
+    this.checksession();
+  }
+
+  ngOninit () {
     this.checksession();
   }
 
