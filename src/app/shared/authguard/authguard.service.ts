@@ -7,10 +7,6 @@ import { AppState } from '../../app.state';
 
 @Injectable()
 export class AuthguardService implements CanActivate {
-<<<<<<< HEAD
-  isLogin: Boolean;
-=======
->>>>>>> 14c9b6c7a29dc8bb92de47474a999e2a420db8e3
   constructor (private router: Router, private http: Http, private appstate: AppState) {
   }
 
@@ -49,10 +45,6 @@ export class AuthguardService implements CanActivate {
 // ログイン済みなのにlogin及びregisterにアクセスした場合
 @Injectable()
 export class AuthguardService2 implements CanActivate {
-<<<<<<< HEAD
-  isLogin: Boolean;
-=======
->>>>>>> 14c9b6c7a29dc8bb92de47474a999e2a420db8e3
   constructor (private router: Router, private http: Http, private appstate: AppState) {
   }
 
