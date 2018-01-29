@@ -28,17 +28,10 @@
         <strong>*</strong>必須項目
       </mat-error>
     </mat-form-field>
-    <h2>カテゴリ別質問１</h2>
+    <h2>カテゴリ別質問</h2>
     <mat-form-field>
-      <textarea matInput rows="6" cols="40" placeholder="ここに記入してください" [formControl]="this.reviewForm.controls.cateAnswer1" [errorStateMatcher]="matcher"></textarea>
-      <mat-error *ngIf="reviewForm.controls.cateAnswer1.hasError('required')">
-        <strong>*</strong>必須項目
-      </mat-error>
-    </mat-form-field>
-    <h2>カテゴリ別質問２</h2>
-    <mat-form-field>
-      <textarea matInput rows="6" cols="40" placeholder="ここに記入してください" [formControl]="this.reviewForm.controls.cateAnswer2" [errorStateMatcher]="matcher"></textarea>
-      <mat-error *ngIf="reviewForm.controls.cateAnswer2.hasError('required')">
+      <textarea matInput rows="6" cols="40" placeholder="ここに記入してください" [formControl]="this.reviewForm.controls.cateAnswer" [errorStateMatcher]="matcher"></textarea>
+      <mat-error *ngIf="reviewForm.controls.cateAnswer.hasError('required')">
         <strong>*</strong>必須項目
       </mat-error>
     </mat-form-field>

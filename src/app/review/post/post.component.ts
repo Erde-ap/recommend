@@ -40,10 +40,7 @@ export class PostComponent implements OnInit {
       improvement : new FormControl('', [
         Validators.required
       ]),
-      cateAnswer1 : new FormControl('', [
-        Validators.required
-      ]),
-      cateAnswer2 : new FormControl('', [
+      cateAnswer : new FormControl('', [
         Validators.required
       ]),
       selfContents : this.builder.array([])
