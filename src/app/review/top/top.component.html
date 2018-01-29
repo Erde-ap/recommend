@@ -1,23 +1,60 @@
-<div class="flex_container">
-  <div *ngFor="let item of items; let i = index">
-  <mat-card>
-    <mat-card-header>
-        <div class="star" *ngFor="let item of createstar(item.i);"><i class="material-icons">star</i></div>
-      <div mat-card-avatar [style.background-image]="'url(' + avatar + ')'" class="profile_card_image"></div>
-      <mat-card-title>TestUser</mat-card-title>
-      <mat-card-title>2018-01-25</mat-card-title>
-    </mat-card-header>
-    <mat-card-content class="card_container">
-      <h1>パナソニック エチケットカッター ER-GN 10シリーズ</h1>
-      <div class="review_img">
-        <img src="./assets/demoReview1.png" class="card_img">
+<div class="grid">
+  <div class="grid-cell-1">
+      <form [formGroup]="cateSeachForm">
+    <mat-card>
+        <div class="grid-child">
+          <h2>キーワード検索</h2>
+          <mat-form-field class="maintitle" color="accent">
+            <input matInput placeholder="キーワードを入力してください" [formControl]="this.cateSeachForm.controls.keyword">
+          </mat-form-field>
+          <button mat-raised-button >キーワード検索</button>
+        </div>
+    </mat-card>
+    <mat-card>
+      <div class="grid-child">
+        <h2>カテゴリー検索</h2>
+        <mat-form-field color="accent">
+          <mat-select placeholder="カテゴリー" [formControl]="this.cateSeachForm.controls.category">
+            <mat-option *ngFor="let category of categories" [value]="category">
+              {{category}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field >
+        <button mat-raised-button >カテゴリ検索</button>
       </div>
-      <h2>薦めたい所</h2>
-      <p>単4電池一本で動き、切れ味も問題なく、その割にリーズナブルな値段で購入できたので凄くコストパフォーマンスのいい商品だと思いました！</p>
-    </mat-card-content>
-    <mat-card-actions>
-        <a mat-raised-button routerLink="/detail">続きを読む</a>
-    </mat-card-actions>
-  </mat-card>
-</div>
+    </mat-card>
+    <mat-card>
+      <div class="grid-child">
+        <h2>タグ検索</h2>
+        <tag-input class="tag-search" [formControl]="this.cateSeachForm.controls.tag" ></tag-input>
+        <button mat-raised-button >タグ検索</button>
+      </div>
+    </mat-card>
+  </form>
+  </div>
+  <div class="grid-cell-2">
+    <div *ngFor="let item of items;">
+      <mat-card>
+        <mat-card-header>
+          <div class="stars" *ngFor="let star of createstar(item.i);">
+            <i class="material-icons">star</i>
+          </div>
+          <div mat-card-avatar [style.background-image]="'url(' + avatar + ')'" class="profile_card_image"></div>
+          <mat-card-title>TestUser</mat-card-title>
+          <mat-card-title>2018-01-25</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card_container">
+          <h1>パナソニック エチケットカッター ER-GN 10シリーズ</h1>
+          <div class="review_img">
+            <img src="./assets/demoReview1.png" class="card_img">
+          </div>
+          <h2>薦めたい所</h2>
+          <p>単4電池一本で動き、切れ味も問題なく、その割にリーズナブルな値段で購入できたので凄くコストパフォーマンスのいい商品だと思いました！</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-raised-button routerLink="/detail">続きを読む</a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
 </div>
