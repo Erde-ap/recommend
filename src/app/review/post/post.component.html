@@ -11,11 +11,16 @@
     <h2>評価</h2>
     <star-rating-comp class="star-rating" [starType]="'icon'" [formControl]="this.reviewForm.controls.star" ></star-rating-comp>
     <h2>カテゴリー選択</h2>
-    <mat-radio-group class="cate-radio-group" [formControl]="this.reviewForm.controls.category">
-      <mat-radio-button class="cate-radio-button" value="食料・飲料"  checked="true">食料・飲料</mat-radio-button>
-      <mat-radio-button class="cate-radio-button" value="ゲーム">ゲーム</mat-radio-button>
-      <mat-radio-button class="cate-radio-button" value="ヘルス＆ビューテー">ヘルス＆ビューテー</mat-radio-button>
-    </mat-radio-group>
+    <mat-form-field>
+    <mat-select placeholder="カテゴリー" [formControl]="this.reviewForm.controls.category" required>
+      <mat-option *ngFor="let category of categories" [value]="category">
+        {{category}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="reviewForm.controls.category.hasError('required')">
+      <strong>*</strong>必須項目
+    </mat-error>
+    </mat-form-field>
     <h2>薦めたい所</h2>
     <mat-form-field>
       <textarea matInput rows="6" cols="40" placeholder="ここに記入してください" [formControl]="this.reviewForm.controls.recommend" [errorStateMatcher]="matcher"></textarea>

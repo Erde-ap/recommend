@@ -8,6 +8,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
   MatButtonModule,
@@ -20,25 +21,7 @@ import {
 } from '@angular/material';
 import { AuthguardService } from './authguard/authguard.service';
 @NgModule({
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatCardModule,
-    MatSidenavModule,
-    MatListModule,
-    MatTabsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatRadioModule,
-    MatDatepickerModule,
-    MatNativeDateModule
-  ],
+  imports: [],
   exports: [
     CommonModule,
     FormsModule,
@@ -56,7 +39,8 @@ import { AuthguardService } from './authguard/authguard.service';
     MatFormFieldModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSelectModule
   ],
   providers: [
     MatNativeDateModule,

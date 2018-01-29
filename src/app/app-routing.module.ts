@@ -19,7 +19,8 @@ const myRoutes = [
   { path: 'detail', component: DetailComponent },
   {path: 'contents', canActivate: [AuthguardService], children: [
     { path: 'mypage', component: MypageComponent },
-    { path: 'review', component: TopComponent }
+    { path: 'review', component: TopComponent },
+    { path: 'post', component: PostComponent }
   ]},
   {path: 'cert', canActivate: [AuthguardService2], children: [
     { path: 'login', component: LoginComponent },

@@ -25,6 +25,23 @@ export class PostComponent implements OnInit {
   replace= RegExp(/"/,'g');
   reviewForm: FormGroup;
   matcher = new MyErrorStateMatcher();
+  categories = [
+    '本・コミック・雑誌',
+    'ゲーム',
+    'ミュージック',
+    '映像作品(映画・アニメ・ドラマ)',
+    '電化製品',
+    'ヘルス&ビューティー',
+    '食品・飲料・お酒',
+    '車・バイク',
+    '家庭用品・家具',
+    '小物・雑貨',
+    'おもちゃ・ホビー',
+    '衣類',
+    'スポーツ・アウトドア',
+    'イベント',
+    'その他'
+  ];
 
   constructor (private http: Http,private builder: FormBuilder, private router: Router, private appstate: AppState) {
     this.reviewForm = this.builder.group({
@@ -32,7 +49,7 @@ export class PostComponent implements OnInit {
         Validators.required
       ]),
       star : new FormControl('', []),
-      category : new FormControl('ゲーム', [
+      category : new FormControl('', [
         Validators.required
       ]),
       recommend : new FormControl('', [
