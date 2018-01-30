@@ -49,4 +49,8 @@ export class MypageComponent {
       });
   }
 
+  toggleMenu (archive): void {
+    archive.favorite = !archive.favorite;
+    archive.favorite ? archive.favoInt++ : archive.favoInt--;
+  }
 }

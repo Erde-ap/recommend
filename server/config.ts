@@ -7,9 +7,9 @@ export const SERVER_PORT = 3000;
 export const MONGO_URL_USER = 'mongodb://150.95.148.134:28001/user';
 export const MONGO_URL_REVIEW = 'mongodb://150.95.148.134:28001/review';
 export const MONGO_URL_SESSION = 'mongodb://150.95.148.134:28001/sessiondata';
-// export const MONGO_URL_USER = 'mongodb://localhost:28001/user';
-// export const MONGO_URL_REVIEW ='mongodb://localhost:28001/review';
-// export const MONGO_URL_SESSION ='mongodb://localhost:28001/sessiondata';
+// export const MONGO_URL_USER = 'mongodb://localhost:27017/user';
+// export const MONGO_URL_REVIEW ='mongodb://localhost:27017/review';
+// export const MONGO_URL_SESSION ='mongodb://localhost:27017/sessiondata';
 
 // googleAPIkey
 export const G_USER = 'Recommend911@gmail.com';

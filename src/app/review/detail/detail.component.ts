@@ -3,7 +3,6 @@ import { SharedModule } from '../../shared/shared.module';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
@@ -12,12 +11,16 @@ import { Observable } from 'rxjs/Observable';
 export class DetailComponent {
   items = {};
   reviewid;
+  favorite = {
+    favoInt: '0',
+    favost: false
+  };
   avatar = './assets/user1/user1_profile.jpg';
   queryParams: any;
+  headers;
   constructor (private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private http: Http) {
-    this.onLoad();
   }
 
   toggleMenu (archive): void {
@@ -30,16 +33,34 @@ export class DetailComponent {
   }
 
   onLoad () {
-    console.log(this.queryRead());
-    this.http.get('http://localhost:3000/api/reviewdetail?id=', { withCredentials: true })
+    this.queryRead().subscribe((data) => {
+      this.http.get('http://localhost:3000/api/reviewdetail?id=' + data, { withCredentials: true })
+      .subscribe(
+        response => {
+          this.items = response.json();
+          this.onLoad_favsystem(data);
+          // レビューの一覧を取得して最新順にしてある。
+        },
+        error => {
+          console.log(error);
+        });
+    });
+  }
+
+  onLoad_favsystem (data) {
+    let params = new URLSearchParams();
+
+    params.set('id', data);
+    this.http.post('http://localhost:3000/api/favst', params, { withCredentials: true })
     .subscribe(
       response => {
-        this.items = response.json();
-        // レビューの一覧を取得して最新順にしてある。
-      },
+        this.favorite.favoInt = response.json().params;
+        this.favorite.favost = response.json().status;
+      } ,
       error => {
         console.log(error);
-      });
+      }
+    );
   }
 
   queryRead (): Observable<string> {
@@ -49,5 +70,4 @@ export class DetailComponent {
         return queryParams.id;
       });
   }
-
 }
