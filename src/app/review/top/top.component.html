@@ -7,7 +7,7 @@
           <mat-form-field class="maintitle" color="accent">
             <input matInput placeholder="キーワードを入力してください" [formControl]="this.cateSeachForm.controls.keyword">
           </mat-form-field>
-          <button mat-raised-button >キーワード検索</button>
+          <button mat-raised-button (click)="onSubmit_keyword()">キーワード検索</button>
         </div>
     </mat-card>
     <mat-card>
@@ -20,14 +20,14 @@
             </mat-option>
           </mat-select>
         </mat-form-field >
-        <button mat-raised-button >カテゴリ検索</button>
+        <button mat-raised-button (click)="onSubmit_cate()">カテゴリ検索</button>
       </div>
     </mat-card>
     <mat-card>
       <div class="grid-child">
         <h2>タグ検索</h2>
         <tag-input class="tag-search" [formControl]="this.cateSeachForm.controls.tag" ></tag-input>
-        <button mat-raised-button >タグ検索</button>
+        <button mat-raised-button (click)="onSubmit_tag()">タグ検索</button>
       </div>
     </mat-card>
   </form>
@@ -35,7 +35,7 @@
   <div class="grid-cell-2">
     <div *ngFor="let item of items;">
       <mat-card>
-        <mat-card-header>
+        <!-- <mat-card-header>
           <div class="stars" *ngFor="let star of createstar(item.i);">
             <i class="material-icons">star</i>
           </div>
@@ -53,6 +53,26 @@
         </mat-card-content>
         <mat-card-actions>
           <a mat-raised-button routerLink="/detail">続きを読む</a>
+        </mat-card-actions> -->
+        <!-- ↑ option [queryParams]='{ id: hoge } -->
+        <mat-card-header>
+          <div class="stars" *ngFor="let star of createstar(item.star);">
+            <i class="material-icons">star</i>
+          </div>
+          <div mat-card-avatar [style.background-image]="'url(' + avatar + ')'" class="profile_card_image"></div>
+          <mat-card-title>{{ item.name}}</mat-card-title>
+          <mat-card-title>{{ item.uday }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card_container">
+          <h1>{{ item.title }}</h1>
+          <div class="review_img">
+            <img src="./assets/demoReview1.png" class="card_img">
+          </div>
+          <h2>薦めたい所</h2>
+          <p>{{ item.improvement }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-raised-button routerLink="/contents/detail" [queryParams]="{ id: item._id }">続きを読む</a>
         </mat-card-actions>
       </mat-card>
     </div>

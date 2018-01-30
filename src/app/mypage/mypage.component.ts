@@ -39,11 +39,6 @@ export class MypageComponent {
   }
 
   onLoad () {
-    // JSON.Stringifyでｏｂｊを文字列化
-    // params.set('object', JSON.stringify(this.object));
-
-    // withCredentials: trueは必須これがないとsessionが維持できない
-    // angular4は標準レスポンス時にCookieを送り出さないためこの問題が発生する
     this.http.get('http://localhost:3000/api/mypage', { withCredentials: true })
     .subscribe(
       response => {

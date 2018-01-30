@@ -13,7 +13,7 @@ searchcateRouter.get('/' , (req: any, res, next) => {
   const u = url.parse(req.url, false);
   const query = qstring.parse(u.query);
   // const searchbox = replaceall('　',' ',query.search).split(' ');
-
+  console.log(query.cate);
 });
 
 export { searchcateRouter };

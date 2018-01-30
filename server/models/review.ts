@@ -7,6 +7,7 @@ const Review = new Schema({
   count: Number, // アクセスされた回数
   uday: { type: Date, index: true, default: Date.now }, // アップロードした日
   star: Number, // 評価の星の数を保存
+  name : String,// 引っこ抜いてきたuserの名前を入れる
   tag: [String], // この中にタグ記述してもらう(ニコ動のタグみたいなもの)
   cateans: [String],
   mainimg: [String],
