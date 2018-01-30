@@ -10,8 +10,10 @@ import { FormGroup } from '@angular/forms/src/model';
   styleUrls: ['./top.component.css']
 })
 export class TopComponent {
+  searched;
   avatar = './assets/user1/user1_profile.jpg';
-  items = [{ i: 1 },{ i: 2 },{ i: 3 },{ i: 4 },{ i: 5 },{ i: 3 },{ i: 2 },{ i: 1 },{ i: 4 },{ i: 5 },{ i: 2 },{ i: 2 },{ i: 3 },{ i: 4 },{ i: 5 },{ i: 4 },{ i: 3 },{ i: 4 },{ i: 3 },{ i: 2 },{ i: 1 },{ i: 4 },{ i: 2 },{ i: 4 },{ i: 5 },{ i: 3 },{ i: 2 }];
+  // items = [{ i: 1 },{ i: 2 },{ i: 3 },{ i: 4 },{ i: 5 },{ i: 3 },{ i: 2 },{ i: 1 },{ i: 4 },{ i: 5 },{ i: 2 },{ i: 2 },{ i: 3 },{ i: 4 },{ i: 5 },{ i: 4 },{ i: 3 },{ i: 4 },{ i: 3 },{ i: 2 },{ i: 1 },{ i: 4 },{ i: 2 },{ i: 4 },{ i: 5 },{ i: 3 },{ i: 2 }];
+  items;
   categories = [
     '本・コミック・雑誌',
     'ゲーム',
@@ -30,7 +32,6 @@ export class TopComponent {
     'その他'
   ];
   cateSeachForm: FormGroup;
-
   constructor (private http: Http,private builder: FormBuilder) {
     this.onLoad();
     this.cateSeachForm = this.builder.group({
@@ -39,20 +40,31 @@ export class TopComponent {
       tag : new FormControl('', [])
     });
   }
-
   // 星の数を表示するためのメソッド
   createstar = num => new Array(num);
 
   onLoad () {
-    // JSON.Stringifyでｏｂｊを文字列化
-    // params.set('object', JSON.stringify(this.object));
-
-    // withCredentials: trueは必須これがないとsessionが維持できない
-    // angular4は標準レスポンス時にCookieを送り出さないためこの問題が発生する
     this.http.get('http://localhost:3000/api/reviewtop', { withCredentials: true })
     .subscribe(
       response => {
-        console.log(response.json());
+        // レビューの一覧を取得して最新順にしてある。
+        this.items = response.json();
+        console.log(this.searched);
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
+  onSubmit_keyword () {
+    const ps = new URLSearchParams();
+    ps.set('keyword', this.cateSeachForm.controls.keyword.value);
+
+    this.http.get('http://localhost:3000/api/searchkeyword', { params: ps , withCredentials: true })
+    .subscribe(
+      response => {
+        this.searched = response.json();
+        console.log(this.searched);
       },
       error => {
         console.log(error);
@@ -60,35 +72,32 @@ export class TopComponent {
   }
 
   onSubmit_tag () {
-    // JSON.Stringifyでｏｂｊを文字列化
-    // params.set('object', JSON.stringify(this.object));
+    // const ps = new URLSearchParams();
+    // ps.set('tag', this.cateSeachForm.controls.tag.value);
 
-    // withCredentials: trueは必須これがないとsessionが維持できない
-    // angular4は標準レスポンス時にCookieを送り出さないためこの問題が発生する
-    this.http.get('http://localhost:3000/api/searchtag', { withCredentials: true })
-    .subscribe(
-      response => {
-        console.log(response.json());
-      },
-      error => {
-        console.log(error);
-      });
+    // this.http.get('http://localhost:3000/api/searchtag', { params: ps , withCredentials: true })
+    // .subscribe(
+    //   response => {
+    //     console.log(response.json());
+    //     this.searched = response.json();
+    //   },
+    //   error => {
+    //     console.log(error);
+    //   });
   }
 
   onSubmit_cate () {
-    const params = new URLSearchParams();
-    // JSON.Stringifyでｏｂｊを文字列化
-    // params.set('object', JSON.stringify(this.object));
+  //   const ps = new URLSearchParams();
+  //   ps.set('cate', this.cateSeachForm.controls.categories.value);
 
-    // withCredentials: trueは必須これがないとsessionが維持できない
-    // angular4は標準レスポンス時にCookieを送り出さないためこの問題が発生する
-    this.http.get('http://localhost:3000/api/searchcate', params: params, { withCredentials: true })
-    .subscribe(
-      response => {
-        console.log(response.json());
-      },
-      error => {
-        console.log(error);
-      });
+  //   this.http.get('http://localhost:3000/api/searchcate', { params: ps , withCredentials: true })
+  // .subscribe(
+  //     response => {
+  //       console.log(response.json());
+  //       this.searched = response.json();
+  //     },
+  //     error => {
+  //       console.log(error);
+  //     });
   }
 }
