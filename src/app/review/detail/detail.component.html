@@ -9,19 +9,18 @@
       </div>
     <mat-card-title>TestUser</mat-card-title>
     <mat-card-subtitle>2018-01-25</mat-card-subtitle>
+    <mat-card-title>{{ items.name }}</mat-card-title>
+    <mat-card-subtitle>{{ items.uday }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <h1>パナソニック エチケットカッター ER-GN 10シリーズ</h1>
+    <h1>{{ items.title }}</h1>
     <div class="review_img">
       <img src="./assets/demoReview1.png" alt="">
     </div>
     <h2>薦めたい所</h2>
-    <p>単4電池一本で動き、切れ味も問題なく、その割にリーズナブルな値段で購入できたので凄くコストパフォーマンスのいい商品だと思いました！
-      <br>使用後に刃の部分を掃除する際も、パーツ数が少なく、細かい作業が苦手な方でも、簡単に取り外して水洗いすることが出来るのもいいです！
-      <br>掃除用ブラシが付属しているので水洗いできない部分も清潔に保てます。</p>
+    <p>{{ items.recommend }}</p>
     <h2>改善してほしい所</h2>
-    <p>「安価な分仕方がないのかもしれませんが、少し刃の劣化が早く感じたので、刃の部分の替えだけ販売してほしかったです。
-      <br>掃除用ブラシの場所が電池カバーの裏にひっついていてわかりにくかったです。</p>
+    <p>{{ items.improvement }}</p>
     <div class="review_img" s>
       <img src="./assets/demoReview2.png" alt="">
     </div>
