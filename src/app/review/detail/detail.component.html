@@ -1,6 +1,14 @@
 <mat-card>
   <mat-card-header>
     <div mat-card-avatar [style.background-image]="'url(' + avatar + ')'" class="profile_card_image"></div>
+    <div class="favorite">
+        <label>100</label>
+        <button mat-icon-button (click)='toggleMenu(data)' color="{{ data.favorite ? 'warn':'disabled' }}">
+          <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+        </button>
+      </div>
+    <mat-card-title>TestUser</mat-card-title>
+    <mat-card-subtitle>2018-01-25</mat-card-subtitle>
     <mat-card-title>{{ items.name }}</mat-card-title>
     <mat-card-subtitle>{{ items.uday }}</mat-card-subtitle>
   </mat-card-header>
