@@ -34,6 +34,9 @@ import { reviewuploadRouter } from './routes/review/review_upload';
 import { searchkeywordRouter } from './routes/reviewsearch/search_keyword';
 import { searchtagRouter } from './routes/reviewsearch/search_tag';
 import { searchcateRouter } from './routes/reviewsearch/search_cate';
+import { reviewfavst } from './routes/review/fav_wanted/review_favst';
+import { reviewfavadd } from './routes/review/fav_wanted/review_favadd';
+import { reviewfavdel } from './routes/review/fav_wanted/review_favdel';
 class App {
   public express: express.Application;
 
@@ -102,6 +105,9 @@ class App {
     this.express.use('/api/searchkeyword', searchkeywordRouter);
     this.express.use('/api/searchtag', searchtagRouter);
     this.express.use('/api/searchcate', searchcateRouter);
+    this.express.use('/api/favdel', reviewfavdel);
+    this.express.use('/api/favst', reviewfavst);
+    this.express.use('/api/favadd', reviewfavadd);
 
     // ここからずらさないで
     this.express.options('*', cors(options));

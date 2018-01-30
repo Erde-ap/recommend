@@ -118,6 +118,18 @@ export let error = {
     {
       code: 28,
       response: '入力されたアドレス宛てにメールを送信しました。'
+    },
+    {
+      code: 29,
+      response: 'レビューにいいねをつけました。'
+    },
+    {
+      code: 30,
+      response: 'レビュからいいねを削除しました。'
+    },
+    {
+      code: 31,
+      response: 'いいねの現在の状態を返します。'
     }
   ]
 };
@@ -202,4 +214,22 @@ export function hadEntrySuccess (req, res) {
 export function hadSendmailSuccess (req, res, transporter) {
   res.send(error.status[28]);
   transporter.close();
+}
+
+export function hadFavoriteaddSuccess (req, res) {
+  res.send(error.status[29]);
+}
+
+export function hadFavoritedelSuccess (req, res) {
+  res.send(error.status[30]);
+}
+
+export function hadFavoriteStatus (req, res, status, params) {
+  const backparams = {
+    code: error.status[31].code,
+    response: error.status[31].response,
+    status: status,
+    params: params
+  };
+  res.send(backparams);
 }

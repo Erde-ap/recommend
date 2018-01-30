@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-detail',
@@ -16,25 +17,21 @@ export class DetailComponent {
   constructor (private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private http: Http) {
-    this._activatedRoute.queryParams.subscribe(
-        params => {
-          this.queryParams = params;
-          this.reviewid = this.queryParams.id;
-        });
     this.onLoad();
   }
 
+  toggleMenu (archive): void {
+    archive.favorite = !archive.favorite;
+    archive.favorite ? archive.favoInt++ : archive.favoInt--;
+  }
+
   ngOnInit () {
-    this._activatedRoute.queryParams.subscribe(
-        params => {
-          this.queryParams = params;
-          this.reviewid = this.queryParams.id;
-        });
     this.onLoad();
   }
 
   onLoad () {
-    this.http.get('http://localhost:3000/api/reviewdetail?id=' + this.reviewid, { withCredentials: true })
+    console.log(this.queryRead());
+    this.http.get('http://localhost:3000/api/reviewdetail?id=', { withCredentials: true })
     .subscribe(
       response => {
         this.items = response.json();
@@ -42,6 +39,14 @@ export class DetailComponent {
       },
       error => {
         console.log(error);
+      });
+  }
+
+  queryRead (): Observable<string> {
+    return this._activatedRoute.queryParams.map(
+      params => {
+        let queryParams = params;
+        return queryParams.id;
       });
   }
 
