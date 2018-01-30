@@ -2,8 +2,8 @@
   <mat-card-header>
     <div mat-card-avatar [style.background-image]="'url(' + avatar + ')'" class="profile_card_image"></div>
     <div class="favorite">
-        <label>100</label>
-        <button mat-icon-button (click)='toggleMenu(data)' color="{{ data.favorite ? 'warn':'disabled' }}">
+        <label>{{ favdata.favoInt }}</label>
+        <button mat-icon-button (click)='toggleMenu(favdata)' color="{{ favdata.favost ? 'warn':'disabled' }}">
           <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
         </button>
       </div>

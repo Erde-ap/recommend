@@ -5,6 +5,7 @@ import { Http, URLSearchParams, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import { AppState } from '../../app.state';
 import 'rxjs/add/operator/toPromise';
+import { APIURL } from '../shared.redirect';
 
 @Injectable()
 export class AuthguardService implements CanActivate {
@@ -19,7 +20,7 @@ export class AuthguardService implements CanActivate {
   }
 
   checksession (): Observable<boolean> {
-    return this.http.get('http://localhost:3000/api/checksession', { withCredentials: true })
+    return this.http.get(APIURL + '/api/checksession', { withCredentials: true })
         .map(
           response => {
             // 受け取ったセッション情報をjson化して変数に格納する。
@@ -56,7 +57,7 @@ export class AuthguardService2 implements CanActivate {
   }
 
   checksession (): Observable<boolean> {
-    return this.http.get('http://localhost:3000/api/checksession', { withCredentials: true })
+    return this.http.get(APIURL + '/api/checksession', { withCredentials: true })
         .map(
           response => {
             // 受け取ったセッション情報をjson化して変数に格納する。
