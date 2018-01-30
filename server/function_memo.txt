@@ -9,3 +9,12 @@ register処理(新規登録処理)
 
 メール認証後expressでリダイレクトさせる場合res.sendが使えなくなるので
 Angularサイドでルーティングする必要がある
+
+
+下記のコードで配列に入っている連想配列内の値をすべてとりだす
+  const tag = JSON.parse(req.body.tag);
+  // 重要↓
+  let tags = [];
+  tags = tag.map(data => {
+    return data.value;
+  });

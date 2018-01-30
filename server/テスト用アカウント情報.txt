@@ -1,2 +1,2 @@
 uid: admin
-pass: aaa
+pass: password

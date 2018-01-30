@@ -1,8 +1,10 @@
 import * as http from 'http';
 import { Router } from 'express';
+import * as async from 'async';
 
 import { error, hadLoginError, hadDbError } from '../../error_config';
 import * as Review from '../../models/review';
+import * as User from '../../models/user';
 
 const reviewtopRouter: Router = Router();
 reviewtopRouter.get('/' , (req: any, res, next) => {
@@ -10,7 +12,29 @@ reviewtopRouter.get('/' , (req: any, res, next) => {
   Review[0].find({},null, { sort: { uday: -1 } },(err, account) => {
     if (err) return hadDbError(req, res);
     if (account) {
-      res.send(account);
+      let reviewback = [];
+      let list = [];
+      reviewback = account;
+      for (let i = 0; i < account.length; i++) {
+        list.push({ id: account[i].hostid, number: i });
+      }
+      async.eachSeries(list, (data, next) => {// ユーザーIDをキーにして動的にWebページの投稿者名を変更する
+        setTimeout(() => {
+          User.findOne({ _id: data.id },{},{},(err, result) => {
+            if (err) return hadDbError(req, res);
+            if (result.length === 0 ) {
+              reviewback[data.number].name = 'このユーザは存在しません。';
+              return next();
+            }
+            // ↓要変更
+            reviewback[data.number].name = result.name;
+            return next();
+          });
+        }, 0);
+      }, () => {
+        console.log(reviewback);
+        res.send(reviewback);
+      });
     }
   });
 });

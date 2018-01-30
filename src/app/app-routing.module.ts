@@ -15,9 +15,8 @@ import { TopComponent } from './review/top/top.component';
 
 const myRoutes = [
   { path: '', component: HomepageComponent },
-  // { path: 'test', component: PostComponent },
-  { path: 'detail', component: DetailComponent },
   {path: 'contents', canActivate: [AuthguardService], children: [
+    { path: 'detail', component: DetailComponent },
     { path: 'mypage', component: MypageComponent },
     { path: 'review', component: TopComponent },
     { path: 'post', component: PostComponent }

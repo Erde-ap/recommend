@@ -30,6 +30,7 @@ export class TopComponent {
     'その他'
   ];
   cateSeachForm: FormGroup;
+
   constructor (private http: Http,private builder: FormBuilder) {
     this.onLoad();
     this.cateSeachForm = this.builder.group({
@@ -38,6 +39,7 @@ export class TopComponent {
       tag : new FormControl('', [])
     });
   }
+
   // 星の数を表示するためのメソッド
   createstar = num => new Array(num);
 
