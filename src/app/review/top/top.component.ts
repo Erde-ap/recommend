@@ -64,7 +64,7 @@ export class TopComponent {
     this.http.get(APIURL + '/api/searchkeyword', { params: ps , withCredentials: true })
     .subscribe(
       response => {
-        this.searched = response.json();
+        this.items = response.json();
         console.log(this.searched);
       },
       error => {
@@ -73,11 +73,11 @@ export class TopComponent {
   }
 
   onSubmit_tag () {
-    this.http.get(APIURL + '/api/searchtag?tag=' + this.cateSeachForm.controls.tag.value, { withCredentials: true })
+    this.http.get(APIURL + '/api/searchtag?tag=' + JSON.stringify(this.cateSeachForm.controls.tag.value), { withCredentials: true })
     .subscribe(
       response => {
         console.log(response.json());
-        this.searched = response.json();
+        this.items = response.json();
       },
       error => {
         console.log(error);
@@ -85,11 +85,11 @@ export class TopComponent {
   }
 
   onSubmit_cate () {
-    this.http.get(APIURL + '/api/searchcate?cate=' + this.cateSeachForm.controls.categories.value , { withCredentials: true })
+    this.http.get(APIURL + '/api/searchcate?cate=' + this.cateSeachForm.controls.category.value , { withCredentials: true })
   .subscribe(
       response => {
         console.log(response.json());
-        this.searched = response.json();
+        this.items = response.json();
       },
       error => {
         console.log(error);
