@@ -13,11 +13,19 @@ export class DetailComponent {
   reviewid;
   avatar = './assets/user1/user1_profile.jpg';
   queryParams: any;
+  user = {
+    favorite: true,
+    favoInt: 235
+  };
   constructor (private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private http: Http) {
   }
 
+  toggleMenu (archive): void {
+    archive.favorite = !archive.favorite;
+    archive.favorite ? archive.favoInt++ : archive.favoInt--;
+  }
   ngOnInit () {
     this._activatedRoute.queryParams.subscribe(
         params => {
