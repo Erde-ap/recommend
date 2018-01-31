@@ -10,6 +10,10 @@ mat-card{
   line-height: 2.8em!important;
   height: 2.5em!important;
 }
+label{
+  color: #fff;
+  background-color: #e53935;
+}
 form {
   display: flex;
   flex-direction: column;

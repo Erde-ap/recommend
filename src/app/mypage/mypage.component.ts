@@ -1,7 +1,6 @@
 import { Component, Inject, Injectable } from '@angular/core';
 import { SharedService } from '../shared/shared.service';
 import { Http } from '@angular/http';
-import { APIURL } from '../shared/shared.redirect';
 
 @Component({
   selector: 'app-mypage',
@@ -40,7 +39,7 @@ export class MypageComponent {
   }
 
   onLoad () {
-    this.http.get(APIURL + '/api/mypage', { withCredentials: true })
+    this.http.get('http://localhost:3000/api/mypage', { withCredentials: true })
     .subscribe(
       response => {
         console.log(response.json());
@@ -50,8 +49,4 @@ export class MypageComponent {
       });
   }
 
-  toggleMenu (archive): void {
-    archive.favorite = !archive.favorite;
-    archive.favorite ? archive.favoInt++ : archive.favoInt--;
-  }
 }

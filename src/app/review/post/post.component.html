@@ -42,19 +42,21 @@
       </mat-error>
     </mat-form-field>
     <div formArrayName="selfContents">
-      <div *ngFor="let content of selfContents.controls; let i=index" [formGroupName]="i">
+      <div *ngFor="let content of selfContents.controls; let i=index;" [formGroupName]="i">
         <mat-form-field class="maintitle">
           <input matInput placeholder="タイトル" formControlName="title">
         </mat-form-field>
         <mat-form-field>
           <textarea matInput rows="6" cols="40" placeholder="内容"  formControlName="body"></textarea>
         </mat-form-field>
+        <input hidden="true" id="upfile" name="upfile" type="file" #fl accept="image/*" (change)="upload(fl.files,i)"/>
+        <label for="upfile" class="mat-raised-button mat-basic">画像をアップロード</label>
+        {{i}}
       </div>
     </div>
     <h2>タグを追加</h2>
     <tag-input [formControl]="this.reviewForm.controls.tag"></tag-input>
     <p>Enterキーを押すことでタグを追加出来ます</p>
-    <button type="file" mat-raised-button>画像</button>
     <button mat-raised-button (click)="addSection()">要素追加</button>
     <button mat-raised-button (click)="onSubmit()" [disabled]="!reviewForm.valid">レビューを投稿</button>
   </form>

@@ -66,11 +66,24 @@ export class PostComponent implements OnInit {
       tag : new FormControl('', [])
     });
   }
+  upload (list: any , num) {
+    if (list.length <= 0) { return; }
+    let f = list[0];
+    console.log(num);
+    let data = new FormData();
+    let userID = 1;
+    let archiveID = 2;
+    let type = list[0].name.split('.');
+    this.reviewForm.controls.selfContents.value[num].img = 'http://localhost:3000/static/img/' + userID + '/' + archiveID + '/' + num + '.' + type[1];
+    data.append('upfile', f, f.name);
+    // ここから下にhttp
+  }
 
   addSection () {
     this.selfContents.push(this.builder.group({
       title: '',
-      body: ''
+      body: '',
+      img : ''
     }));
   }
 

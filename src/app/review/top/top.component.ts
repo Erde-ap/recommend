@@ -44,6 +44,13 @@ export class TopComponent {
   // 星の数を表示するためのメソッド
   createstar = num => new Array(num);
 
+  toLocaleString ( date ) {
+    let arr = date.split('-');
+    let arr2 = arr[2].split('T');
+    // let dataJoin = arr.join
+    return arr[0] + '/' + arr[1] + '/' + arr2[0];
+  }
+
   onLoad () {
     this.http.get(APIURL + '/api/reviewtop', { withCredentials: true })
     .subscribe(

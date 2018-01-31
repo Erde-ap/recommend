@@ -24,10 +24,18 @@
 }
 mat-card{
   width: 300px;
-  margin: 0 20px 20px 0;
+}
+.mat-auto{
+  margin: 20px auto 0 auto;
+}
+.card-item{
+  margin: 20px 20px 0 0;
 }
 .profile_card_image{
   background-size: cover;
+}
+.mat-form-field{
+  width: 295px;
 }
 .tag-search{
   margin: 10px 0 20px 0;
