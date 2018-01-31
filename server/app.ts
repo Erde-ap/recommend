@@ -31,6 +31,7 @@ import { outlookmypageRouter } from './routes/mypage/outlook_mypage';
 import { reviewtopRouter } from './routes/review/review_top';
 import { reviewdetailRouter } from './routes/review/review_detail';
 import { reviewuploadRouter } from './routes/review/review_upload';
+import { reviewphotouploadRouter } from './routes/review/review_photoup';
 import { searchkeywordRouter } from './routes/reviewsearch/search_keyword';
 import { searchtagRouter } from './routes/reviewsearch/search_tag';
 import { searchcateRouter } from './routes/reviewsearch/search_cate';
@@ -104,6 +105,7 @@ class App {
     this.express.use('/api/reviewtop', reviewtopRouter);
     this.express.use('/api/reviewdetail', reviewdetailRouter);
     this.express.use('/api/reviewupload', reviewuploadRouter);
+    this.express.use('/api/reviewphotoupload', reviewphotouploadRouter);
     this.express.use('/api/searchkeyword', searchkeywordRouter);
     this.express.use('/api/searchtag', searchtagRouter);
     this.express.use('/api/searchcate', searchcateRouter);

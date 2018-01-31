@@ -10,20 +10,15 @@ import { getDate } from '../../config';
 const reviewuploadRouter: Router = Router();
 reviewuploadRouter.post('/' , (req: any, res, next) => {
   if (!req.session.user) return hadLoginError(req, res);
-  // const protodata = {
-  //   title: 'テスト用タイトル',
-  //   cateans: 'カテゴリ別回答1',
-  //   subtitle: ['サブタイトル1', 'サブタイトル2'],
-  //   mainimg: ['http://localhost:3000/public/img/hoge', 'http://localhost:3000/public/img/hoge2'],
-  //   main: ['おまんけ1', 'おまんけ2'],
-  //   tag: ['テスト用']
-  // };
+
   const tag = JSON.parse(req.body.tag);
-  // 重要↓
   let tags = [];
-  tags = tag.map(x => {
-    return x.value;
-  });
+
+  if (req.body.tag !== undefined) {
+    tags = tag.map(x => {
+      return x.value;
+    });
+  }
 
   const maindata = {
     title: req.body.mainTitle,
