@@ -1,6 +1,5 @@
 import * as http from 'http';
 import { Router } from 'express';
-import async from 'async';
 
 import * as Review from '../../../models/review';
 
@@ -10,15 +9,13 @@ const reviewfavdel: Router = Router();
 reviewfavdel.post('/' , (req: any, res, next) => {
   if (!req.session.user) return hadLoginError(req, res);
 
-  Review[0].findOne({ _id: req.body.id }).async.forEach((data) => {
-    const arr = data.fav;
-    const length = arr.length;
-    for (let i = 0; i < length; i++) {
-      if (arr[i] === req.body.id) {
-        delete arr[i];
-      }
-    }
-    Review[0].save(data);
+  // Review[0].findOne({ _id: req.body.id },(err, data) => {
+  //   if (err) return hadDbError(req, res);
+
+  //   return hadFavoritedelSuccess(req, res);
+  // });
+  Review[0].findOneAndUpdate({ _id: req.body.id },{ $pull: { fav: req.session.user } },{ 'new': true },(err) => {
+    if (err) return hadDbError(req, res);
     return hadFavoritedelSuccess(req, res);
   });
 });

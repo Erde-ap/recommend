@@ -9,7 +9,7 @@ const reviewfavadd: Router = Router();
 reviewfavadd.post('/' , (req: any, res, next) => {
   if (!req.session.user) return hadLoginError(req, res);
 
-  Review[0].update({ _id: req.body.id },{ favorite: req.session.user },{ upsert: true },(err) => {
+  Review[0].findOneAndUpdate({ _id: req.body.id },{ $push: { fav: req.session.user } },{ upsert: true },(err) => {
     if (err) return hadDbError(req, res);
     return hadFavoriteaddSuccess(req, res);
   });

@@ -12,7 +12,7 @@ reviewfavst.post('/' , (req: any, res: any, next) => {
 
   Review[0].findOne({ _id: req.body.id } ,(err, data) => {
     if (err) return hadDbError(req, res);
-    if ( data === null) return hadDbError(req, res);
+    if (data === null) return hadDbError(req, res);
     const arr = data.fav;
     const length = arr.length;
     const params = length;

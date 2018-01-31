@@ -27,8 +27,10 @@ export class DetailComponent {
   toggleMenu (archive): void {
     // archive.favorite = !archive.favorite;
     // archive.favorite ? archive.favoInt++ : archive.favoInt--;
-    if (archive.favorite === true) {
-
+    if (archive.favost === true) {
+      this.favdel();
+    }else if (archive.favost === false) {
+      this.favadd();
     }
   }
 
@@ -55,8 +57,10 @@ export class DetailComponent {
     this.http.post(APIURL + '/api/favst', { id: data }, { withCredentials: true })
     .subscribe(
       response => {
-        this.favdata.favoInt = response.json().params;
-        this.favdata.favost = response.json().status;
+        if (response !== null) {
+          this.favdata.favoInt = response.json().params;
+          this.favdata.favost = response.json().status;
+        }
       } ,
       error => {
         console.log(error);
@@ -66,11 +70,24 @@ export class DetailComponent {
 
   favdel () {
     this.queryRead().subscribe((data) => {
-      this.http.post(APIURL + '/api/favst', { id: data }, { withCredentials: true })
+      this.http.post(APIURL + '/api/favdel', { id: data }, { withCredentials: true })
     .subscribe(
       response => {
-        this.favdata.favoInt = response.json().params;
-        this.favdata.favost = response.json().status;
+        this.onLoad_favsystem(data);
+      } ,
+      error => {
+        console.log(error);
+      }
+    );
+    });
+  }
+
+  favadd () {
+    this.queryRead().subscribe((data) => {
+      this.http.post(APIURL + '/api/favadd', { id: data }, { withCredentials: true })
+    .subscribe(
+      response => {
+        this.onLoad_favsystem(data);
       } ,
       error => {
         console.log(error);
