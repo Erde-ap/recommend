@@ -37,6 +37,8 @@ import { searchcateRouter } from './routes/reviewsearch/search_cate';
 import { reviewfavst } from './routes/review/fav_wanted/review_favst';
 import { reviewfavadd } from './routes/review/fav_wanted/review_favadd';
 import { reviewfavdel } from './routes/review/fav_wanted/review_favdel';
+import { comupload } from './routes/review/comment/com_upload';
+import { comdetails } from './routes/review/comment/com_details';
 class App {
   public express: express.Application;
 
@@ -108,6 +110,8 @@ class App {
     this.express.use('/api/favdel', reviewfavdel);
     this.express.use('/api/favst', reviewfavst);
     this.express.use('/api/favadd', reviewfavadd);
+    this.express.use('/api/comup', comupload);
+    this.express.use('/api/comdetails', comdetails);
 
     // ここからずらさないで
     this.express.options('*', cors(options));

@@ -22,7 +22,6 @@ const Review = new Schema({
 const ReviewCom = new Schema({
     // reviewcomの_idはreviewのIDと同じになる
   mfo: { type: Schema.Types.ObjectId, ref: 'Review', index: true },
-  _conid: { type: Schema.Types.ObjectId, index: true }, // コンテンツID
   com: { type: Schema.Types.ObjectId, index: true }, // コメンターID
   name: { type: String, index: true }, // ユーザーが決めた自由な名前
   prop: String, // プロフィールの画像？

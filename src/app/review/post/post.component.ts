@@ -112,6 +112,7 @@ export class PostComponent implements OnInit {
     .subscribe(
       response => {
         console.log(response.json());
+        this.router.navigate(['/contents/review']);
       },
       error => {
         console.log(error);
