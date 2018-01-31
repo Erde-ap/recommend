@@ -23,6 +23,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class PostComponent implements OnInit {
   responseJson = '';
+  count = 0;
   replace= RegExp(/"/,'g');
   reviewForm: FormGroup;
   matcher = new MyErrorStateMatcher();
@@ -66,7 +67,7 @@ export class PostComponent implements OnInit {
       tag : new FormControl('', [])
     });
   }
-  upload (list: any , num) {
+  upload (list: any, num: number ) {
     if (list.length <= 0) { return; }
     let f = list[0];
     console.log(num);
@@ -74,17 +75,22 @@ export class PostComponent implements OnInit {
     let userID = 1;
     let archiveID = 2;
     let type = list[0].name.split('.');
-    this.reviewForm.controls.selfContents.value[num].img = 'http://localhost:3000/static/img/' + userID + '/' + archiveID + '/' + num + '.' + type[1];
+    let filePath = 'http://localhost:3000/static/img/' + userID + '/' + archiveID + '/' + num + '.' + type[1];
+    this.reviewForm.controls.selfContents.value[num].img = filePath;
     data.append('upfile', f, f.name);
     // ここから下にhttp
   }
-
+  resId (i) {
+    return i;
+  }
   addSection () {
     this.selfContents.push(this.builder.group({
+      id: this.count,
       title: '',
       body: '',
       img : ''
     }));
+    this.count++;
   }
 
   ngOnInit () { this.addSection(); }
