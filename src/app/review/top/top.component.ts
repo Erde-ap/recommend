@@ -3,6 +3,7 @@ import { Router,NavigationEnd } from '@angular/router';
 import { Http, URLSearchParams, Headers } from '@angular/http';
 import { FormControl,FormBuilder,FormGroupDirective,NgForm,FormArray,Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms/src/model';
+import { APIURL } from '../../shared/shared.redirect';
 
 @Component({
   selector: 'app-top',
@@ -44,7 +45,7 @@ export class TopComponent {
   createstar = num => new Array(num);
 
   onLoad () {
-    this.http.get('http://localhost:3000/api/reviewtop', { withCredentials: true })
+    this.http.get(APIURL + '/api/reviewtop', { withCredentials: true })
     .subscribe(
       response => {
         // レビューの一覧を取得して最新順にしてある。
@@ -60,10 +61,10 @@ export class TopComponent {
     const ps = new URLSearchParams();
     ps.set('keyword', this.cateSeachForm.controls.keyword.value);
 
-    this.http.get('http://localhost:3000/api/searchkeyword', { params: ps , withCredentials: true })
+    this.http.get(APIURL + '/api/searchkeyword', { params: ps , withCredentials: true })
     .subscribe(
       response => {
-        this.searched = response.json();
+        this.items = response.json();
         console.log(this.searched);
       },
       error => {
@@ -72,32 +73,26 @@ export class TopComponent {
   }
 
   onSubmit_tag () {
-    // const ps = new URLSearchParams();
-    // ps.set('tag', this.cateSeachForm.controls.tag.value);
-
-    // this.http.get('http://localhost:3000/api/searchtag', { params: ps , withCredentials: true })
-    // .subscribe(
-    //   response => {
-    //     console.log(response.json());
-    //     this.searched = response.json();
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   });
+    this.http.get(APIURL + '/api/searchtag?tag=' + JSON.stringify(this.cateSeachForm.controls.tag.value), { withCredentials: true })
+    .subscribe(
+      response => {
+        console.log(response.json());
+        this.items = response.json();
+      },
+      error => {
+        console.log(error);
+      });
   }
 
   onSubmit_cate () {
-  //   const ps = new URLSearchParams();
-  //   ps.set('cate', this.cateSeachForm.controls.categories.value);
-
-  //   this.http.get('http://localhost:3000/api/searchcate', { params: ps , withCredentials: true })
-  // .subscribe(
-  //     response => {
-  //       console.log(response.json());
-  //       this.searched = response.json();
-  //     },
-  //     error => {
-  //       console.log(error);
-  //     });
+    this.http.get(APIURL + '/api/searchcate?cate=' + this.cateSeachForm.controls.category.value , { withCredentials: true })
+  .subscribe(
+      response => {
+        console.log(response.json());
+        this.items = response.json();
+      },
+      error => {
+        console.log(error);
+      });
   }
 }

@@ -7,6 +7,7 @@ import { FormControl,FormBuilder,FormGroupDirective,NgForm,Validators ,Validatio
 import { FormGroup } from '@angular/forms/src/model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppState } from '../app.state';
+import { APIURL } from '../shared/shared.redirect';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -86,7 +87,7 @@ export class RegisterComponent {
     params.set('sex', this.registerForm.controls.sex.value);
     params.set('syoukai', this.registerForm.controls.intro.value);
 
-    this.http.post('http://localhost:3000/api/register', params, { withCredentials: true })
+    this.http.post(APIURL + '/api/register', params, { withCredentials: true })
     .subscribe(
       data => JSON.stringify(data),
       error => console.log(error)

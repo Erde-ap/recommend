@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { FormControl,FormBuilder,FormGroupDirective,NgForm,FormArray,Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms/src/model';
 import { AppState } from '../../app.state';
+import { APIURL } from '../../shared/shared.redirect';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -94,7 +95,7 @@ export class PostComponent implements OnInit {
 
     // withCredentials: trueは必須これがないとsessionが維持できない
     // angular4は標準レスポンス時にCookieを送り出さないためこの問題が発生する
-    this.http.post('http://localhost:3000/api/reviewupload', params, { withCredentials: true })
+    this.http.post(APIURL + '/api/reviewupload', params, { withCredentials: true })
     .subscribe(
       response => {
         console.log(response.json());

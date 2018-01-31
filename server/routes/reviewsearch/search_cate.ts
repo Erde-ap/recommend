@@ -1,11 +1,11 @@
 import * as http from 'http';
 import { Router } from 'express';
 
-import { error, hadLoginError } from '../../error_config';
+import { error, hadLoginError, hadDbError } from '../../error_config';
 import * as url from 'url';
 import * as qstring from 'querystring';
 
-import * as User from '../../models/user';
+import * as Review from '../../models/review';
 
 const searchcateRouter: Router = Router();
 searchcateRouter.get('/' , (req: any, res, next) => {
@@ -13,7 +13,10 @@ searchcateRouter.get('/' , (req: any, res, next) => {
   const u = url.parse(req.url, false);
   const query = qstring.parse(u.query);
   // const searchbox = replaceall('　',' ',query.search).split(' ');
-  console.log(query.cate);
+  Review[0].find({ category: query.cate } ,(err, review) => {
+    if (err) return hadDbError(req, res);
+    res.send(review);
+  });
 });
 
 export { searchcateRouter };
