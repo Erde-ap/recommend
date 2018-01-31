@@ -15,7 +15,7 @@
       <mat-card>
         <div class="">
           <h2>ユーザーID</h2>
-          <i class="material-icons">language</i>{{user.id}}
+          <i class="material-icons">language</i>{{user.uid}}
         </div>
         <div class="">
           <h2>ユーザ名</h2>
@@ -23,11 +23,11 @@
         </div>
         <div class="">
           <h2>Mail</h2>
-          <i class="material-icons">email</i>{{user.mail}}
+          <i class="material-icons">email</i>{{user.email}}
         </div>
         <div class="">
           <h2>自己紹介</h2>
-          <div class="profile_desc">{{user.introduction}}</div>
+          <div class="profile_desc">{{user.syoukai}}</div>
         </div>
         <mat-card-content>
         </mat-card-content>
@@ -39,18 +39,18 @@
           <mat-card-header>
             <div mat-card-avatar [style.background-image]="'url(' + avatar + ')'" class="profile_card_image"></div>
             <mat-card-title>{{ data.title }}</mat-card-title>
-            <mat-card-subtitle>{{user.id}}</mat-card-subtitle>
+            <mat-card-subtitle>{{user.uid}}</mat-card-subtitle>
             <span class="spacer"></span>
-            <div class="favorite">
+            <!-- <div class="favorite">
               <label>{{ data.favoInt }}</label>
               <button mat-icon-button (click)='toggleMenu(data)' color="{{ data.favorite ? 'warn':'disabled' }}">
                 <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
               </button>
-            </div>
+            </div> -->
           </mat-card-header>
           <img mat-card-image src={{data.img}} alt="Photo of a Shiba Inu">
           <mat-card-content>
-            <p>{{ data.description }}</p>
+            <p>{{ data.recommend }}</p>
           </mat-card-content>
         </mat-card>
       </ng-container>
