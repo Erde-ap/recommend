@@ -34,10 +34,6 @@ export class DetailComponent {
     }
   }
 
-  toggleMenu (archive): void {
-    archive.favorite = !archive.favorite;
-    archive.favorite ? archive.favoInt++ : archive.favoInt--;
-  }
   ngOnInit () {
     this.onLoad();
   }

@@ -130,6 +130,10 @@ export let error = {
     {
       code: 31,
       response: 'いいねの現在の状態を返します。'
+    },
+    {
+      code: 32,
+      response: 'コメントの投稿に成功しました。'
     }
   ]
 };
@@ -160,6 +164,11 @@ export function hadUrlError (req, res) {
 export function hadDbError (req, res) {
   // const error = { status: 6 , err: err };
   res.send(error.status[6]);
+}
+
+export function hadDbError2 (req, res, err) {
+  const error = { status: 6 , err: err };
+  res.send(error);
 }
 
 export function hadLoginError (req, res) {
@@ -232,4 +241,8 @@ export function hadFavoriteStatus (req, res, status, params) {
     params: params
   };
   res.send(backparams);
+}
+
+export function hadComSuccess (req, res) {
+  res.send(error.status[32]);
 }
