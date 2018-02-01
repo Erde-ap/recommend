@@ -109,10 +109,12 @@ export class PostComponent implements OnInit {
           //   this.reviewForm.controls.selfContents.value[i].img = APIURL + '\/static' + filename[0];
           // }
           if (backdata[i].path.indexOf('/public') >= 0 ) {
-            filename = backdata[i].path.substring(backdata[i].path.indexOf('/public'), backdata.path.length);
+            filename = backdata[i].path.substring(backdata[i].path.indexOf('/public'), backdata[i].path.length);
+            this.reviewForm.controls.selfContents.value[i].img = APIURL + '\/static' + filename;
+          }else if (backdata[i].path.indexOf('\\public') >= 0) {
+            filename = backdata[i].path.substring(backdata[i].path.indexOf('\\public'), backdata[i].path.length);
             this.reviewForm.controls.selfContents.value[i].img = APIURL + '\/static' + filename;
           }
-          console.log(filename);
         }
         console.log('outputfilepath:' + filename);
         const params = new URLSearchParams();
