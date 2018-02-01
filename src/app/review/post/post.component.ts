@@ -22,6 +22,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
+  filename = [];
   responseJson = '';
   count = 0;
   replace= RegExp(/"/,'g');
@@ -104,8 +105,9 @@ export class PostComponent implements OnInit {
         const backdata = response.json();
         let replacedata = new RegExp(/\/img(.+?)$/);
         for (let i = 0; i < backdata.length ; i++) {
-          const filename = backdata[i].path.match(replacedata);
-          this.reviewForm.controls.selfContents.value[i].img = APIURL + '\/static' + filename[0];
+          console.log(this.filename);
+          this.filename = backdata[i].path.match(replacedata);
+          this.reviewForm.controls.selfContents.value[i].img = APIURL + '\/static' + this.filename[0];
         }
         const params = new URLSearchParams();
         params.set('mainTitle', this.reviewForm.controls.mainTitle.value);

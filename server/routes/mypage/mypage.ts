@@ -15,7 +15,7 @@ mypageRouter.get('/' , (req: any, res, next) => {
 
 function readmypage (req, res) {
   const userid = req.session.user;
-  Users.findOne({ _id: userid },{},{ sort: { uday: -1 } }, (err, user) => {
+  Users.findOne({ _id: userid }, (err, user) => {
     if (err) hadDbError(req, res);
     if (user) {
       let backdata = {
