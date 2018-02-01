@@ -25,6 +25,13 @@ img{
 .report-button{
   margin-left: auto;
 }
+.comment-card{
+  justify-content: flex-start;
+}
+.comment-card mat-card{
+  width: 90%!important;
+  margin: 0 auto 15px 0!important;
+}
 mat-form-field{
   width: 100%;
 }

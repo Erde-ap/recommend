@@ -22,6 +22,26 @@ export class DetailComponent {
   queryParams: any;
   headers;
   commentForm;
+  demoComment = [
+    {
+      userId : 'demodemo1',
+      userName : 'レコメンド運営1',
+      comment : 'すごくいいレビューですね、参考にさせて頂きます!!',
+      avatar : './assets/user1/user1_profile.jpg'
+    },
+    {
+      userId : 'demodemo2',
+      userName : 'レコメンド運営2',
+      comment : 'テストコメントです、気にしないでください!!',
+      avatar : './assets/user1/user1_profile.jpg'
+    },
+    {
+      userId : 'demodemo3',
+      userName : 'レコメンド運営3',
+      comment : 'こんいちは、運営です!!',
+      avatar : './assets/user1/user1_profile.jpg'
+    }
+  ];
   constructor (private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private http: Http,
