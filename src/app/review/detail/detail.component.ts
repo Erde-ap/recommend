@@ -46,7 +46,6 @@ export class DetailComponent {
     }
   ];
   report: string;
-  name: string;
   constructor (private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private http: Http,
