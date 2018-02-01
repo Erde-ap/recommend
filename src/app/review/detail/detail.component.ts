@@ -14,7 +14,12 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent {
-  selfContents = {};
+  selfcont = [];
+  selfcontents = [{
+    title : 'aaa',
+    img: 'aaa',
+    body: 'aaa'
+  }];
   items = {};
   reviewid;
   favdata = {
@@ -52,6 +57,7 @@ export class DetailComponent {
     private http: Http,
     private builder: FormBuilder,
     public dialog: MatDialog) {
+    this.onLoad();
     this.commentForm = this.builder.group({
       value : new FormControl('', [
         Validators.required
@@ -88,11 +94,10 @@ export class DetailComponent {
       this.http.get(APIURL + '/api/reviewdetail?id=' + data, { withCredentials: true })
       .subscribe(
         response => {
-          console.log(response.json());
+          // console.log(response.json());
           this.items = response.json();
-          this.selfContents = response.json().main;
-          console.log(this.selfContents);
-          this.selfContents[0] = JSON.parse(this.selfContents[0]);
+          this.selfcont = response.json().main;
+          this.selfcontents = JSON.parse(this.selfcont[0]);
           this.onLoad_favsystem(data);
           // レビューの一覧を取得して最新順にしてある。
         },
