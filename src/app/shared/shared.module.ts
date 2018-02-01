@@ -19,6 +19,7 @@ import {
   MatSidenavModule,
   MatNativeDateModule
 } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 import { AuthguardService } from './authguard/authguard.service';
 @NgModule({
   imports: [],
@@ -40,7 +41,8 @@ import { AuthguardService } from './authguard/authguard.service';
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
   providers: [
     MatNativeDateModule,

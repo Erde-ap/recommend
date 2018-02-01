@@ -24,10 +24,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class PostComponent implements OnInit {
   responseJson = '';
   count = 0;
-  data = new FormData();
   replace= RegExp(/"/,'g');
   reviewForm: FormGroup;
   matcher = new MyErrorStateMatcher();
+  data = new FormData();
   categories = [
     '本・コミック・雑誌',
     'ゲーム',
@@ -77,15 +77,6 @@ export class PostComponent implements OnInit {
     // let filePath = APIURL + '/static/img/' + userID + '/' + archiveID + '/' + num + '.' + type[1];
     this.data.append('upfile', f, f.name);
     // ここから下にhttp
-    // this.http.post(APIURL + '/api/reviewphotoupload', this.data, { withCredentials: true })
-    // .subscribe(
-    //   response => {
-    //     console.log(response);
-    //   },
-    //   err => {
-    //     console.log(err);
-    //   }
-    // );
   }
   resId (i) {
     return i;
@@ -109,7 +100,6 @@ export class PostComponent implements OnInit {
     this.http.post(APIURL + '/api/reviewphotoupload', this.data, { withCredentials: true })
     .subscribe(
       response => {
-        console.log('画像アップ完了');
         console.log(response.json());
         const backdata = response.json();
         let replacedata = new RegExp(/\/img(.+?)$/);
@@ -138,9 +128,8 @@ export class PostComponent implements OnInit {
             console.log(error);
           });
       },
-      err => {
-        console.log(err);
-      }
-    );
+      error => {
+        console.log(error);
+      });
   }
 }
