@@ -15,14 +15,14 @@ import { TopComponent } from './review/top/top.component';
 
 const myRoutes = [
   { path: '', component: HomepageComponent },
-  { path: 'test', component: DetailComponent },
-  {path: 'contents', canActivate: [AuthguardService], children: [
+  { path: 'test', component: TopComponent },
+  { path: 'contents', canActivate: [AuthguardService], children: [
     { path: 'detail', component: DetailComponent },
     { path: 'mypage', component: MypageComponent },
     { path: 'review', component: TopComponent },
     { path: 'post', component: PostComponent }
   ]},
-  {path: 'cert', canActivate: [AuthguardService2], children: [
+  { path: 'cert', canActivate: [AuthguardService2], children: [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent }
   ]},

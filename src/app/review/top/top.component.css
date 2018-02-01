@@ -6,30 +6,41 @@
   justify-content:center;
 }
 .grid-cell-1{
-  flex:1;
+  display: inline-flex;
+  flex: 1;
+  flex-direction: column;
+  margin-bottom: 30px;
 }
 .grid-child{
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   justify-content: center;
 }
 .grid-child > mat-form-field{
   width: 100%;
 }
 .grid-cell-2{
-  flex:3;
+  flex:5;
   display: flex;
   flex-wrap: wrap;
+  margin-left: 20px;
 }
 mat-card{
   width: 300px;
+}
+mat-card h1{
+  width: 280px;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 18px;
 }
 .mat-auto{
   margin: 20px auto 0 auto;
 }
 .card-item{
+  overflow: hidden;
   margin: 20px 20px 0 0;
+
 }
 .profile_card_image{
   background-size: cover;
@@ -45,9 +56,6 @@ mat-card{
 .review_img img{
   width: 100%;
 }
-button{
-
-}
 .card_container::before {
   display: block;
   position: absolute;
@@ -61,4 +69,17 @@ button{
 }
 .stars i{
   color: rgb(184, 184, 0);
+}
+@media (max-width:500px){
+  .grid{
+    margin: 10px auto 0 auto;
+    justify-content:center;
+  }
+  .grid-cell-2{
+    justify-content: center;
+  }
+  .card-item{
+    overflow: hidden;
+    margin: 20px auto 30px auto;
+  }
 }

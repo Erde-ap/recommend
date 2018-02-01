@@ -13,8 +13,14 @@ import { APIURL } from '../../shared/shared.redirect';
 export class TopComponent {
   searched;
   avatar = './assets/user1/user1_profile.jpg';
-  // items = [{ i: 1 },{ i: 2 },{ i: 3 },{ i: 4 },{ i: 5 },{ i: 3 },{ i: 2 },{ i: 1 },{ i: 4 },{ i: 5 },{ i: 2 },{ i: 2 },{ i: 3 },{ i: 4 },{ i: 5 },{ i: 4 },{ i: 3 },{ i: 4 },{ i: 3 },{ i: 2 },{ i: 1 },{ i: 4 },{ i: 2 },{ i: 4 },{ i: 5 },{ i: 3 },{ i: 2 }];
   items;
+  Popular = {
+    name: '人気ユーザー',
+    uday: '2018-1-24T32',
+    title: '今流行のあのアイテム',
+    improvement: '今流行のあのアイテムがついに日本で発売される事になりました。今回はそのアイテムについてレビューしていこうと思います。',
+    star: 4
+  };
   categories = [
     '本・コミック・雑誌',
     'ゲーム',
