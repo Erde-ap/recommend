@@ -24,6 +24,14 @@
     <div class="review_img" s>
       <img src="./assets/demoReview2.png" alt="">
     </div>
+    <div ngFor="let self of selfContent">
+      <div></div>
+    <h2>{{self.title}}</h2>
+    <p>{{ self.body }}</p>
+    <div class="review_img" s>
+      <img src="{{self.img}}" alt="">
+    </div>
+    </div>
   </mat-card-content>
   <button mat-raised-button class="report-button" (click)="openDialog()" color="warn">
     <i class="material-icons">report</i>通報</button>
