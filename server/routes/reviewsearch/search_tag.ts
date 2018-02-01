@@ -1,7 +1,7 @@
 import * as http from 'http';
 import { Router } from 'express';
 
-import { error, hadLoginError, hadDbError } from '../../error_config';
+import { error, hadLoginError, hadDbError, hadInputdataError } from '../../error_config';
 import * as url from 'url';
 import * as qstring from 'querystring';
 
@@ -15,17 +15,16 @@ searchtagRouter.get('/' , (req: any, res, next) => {
 
   const tag = JSON.parse(query.tag);
   let tags = [];
-  if (req.body.tag !== undefined) {
+  if (req.body.tag !== undefined && req.body.tag.length !== 0 ) {
     tags = tag.map(data => {
       return { tag: data.value };
     });
+    Review[0].find({ $or: tags },(err, review) => {
+      if (err) return hadDbError(req, res);
+      res.send(review);
+    });
   }
-
-  // const searchbox = replaceall('　',' ',query.search).split(' ');
-  Review[0].find({ $or: tags },(err, review) => {
-    if (err) return hadDbError(req, res);
-    res.send(review);
-  });
+  res.send([]);
 });
 
 export { searchtagRouter };

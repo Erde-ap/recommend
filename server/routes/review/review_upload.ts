@@ -14,7 +14,7 @@ reviewuploadRouter.post('/' , (req: any, res, next) => {
   const tag = JSON.parse(req.body.tag);
   let tags = [];
 
-  if (req.body.tag !== undefined) {
+  if (req.body.tag !== undefined && req.body.tag.length !== 0) {
     tags = tag.map(x => {
       return x.value;
     });

@@ -13,7 +13,7 @@ import { APIURL } from '../../shared/shared.redirect';
 export class TopComponent {
   searched ;
   avatar = './assets/user1/user1_profile.jpg';
-  items;
+  items = [];
   Popular = {
     id: 'test',
     name: '人気ユーザー',
