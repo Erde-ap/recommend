@@ -42,7 +42,7 @@ export class DetailComponent {
     {
       userId : 'demodemo3',
       userName : 'レコメンド運営3',
-      comment : 'こんいちは、運営です!!',
+      comment : 'こんにちは、運営です!!',
       avatar : './assets/user1/user1_profile.jpg'
     }
   ];
