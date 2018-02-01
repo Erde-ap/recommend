@@ -35,12 +35,7 @@
         </mat-card-header>
         <mat-card-content class="card_container">
           <h1>{{ Popular.title }}</h1>
-          <div class="review_img">
-            <img src="./assets/demoReview1.png" class="card_img">
-          </div>
-          <h2>薦めたい所</h2>
-          <p>{{ Popular.improvement }}</p>
-        </mat-card-content>
+          </mat-card-content>
         <mat-card-actions>
           <a mat-raised-button routerLink="/contents/detail" [queryParams]="{ id: Popular._id }">続きを読む</a>
         </mat-card-actions>

@@ -25,6 +25,9 @@
   flex-wrap: wrap;
   margin-left: 20px;
 }
+.grid-cell-2 > div{
+  align-self: flex-start;
+}
 mat-card{
   width: 300px;
 }
