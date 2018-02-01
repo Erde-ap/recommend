@@ -10,6 +10,7 @@ import { APIURL } from '../../shared/shared.redirect';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent {
+  selfContents = {};
   items = {};
   reviewid;
   favdata = {
@@ -42,7 +43,11 @@ export class DetailComponent {
       this.http.get(APIURL + '/api/reviewdetail?id=' + data, { withCredentials: true })
       .subscribe(
         response => {
+          console.log(response.json());
           this.items = response.json();
+          this.selfContents = response.json().main;
+          console.log(this.selfContents);
+          this.selfContents[0] = JSON.parse(this.selfContents[0]);
           this.onLoad_favsystem(data);
           // レビューの一覧を取得して最新順にしてある。
         },

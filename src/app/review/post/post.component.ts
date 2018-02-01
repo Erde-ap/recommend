@@ -74,8 +74,7 @@ export class PostComponent implements OnInit {
     let userID = 1;
     let archiveID = 2;
     let type = list[0].name.split('.');
-    let filePath = APIURL + '/static/img/' + userID + '/' + archiveID + '/' + num + '.' + type[1];
-    this.reviewForm.controls.selfContents.value[num].img = filePath;
+    // let filePath = APIURL + '/static/img/' + userID + '/' + archiveID + '/' + num + '.' + type[1];
     this.data.append('upfile', f, f.name);
     // ここから下にhttp
     // this.http.post(APIURL + '/api/reviewphotoupload', this.data, { withCredentials: true })
@@ -107,21 +106,27 @@ export class PostComponent implements OnInit {
   }
 
   onSubmit () {
-    const params = new URLSearchParams();
-    params.set('mainTitle', this.reviewForm.controls.mainTitle.value);
-    params.set('star', this.reviewForm.controls.star.value);
-    params.set('category', this.reviewForm.controls.category.value);
-    params.set('recommend', this.reviewForm.controls.recommend.value);
-    params.set('improvement', this.reviewForm.controls.improvement.value);
-    params.set('cateAnswer', this.reviewForm.controls.cateAnswer.value);
-    params.set('selfContents', JSON.stringify(this.reviewForm.controls.selfContents.value));
-    params.set('tag', JSON.stringify(this.reviewForm.controls.tag.value));
-
     this.http.post(APIURL + '/api/reviewphotoupload', this.data, { withCredentials: true })
     .subscribe(
       response => {
         console.log('画像アップ完了');
         console.log(response.json());
+        const backdata = response.json();
+        let replacedata = new RegExp(/\/img(.+?)$/);
+        for (let i = 0; i < backdata.length ; i++) {
+          const filename = backdata[i].path.match(replacedata);
+          this.reviewForm.controls.selfContents.value[i].img = APIURL + '\/static' + filename[0];
+        }
+        const params = new URLSearchParams();
+        params.set('mainTitle', this.reviewForm.controls.mainTitle.value);
+        params.set('star', this.reviewForm.controls.star.value);
+        params.set('category', this.reviewForm.controls.category.value);
+        params.set('recommend', this.reviewForm.controls.recommend.value);
+        params.set('improvement', this.reviewForm.controls.improvement.value);
+        params.set('cateAnswer', this.reviewForm.controls.cateAnswer.value);
+        params.set('selfContents', JSON.stringify(this.reviewForm.controls.selfContents.value));
+        params.set('tag', JSON.stringify(this.reviewForm.controls.tag.value));
+
         this.http.post(APIURL + '/api/reviewupload', params, { withCredentials: true })
         .subscribe(
           response => {
