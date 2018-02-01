@@ -89,7 +89,10 @@ export class RegisterComponent {
 
     this.http.post(APIURL + '/api/register', params, { withCredentials: true })
     .subscribe(
-      data => JSON.stringify(data),
+      data => {
+        JSON.stringify(data);
+        this._router.navigate(['/homepage']);
+      },
       error => console.log(error)
     );
   }

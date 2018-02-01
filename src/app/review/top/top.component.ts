@@ -11,10 +11,11 @@ import { APIURL } from '../../shared/shared.redirect';
   styleUrls: ['./top.component.css']
 })
 export class TopComponent {
-  searched;
+  searched ;
   avatar = './assets/user1/user1_profile.jpg';
   items;
   Popular = {
+    id: 'test',
     name: '人気ユーザー',
     uday: '2018-1-24T32',
     title: '今流行のあのアイテム',
