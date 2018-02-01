@@ -60,7 +60,7 @@ export class DetailComponent {
   openDialog (): void {
     let dialogRef = this.dialog.open(ReportDialog, {
       width: '250px',
-      data: { name: this.name, report: this.report }
+      data: { report: this.report }
     });
 
     dialogRef.afterClosed().subscribe(result => {
