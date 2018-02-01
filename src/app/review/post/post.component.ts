@@ -24,7 +24,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class PostComponent implements OnInit {
   responseJson = '';
   count = 0;
-  data = new FormData();
   replace= RegExp(/"/,'g');
   reviewForm: FormGroup;
   matcher = new MyErrorStateMatcher();
@@ -71,22 +70,15 @@ export class PostComponent implements OnInit {
   upload (list: any, num: number ) {
     if (list.length <= 0) { return; }
     let f = list[0];
+    console.log(num);
+    let data = new FormData();
     let userID = 1;
     let archiveID = 2;
     let type = list[0].name.split('.');
-    let filePath = APIURL + '/static/img/' + userID + '/' + archiveID + '/' + num + '.' + type[1];
+    let filePath = 'http://localhost:3000/static/img/' + userID + '/' + archiveID + '/' + num + '.' + type[1];
     this.reviewForm.controls.selfContents.value[num].img = filePath;
-    this.data.append('upfile', f, f.name);
+    data.append('upfile', f, f.name);
     // ここから下にhttp
-    // this.http.post(APIURL + '/api/reviewphotoupload', this.data, { withCredentials: true })
-    // .subscribe(
-    //   response => {
-    //     console.log(response);
-    //   },
-    //   err => {
-    //     console.log(err);
-    //   }
-    // );
   }
   resId (i) {
     return i;
@@ -117,25 +109,19 @@ export class PostComponent implements OnInit {
     params.set('selfContents', JSON.stringify(this.reviewForm.controls.selfContents.value));
     params.set('tag', JSON.stringify(this.reviewForm.controls.tag.value));
 
-    this.http.post(APIURL + '/api/reviewphotoupload', this.data, { withCredentials: true })
+    // JSON.Stringifyでｏｂｊを文字列化
+    // params.set('object', JSON.stringify(this.object));
+
+    // withCredentials: trueは必須これがないとsessionが維持できない
+    // angular4は標準レスポンス時にCookieを送り出さないためこの問題が発生する
+    this.http.post(APIURL + '/api/reviewupload', params, { withCredentials: true })
     .subscribe(
       response => {
-        console.log('画像アップ完了');
         console.log(response.json());
-        this.http.post(APIURL + '/api/reviewupload', params, { withCredentials: true })
-        .subscribe(
-          response => {
-            console.log('投稿完了');
-            console.log(response.json());
-            this.router.navigate(['/contents/review']);
-          },
-          error => {
-            console.log(error);
-          });
+        this.router.navigate(['/contents/review']);
       },
-      err => {
-        console.log(err);
-      }
-    );
+      error => {
+        console.log(error);
+      });
   }
 }

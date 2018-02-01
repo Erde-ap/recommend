@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { APIURL } from '../../shared/shared.redirect';
+import { FormControl,FormBuilder,FormGroupDirective,NgForm,FormArray,Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms/src/model';
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
@@ -19,9 +21,15 @@ export class DetailComponent {
   avatar = './assets/user1/user1_profile.jpg';
   queryParams: any;
   headers;
+  commentForm;
   constructor (private _activatedRoute: ActivatedRoute,
     private _router: Router,
-    private http: Http) {
+    private http: Http,
+    private builder: FormBuilder) {
+    this.commentForm = this.builder.group({
+      value : new FormControl('', [
+        Validators.required
+      ])});
   }
 
   toggleMenu (archive): void {

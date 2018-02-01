@@ -2,7 +2,7 @@
   <mat-card-header>
     <div mat-card-avatar [style.background-image]="'url(' + avatar + ')'" class="profile_card_image"></div>
     <div class="favorite">
-        <label>{{ favdata.favoInt }}</label>
+        <label>お気に入り  {{ favdata.favoInt }}</label>
         <button mat-icon-button (click)='toggleMenu(favdata)' color="{{ favdata.favost ? 'warn':'disabled' }}">
           <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
         </button>
@@ -25,4 +25,15 @@
       <img src="./assets/demoReview2.png" alt="">
     </div>
     </mat-card-content>
+    <button mat-raised-button class="report-button" color="warn"><i class="material-icons">report</i>通報</button>
+</mat-card>
+<mat-card>
+  <h2>コメント</h2>
+  <mat-form-field>
+    <textarea matInput rows="6" cols="40" placeholder="ここに記入してください" [formControl]="this.commentForm.controls.value" [errorStateMatcher]="matcher"></textarea>
+    <mat-error *ngIf="commentForm.controls.value.hasError('required')">
+      <strong>*</strong>必須項目
+    </mat-error>
+  </mat-form-field>
+  <button class="submit" mat-raised-button (click)="onSubmit()" [disabled]="!commentForm.valid" color="primary">レビューを投稿</button>
 </mat-card>
