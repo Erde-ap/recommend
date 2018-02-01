@@ -101,14 +101,13 @@ export class PostComponent implements OnInit {
     this.http.post(APIURL + '/api/reviewphotoupload', this.data, { withCredentials: true })
     .subscribe(
       response => {
-        console.log(response.json());
-        const backdata = response.json();
+        let backdata = response.json();
         let replacedata = new RegExp(/\/img(.+?)$/);
         for (let i = 0; i < backdata.length ; i++) {
-          console.log(this.filename);
           this.filename = backdata[i].path.match(replacedata);
           this.reviewForm.controls.selfContents.value[i].img = APIURL + '\/static' + this.filename[0];
         }
+        console.log(this.filename);
         const params = new URLSearchParams();
         params.set('mainTitle', this.reviewForm.controls.mainTitle.value);
         params.set('star', this.reviewForm.controls.star.value);
@@ -123,7 +122,6 @@ export class PostComponent implements OnInit {
         .subscribe(
           response => {
             console.log('投稿完了');
-            console.log(response.json());
             this.router.navigate(['/contents/review']);
           },
           error => {
