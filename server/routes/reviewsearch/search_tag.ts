@@ -15,9 +15,11 @@ searchtagRouter.get('/' , (req: any, res, next) => {
 
   const tag = JSON.parse(query.tag);
   let tags = [];
-  tags = tag.map(data => {
-    return { tag: data.value };
-  });
+  if (req.body.tag !== undefined) {
+    tags = tag.map(data => {
+      return { tag: data.value };
+    });
+  }
 
   // const searchbox = replaceall('　',' ',query.search).split(' ');
   Review[0].find({ $or: tags },(err, review) => {
