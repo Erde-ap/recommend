@@ -8,7 +8,7 @@ import { TagInputModule } from 'ngx-chips';
 
 import { TopComponent } from './top/top.component';
 import { SearchComponent } from './search/search.component';
-import { DetailComponent } from './detail/detail.component';
+import { DetailComponent,ReportDialog } from './detail/detail.component';
 import { PostComponent } from './post/post.component';
 import { BrowserModule } from '@angular/platform-browser/src/browser';
 
@@ -25,7 +25,11 @@ import { BrowserModule } from '@angular/platform-browser/src/browser';
     TopComponent,
     SearchComponent,
     DetailComponent,
+    ReportDialog,
     PostComponent
+  ],
+  entryComponents: [
+    ReportDialog
   ]
 })
 export class ReviewModule { }

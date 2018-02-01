@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Http } from '@angular/http';
@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/Observable';
 import { APIURL } from '../../shared/shared.redirect';
 import { FormControl,FormBuilder,FormGroupDirective,NgForm,FormArray,Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms/src/model';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
@@ -22,6 +24,7 @@ export class DetailComponent {
   queryParams: any;
   headers;
   commentForm;
+  isReport;
   demoComment = [
     {
       userId : 'demodemo1',
@@ -42,14 +45,29 @@ export class DetailComponent {
       avatar : './assets/user1/user1_profile.jpg'
     }
   ];
+  report: string;
+  name: string;
   constructor (private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private http: Http,
-    private builder: FormBuilder) {
+    private builder: FormBuilder,
+    public dialog: MatDialog) {
     this.commentForm = this.builder.group({
       value : new FormControl('', [
         Validators.required
       ])});
+  }
+
+  openDialog (): void {
+    let dialogRef = this.dialog.open(ReportDialog, {
+      width: '250px',
+      data: { name: this.name, report: this.report }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.report = result;
+    });
   }
 
   toggleMenu (archive): void {
@@ -130,4 +148,20 @@ export class DetailComponent {
         return queryParams.id;
       });
   }
+}
+
+@Component({
+  selector: 'report-dialog',
+  templateUrl: 'reportDialog.html'
+})
+export class ReportDialog {
+
+  constructor (
+    public dialogRef: MatDialogRef<ReportDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick (): void {
+    this.dialogRef.close();
+  }
+
 }
