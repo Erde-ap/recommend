@@ -16,9 +16,9 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class DetailComponent {
   selfcont = [];
   selfcontents = [{
-    title : 'aaa',
-    img: 'aaa',
-    body: 'aaa'
+    title : '',
+    img: '',
+    body: ''
   }];
   items = {};
   reviewid;

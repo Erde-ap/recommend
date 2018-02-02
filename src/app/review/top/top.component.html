@@ -45,26 +45,6 @@
   <div class="grid-cell-2">
     <div *ngFor="let item of items;">
       <mat-card class="card-item">
-        <!-- <mat-card-header>
-          <div class="stars" *ngFor="let star of createstar(item.i);">
-            <i class="material-icons">star</i>
-          </div>
-          <div mat-card-avatar [style.background-image]="'url(' + avatar + ')'" class="profile_card_image"></div>
-          <mat-card-title>TestUser</mat-card-title>
-          <mat-card-title>2018-01-25</mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="card_container">
-          <h1>パナソニック エチケットカッター ER-GN 10シリーズ</h1>
-          <div class="review_img">
-            <img src="./assets/demoReview1.png" class="card_img">
-          </div>
-          <h2>薦めたい所</h2>
-          <p>単4電池一本で動き、切れ味も問題なく、その割にリーズナブルな値段で購入できたので凄くコストパフォーマンスのいい商品だと思いました！</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <a mat-raised-button routerLink="/detail">続きを読む</a>
-        </mat-card-actions> -->
-        <!-- ↑ option [queryParams]='{ id: hoge } -->
         <mat-card-header>
           <div class="stars" *ngFor="let star of createstar(item.star);">
             <i class="material-icons">star</i>

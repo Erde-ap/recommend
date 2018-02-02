@@ -94,8 +94,6 @@ class App {
 
     // 静的資産へのルーティング
     this.express.use(cors(options));
-    this.express.use(express.static(path.join(__dirname, 'public')));
-    this.express.use('/static', express.static(path.join(__dirname, 'public')));
     this.express.use('/api/register', registerRouter);
     this.express.use('/api/login', loginRouter);
     this.express.use('/api/logout', logoutRouter);
@@ -114,6 +112,11 @@ class App {
     this.express.use('/api/favadd', reviewfavadd);
     this.express.use('/api/comup', comupload);
     this.express.use('/api/comdetails', comdetails);
+    this.express.use(express.static(path.join(__dirname, 'public')));
+    this.express.use('/static', express.static(path.join(__dirname, 'public')));
+    this.express.use('/*', (req, res) => {
+      res.sendfile(__dirname + '/public/index.html');
+    });
 
     // ここからずらさないで
     this.express.options('*', cors(options));
