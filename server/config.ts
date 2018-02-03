@@ -3,6 +3,7 @@ import * as randomstring from 'randomstring';
 
 // MongoDB接続設定
 export const API_URL = 'http://localhost:4200';
+export const CONF_URL = 'https://reco.site:3000';
 export const SERVER_PORT = 3000;
 export const MONGO_URL_USER = 'mongodb://150.95.148.134:28001/user';
 export const MONGO_URL_REVIEW = 'mongodb://150.95.148.134:28001/review';

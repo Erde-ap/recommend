@@ -91,7 +91,7 @@ export class RegisterComponent {
     .subscribe(
       data => {
         JSON.stringify(data);
-        this._router.navigate(['/homepage']);
+        this._router.navigate(['/']);
       },
       error => console.log(error)
     );

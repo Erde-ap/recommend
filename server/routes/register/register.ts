@@ -5,7 +5,7 @@ import { Router } from 'express';
 
 const nodemailer = require('nodemailer');
 
-import { G_USER, G_PASS, REGI_RAND, REGI_SUB, M_MINUTE, getHash, getRand, getDate, getPhash } from '../../config';
+import { G_USER, G_PASS, REGI_RAND, REGI_SUB, M_MINUTE, getHash, getRand, getDate, getPhash, API_URL, CONF_URL } from '../../config';
 import { SEND_REDIRECT_URL } from '../../redirect_config';
 import { error, hadDbError, hadInputdataError, hadLoginError, hadOverlapError, hadRateoverError, hadSendmailError, hadEntryedError, hadUrlError, hadEntryError, hadEntrySuccess, hadSendmailSuccess } from '../../error_config';
 import * as Users from '../../models/user';
@@ -108,7 +108,7 @@ function sendmail (req: any, res: any, onetimeUrl: any) {
     from: 'Recommend運営<Recommed911@gmail.com>',
     to: req.body.email,
     subject: REGI_SUB,
-    html:  'Recommendへようこそ！<br>URLをクリックしてください。<br>http://127.0.0.1:3000/api/register?url_path=' + onetimeUrl
+    html:  'Recommendへようこそ！<br>URLをクリックしてください。<br>' + CONF_URL + '/api/register?url_path=' + onetimeUrl
   };
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
