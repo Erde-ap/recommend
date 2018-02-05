@@ -68,10 +68,10 @@ class App {
       secret: 'ioukitty',
       store: store,
       resave: true,
-      saveUninitialized: true,
+      saveUninitialized: false,
       rolling: true,
       cookie: {
-        secure: true,
+        secure: false,
         httpOnly: true,
         maxAge: 60 * 60 * 1000
       }
