@@ -1,1 +1,5 @@
-/static/img/ping.png
+デプロイチェックリスト
+
+server
+1. redirect_config.tsのURL変更
+2. angualrのsharedのsharedredirectの値を変更する
