@@ -114,8 +114,7 @@ function sendmail (req: any, res: any, onetimeUrl: any) {
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 587,
-    secure: false,
-    requireTLS: true,
+    secure: true,
     auth: {
       user: G_USER,
       pass: G_PASS
