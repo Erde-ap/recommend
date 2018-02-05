@@ -16,6 +16,7 @@ import { MypageComponent } from './mypage/mypage.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { ErrorComponent } from './shared/error/error.component';
+import { EditprofComponent } from './editprof/editprof.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ErrorComponent } from './shared/error/error.component';
     MypageComponent,
     HeaderComponent,
     FooterComponent,
-    ErrorComponent
+    ErrorComponent,
+    EditprofComponent
   ],
   imports: [
     BrowserModule,

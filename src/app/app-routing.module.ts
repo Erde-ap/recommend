@@ -12,6 +12,7 @@ import { DetailComponent } from './review/detail/detail.component';
 import { PostComponent } from './review/post/post.component';
 import { ErrorComponent } from './shared/error/error.component';
 import { TopComponent } from './review/top/top.component';
+import { EditprofComponent } from './editprof/editprof.component';
 
 const myRoutes = [
   { path: '', component: HomepageComponent },
@@ -20,7 +21,8 @@ const myRoutes = [
     { path: 'detail', component: DetailComponent },
     { path: 'mypage', component: MypageComponent },
     { path: 'review', component: TopComponent },
-    { path: 'post', component: PostComponent }
+    { path: 'post', component: PostComponent },
+    { path: 'edit', component: EditprofComponent }
   ]},
   { path: 'cert', canActivate: [AuthguardService2], children: [
     { path: 'login', component: LoginComponent },
