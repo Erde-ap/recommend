@@ -221,8 +221,8 @@ export function hadEntrySuccess (req, res) {
 }
 
 export function hadSendmailSuccess (req, res, transporter) {
-  res.send(error.status[28]);
   transporter.close();
+  res.send(error.status[28]);
 }
 
 export function hadFavoriteaddSuccess (req, res) {
