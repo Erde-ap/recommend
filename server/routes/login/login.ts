@@ -51,7 +51,6 @@ loginRouter.post('/' , (req: any, res: any, next: any) => {
     if (!user) { return hadLogintfaildError(req, res); }
     req.session.user = user._id;
     hadLoginSuccess(req, res);
-    next();
   })(req, res, next);
 });
 
