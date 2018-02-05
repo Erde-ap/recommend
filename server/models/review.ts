@@ -15,6 +15,7 @@ const Review = new Schema({
   recommend: String,
   improvement: String,
   category: String,
+  prop: String,
   fav: [{ type: Schema.Types.ObjectId, index: true }], // ファボした人のオブジェクトIDを格納
   com: [{ type: Schema.Types.ObjectId, ref: 'ReviewCom' }]
 }, { collection: 'review' });

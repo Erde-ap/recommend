@@ -4,7 +4,7 @@
   </div>
   <div class="head_profile">
     <a routerLink="/contents/edit" class="edit_profile">
-      <img src="./assets/user1/user1_profile.jpg">
+      <img src="{{items.prop}}">
       <div class="mask">
         <div class="caption">プロフィール編集</div>
       </div>
@@ -37,8 +37,8 @@
       <ng-container *ngFor="let data of archives">
         <mat-card class="timeline_card">
           <mat-card-header>
-            <div mat-card-avatar [style.background-image]="'url(' + avatar + ')'" class="profile_card_image"></div>
-            <mat-card-title>{{ data.title }}</mat-card-title>
+            <div mat-card-avatar [style.background-image]="'url(' + items.prop + ')'" class="profile_card_image"></div>
+            <mat-card-title><a routerLink="/contents/detail" [queryParams]='{ id: data.id }' class="edit_profile">{{ data.title }}</a></mat-card-title>
             <mat-card-subtitle>{{user.uid}}</mat-card-subtitle>
             <span class="spacer"></span>
             <!-- <div class="favorite">

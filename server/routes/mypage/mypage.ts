@@ -10,11 +10,18 @@ import * as Review from '../../models/review';
 const mypageRouter: Router = Router();
 mypageRouter.get('/' , (req: any, res, next) => {
   if (!req.session.user) return hadLoginError(req, res);
-  readmypage(req, res);
+  const u = url.parse(req.url, false);
+  const query = qstring.parse(u.query);
+  console.log(query);
+
+  readmypage(req, res, query);
 });
 
-function readmypage (req, res) {
-  const userid = req.session.user;
+function readmypage (req, res, query) {
+  let userid = req.session.user;
+  if ( query.id !== undefined ) {
+    userid = query.id;
+  }
   Users.findOne({ _id: userid }, (err, user) => {
     if (err) hadDbError(req, res);
     if (user) {
@@ -24,6 +31,7 @@ function readmypage (req, res) {
         email: user.email,
         name: user.name,
         birthday: user.birthday,
+        prop: user.prop,
         sex: user.sex,
         syoukai: user.syoukai,
         review: []
@@ -39,6 +47,7 @@ function readreview (req, res, data) {
     if (result.lenght === 0) return hadDbError(req, res);
     for (let i = 0; result.length > i ; i++) {
       let inputrev = {};
+      inputrev['id'] = result[i]._id;
       inputrev['title'] = result[i].title;
       inputrev['fav'] = result[i].fav.length;
       inputrev['star'] = result[i].star;

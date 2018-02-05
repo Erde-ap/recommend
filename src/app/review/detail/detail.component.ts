@@ -1,7 +1,7 @@
 import { Component, OnInit,Inject } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { APIURL } from '../../shared/shared.redirect';
 import { FormControl,FormBuilder,FormGroupDirective,NgForm,FormArray,Validators } from '@angular/forms';
@@ -31,37 +31,36 @@ export class DetailComponent {
   headers;
   commentForm;
   isReport;
-  demoComment = [
-    {
-      userId : 'demodemo1',
-      userName : 'レコメンド運営1',
-      comment : 'すごくいいレビューですね、参考にさせて頂きます!!',
-      avatar : './assets/user1/user1_profile.jpg'
-    },
-    {
-      userId : 'demodemo2',
-      userName : 'レコメンド運営2',
-      comment : 'テストコメントです、気にしないでください!!',
-      avatar : './assets/user1/user1_profile.jpg'
-    },
-    {
-      userId : 'demodemo3',
-      userName : 'レコメンド運営3',
-      comment : 'こんにちは、運営です!!',
-      avatar : './assets/user1/user1_profile.jpg'
-    }
-  ];
+  commentdata = [];
+  // demoComment = [
+  //   {
+  //     userId : 'demodemo1',
+  //     userName : 'レコメンド運営1',
+  //     comment : 'すごくいいレビューですね、参考にさせて頂きます!!',
+  //     avatar : './assets/user1/user1_profile.jpg'
+  //   },
+  //   {
+  //     userId : 'demodemo2',
+  //     userName : 'レコメンド運営2',
+  //     comment : 'テストコメントです、気にしないでください!!',
+  //     avatar : './assets/user1/user1_profile.jpg'
+  //   },
+  //   {
+  //     userId : 'demodemo3',
+  //     userName : 'レコメンド運営3',
+  //     comment : 'こんにちは、運営です!!',
+  //     avatar : './assets/user1/user1_profile.jpg'
+  //   }
+  // ];
   report: string;
   constructor (private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private http: Http,
     private builder: FormBuilder,
     public dialog: MatDialog) {
+    this.commentForm = this.builder.group({ comment : new FormControl('', [Validators.required]) });
     this.onLoad();
-    this.commentForm = this.builder.group({
-      value : new FormControl('', [
-        Validators.required
-      ])});
+    this.com_download();
   }
 
   openDialog (): void {
@@ -96,6 +95,7 @@ export class DetailComponent {
         response => {
           // console.log(response.json());
           this.items = response.json();
+          console.log(this.items);
           this.selfcont = response.json().main;
           this.selfcontents = JSON.parse(this.selfcont[0]);
           this.onLoad_favsystem(data);
@@ -143,6 +143,43 @@ export class DetailComponent {
       response => {
         this.onLoad_favsystem(data);
       } ,
+      error => {
+        console.log(error);
+      }
+    );
+    });
+  }
+
+  com_upload () {
+    this.queryRead().subscribe((data) => {
+      const params = new URLSearchParams();
+      params.set('comment', this.commentForm.controls.comment.value);
+      params.set('reviewid', data);
+
+      this.http.post(APIURL + '/api/comup', params, { withCredentials: true })
+    .subscribe(
+      response => {
+        console.log(response);
+        this.com_download();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+    });
+  }
+
+  com_download () {
+    this.queryRead().subscribe((data) => {
+      const params = new URLSearchParams();
+      params.set('reviewid', data);
+
+      this.http.post(APIURL + '/api/comdetails', params, { withCredentials: true })
+    .subscribe(
+      response => {
+        console.log(response.json());
+        this.commentdata = response.json();
+      },
       error => {
         console.log(error);
       }

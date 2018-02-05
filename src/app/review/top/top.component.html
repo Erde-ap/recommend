@@ -24,7 +24,7 @@
         <tag-input class="tag-search" [formControl]="this.cateSeachForm.controls.tag"></tag-input>
         <button mat-raised-button (click)="onSubmit_tag()" color="warn">タグ検索</button>
       </mat-card>
-      <mat-card class="mat-auto">
+      <!-- <mat-card class="mat-auto">
         <mat-card-header>
           <div class="stars" *ngFor="let star of createstar(Popular.star);">
             <i class="material-icons">star</i>
@@ -39,7 +39,7 @@
         <mat-card-actions>
           <a mat-raised-button routerLink="/contents/detail" [queryParams]="{ id: Popular._id }">続きを読む</a>
         </mat-card-actions>
-      </mat-card>
+      </mat-card> -->
     </form>
   </div>
   <div class="grid-cell-2">
@@ -49,8 +49,8 @@
           <div class="stars" *ngFor="let star of createstar(item.star);">
             <i class="material-icons">star</i>
           </div>
-          <div mat-card-avatar [style.background-image]="'url(' + avatar + ')'" class="profile_card_image"></div>
-          <mat-card-title>{{ item.name}}</mat-card-title>
+          <div routerLink="/contents/mypage" [queryParams]='{ id: item.hostid }' mat-card-avatar [style.background-image]="'url(' + item.prop + ')'" class="profile_card_image"></div>
+          <mat-card-title><a routerLink="/contents/mypage" [queryParams]='{ id: item.hostid }'>{{ item.name}}</a></mat-card-title>
           <mat-card-title>{{ toLocaleString(item.uday) }}</mat-card-title>
         </mat-card-header>
         <mat-card-content class="card_container">

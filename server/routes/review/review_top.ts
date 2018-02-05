@@ -22,12 +22,14 @@ reviewtopRouter.get('/' , (req: any, res, next) => {
         setTimeout(() => {
           User.findOne({ _id: data.id },{},{},(err, result) => {
             if (err) return hadDbError(req, res);
-            if (result.length === 0 ) {
+            if (result === null) {
               reviewback[data.number].name = 'このユーザは存在しません。';
+              reviewback[data.number].prop = './assets/prof/user13.png';
               return next();
             }
             // ↓要変更
             reviewback[data.number].name = result.name;
+            reviewback[data.number].prop = result.prop;
             return next();
           });
         }, 0);

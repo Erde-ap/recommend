@@ -5,6 +5,7 @@ import * as url from 'url';
 import * as qstring from 'querystring';
 
 import * as Review from '../../models/review';
+import * as User from '../../models/user';
 
 import { error, hadLoginError, hadDbError } from '../../error_config';
 
@@ -17,7 +18,17 @@ reviewdetailRouter.get('/' , (req: any, res, next) => {
 
   Review[0].findOne({ _id: query.id },(err, data) => {
     if (err) return hadDbError(req, res);
-    res.send(data);
+    if (data != null) {
+      let detail = data;
+      User.findOne({ _id: data.hostid }, (err, resp) => {
+        if (err) return hadDbError(req, res);
+        if (resp != null) {
+          detail.prop = resp.prop;
+          detail.name = resp.name;
+        }
+        res.send(detail);
+      });
+    }
   });
 });
 
