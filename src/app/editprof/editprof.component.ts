@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { SharedService } from '../shared/shared.service';
+import { Http, URLSearchParams, Headers } from '@angular/http';
+import { APIURL } from '../shared/shared.redirect';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-editprof',
@@ -24,5 +27,22 @@ export class EditprofComponent {
     { path: './assets/prof/user16.png' },
     { path: './assets/prof/user17.png' }
   ];
+
+  constructor (private http: Http, private router: Router) {}
+
+  onSubmit (num: number) {
+    let params = new URLSearchParams();
+    params.set('picid', this.images[num].path);
+
+    this.http.post(APIURL + '/api/updateIcon', params, { withCredentials: true })
+    .subscribe(
+      response => {
+        console.log(response);
+        this.router.navigate(['/contents/mypage']);
+      },
+      error => {
+        console.log(error);
+      });
+  }
 
 }

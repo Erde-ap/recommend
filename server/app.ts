@@ -39,6 +39,7 @@ import { reviewfavadd } from './routes/review/fav_wanted/review_favadd';
 import { reviewfavdel } from './routes/review/fav_wanted/review_favdel';
 import { comupload } from './routes/review/comment/com_upload';
 import { comdetails } from './routes/review/comment/com_details';
+import { updateIcon } from './routes/mypage/editprof';
 class App {
   public express: express.Application;
 
@@ -110,6 +111,7 @@ class App {
     this.express.use('/api/favadd', reviewfavadd);
     this.express.use('/api/comup', comupload);
     this.express.use('/api/comdetails', comdetails);
+    this.express.use('/api/updateIcon', updateIcon);
     this.express.use(express.static(path.join(__dirname, 'public')));
     this.express.use('/static', express.static(path.join(__dirname, 'public')));
     this.express.use('/*', (req, res) => {
