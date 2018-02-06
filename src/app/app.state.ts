@@ -21,7 +21,6 @@ export class AppState {
           response => {
             // 受け取ったセッション情報をjson化して変数に格納する。
             const resp = response.json();
-            console.log('appstate:' + resp.user);
             if (resp.user !== undefined) {
               this.isLogin = true;
             } else if (resp.user === undefined) {

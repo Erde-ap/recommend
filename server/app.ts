@@ -134,8 +134,6 @@ class App {
     if (this.express.get('env') === 'development') {
       this.express.use((err, req, res, next) => {
         res.status(err.status || 500);
-        console.log(err.message);
-        console.log(err);
       });
     }
 
@@ -143,8 +141,6 @@ class App {
     // no stacktraces leaked to user
     this.express.use((err, req, res, next) => {
       res.status(err.status || 500);
-      console.log(err.message);
-      console.log(err);
     });
   }
 }

@@ -116,7 +116,6 @@ export class PostComponent implements OnInit {
             this.reviewForm.controls.selfContents.value[i].img = APIURL + '\/static' + filename.replace('\\', '/');
           }
         }
-        console.log('outputfilepath:' + filename);
         const params = new URLSearchParams();
         params.set('mainTitle', this.reviewForm.controls.mainTitle.value);
         params.set('star', this.reviewForm.controls.star.value);

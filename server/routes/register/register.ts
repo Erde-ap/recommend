@@ -110,7 +110,6 @@ function sendmail (req: any, res: any, onetimeUrl: any) {
     subject: REGI_SUB,
     html:  'Recommendへようこそ！<br>URLをクリックしてください。<br>' + CONF_URL + '/api/register?url_path=' + onetimeUrl
   };
-  console.log(mailOptions);
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -122,7 +121,6 @@ function sendmail (req: any, res: any, onetimeUrl: any) {
   });
   transporter.sendMail(mailOptions, (err, resp) => { // メールの送信
     if (err) { // 送信に失敗したとき
-      console.log(err);
       hadSendmailError(req, res, resp, transporter);
     }
     hadSendmailSuccess(req, res, transporter);

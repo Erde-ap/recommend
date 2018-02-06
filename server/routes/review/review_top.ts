@@ -34,7 +34,6 @@ reviewtopRouter.get('/' , (req: any, res, next) => {
           });
         }, 0);
       }, () => {
-        console.log(reviewback);
         res.send(reviewback);
       });
     }

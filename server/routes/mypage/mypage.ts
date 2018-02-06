@@ -12,7 +12,6 @@ mypageRouter.get('/' , (req: any, res, next) => {
   if (!req.session.user) return hadLoginError(req, res);
   const u = url.parse(req.url, false);
   const query = qstring.parse(u.query);
-  console.log(query);
 
   readmypage(req, res, query);
 });

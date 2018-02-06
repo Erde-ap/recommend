@@ -17,9 +17,7 @@ searchtagRouter.get('/' , (req: any, res, next) => {
 
   const tag = JSON.parse(query.tag);
   let tags = [];
-  console.log('before throw');
   if (tag !== undefined && tag.length !== 0 ) {
-    console.log('aftor throw');
     tags = tag.map(data => {
       return { tag: data.value };
     });
@@ -47,7 +45,6 @@ searchtagRouter.get('/' , (req: any, res, next) => {
           });
         }, 0);
       }, () => {
-        console.log('test' + reviewback);
         res.send(reviewback);
       });
     });

@@ -15,7 +15,6 @@ export class SharedService {
         .subscribe(
           response => {
             this.appstate.isLogin = false;
-            console.log(response);
           },
           error => {
             console.log(error);

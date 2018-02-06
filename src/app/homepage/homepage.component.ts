@@ -18,7 +18,6 @@ export class HomepageComponent {
       params => {
         this.queryParams = params;
         this.resp = this.queryParams.status;
-        console.log(this.resp);
       });
   }
 }

@@ -14,7 +14,6 @@ updateIcon.post('/' , (req: any, res, next) => {
 });
 
 function updateicon (req, res, picid) {
-  console.log(picid);
   let userid = req.session.user;
   Users.findOneAndUpdate({ _id: userid }, { $set: { prop: picid } }, (err, result) => {
     if (err) return hadDbError(req, res);

@@ -23,8 +23,6 @@ searchkeywordRouter.get('/' , (req: any, res, next) => {
   for (let g = 0; searchbox.length > g ; g++) {
     searchbox[g] = new RegExp(searchbox[g]);// 正規表現オブジェクト/hoge/の作成（キモ）
   }
-
-  console.log(searchbox);
   Review[0].find({ $or: [{ title: { $in: searchbox } }, { tag: { $elemMatch: { $in: searchbox } } }] },{},{ sort: { uday: -1 } } ,(err, review) => {
     if (err) return hadDbError(req, res);
     let reviewback = [];
@@ -49,7 +47,6 @@ searchkeywordRouter.get('/' , (req: any, res, next) => {
         });
       }, 0);
     }, () => {
-      console.log(reviewback);
       res.send(reviewback);
     });
   });

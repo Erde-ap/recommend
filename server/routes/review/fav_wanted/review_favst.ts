@@ -22,7 +22,6 @@ reviewfavst.post('/' , (req: any, res: any, next) => {
         status = true;
       }
     }
-    console.log(status);
     return hadFavoriteStatus(req, res, status, params);
   });
 });

@@ -64,7 +64,6 @@ export class TopComponent {
       response => {
         // レビューの一覧を取得して最新順にしてある。
         this.items = response.json();
-        console.log(this.searched);
       },
       error => {
         console.log(error);
@@ -90,7 +89,6 @@ export class TopComponent {
     this.http.get(APIURL + '/api/searchtag?tag=' + JSON.stringify(this.cateSeachForm.controls.tag.value), { withCredentials: true })
     .subscribe(
       response => {
-        console.log(response.json());
         this.items = response.json();
       },
       error => {
@@ -102,7 +100,6 @@ export class TopComponent {
     this.http.get(APIURL + '/api/searchcate?cate=' + this.cateSeachForm.controls.category.value , { withCredentials: true })
   .subscribe(
       response => {
-        console.log(response.json());
         this.items = response.json();
       },
       error => {
